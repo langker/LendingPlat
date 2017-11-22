@@ -13,8 +13,6 @@ public class UserDao {
 	
 	public List<User> findByEmailAndPassword(String email, String password) {
 		String sql = "Select * from User where email='"+email+"' and password='"+password+"'";
-		List<User> user = (List<User>)em.createNativeQuery(sql, User.class).getResultList();
-//		System.out.println(user.get(0));
 		return (List<User>)em.createNativeQuery(sql, User.class).getResultList();
 	}
 	public List<User> findByEmail(String email) {

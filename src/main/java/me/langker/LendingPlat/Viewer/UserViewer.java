@@ -1,7 +1,10 @@
 package me.langker.LendingPlat.Viewer;
 
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import me.langker.LendingPlat.Controller.UserController;
 
@@ -15,10 +18,20 @@ public class UserViewer {
 	private String credentail;
 	private String address;
 	
-	public void login() {
+	public void login() throws IOException {
 		try {
 			userController.login(email, password);
+			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		} catch (Exception e) {
+			FacesContext.getCurrentInstance().getExternalContext().redirect("failure.xhtml");
+			e.printStackTrace();
+		}
+	}
+	public void handleEvent() {
+		try {
+			if(!userController.isLogin())
+				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
