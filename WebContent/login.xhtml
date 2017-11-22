@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">   
+<h:head>  
+ <title>login or register</title>  
+</h:head>   
+<h:body>  
+	<h:form id="login_form">  
+ 		<div>  
+ 			EMAIL: <h:inputText value="#{user.email}" /> <br></br>
+ 			PASSWORD: <h:inputText value="#{user.password}" /> <br></br>
+ 			<h:commandButton value="login" action="#{user.login}"/> 
+ 		</div>
+ 	</h:form>
+ 	<h:form id="reg_form">  
+ 		<div>  
+ 			EMAIL: <h:inputText value="#{user.email}" /> <br></br>
+ 			PASSWORD: <h:inputText value="#{user.password}" /> <br></br>
+ 			ADDRESS: <h:inputText value="#{user.address}" /> <br></br>
+ 			CREDENTAIL: <h:inputFile value="#{user.credentail}" /> <br></br>
+ 			<h:commandButton value="regisiter" action="#{user.reg}"/> 
+ 		</div>  
+ 	</h:form> 
+</h:body>   
+</html> 
