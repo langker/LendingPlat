@@ -11,13 +11,17 @@ public class UserDao {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@SuppressWarnings("unchecked")
 	public List<User> findByEmailAndPassword(String email, String password) {
-		String sql = "Select * from User where email='"+email+"' and password='"+password+"'";
-		return (List<User>)em.createNativeQuery(sql, User.class).getResultList();
+		String sql = "Select * from User where email=? and password=?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1, email).setParameter(2, password);
+		return (List<User>)query.getResultList();
 	}
+	@SuppressWarnings("unchecked")
 	public List<User> findByEmail(String email) {
-		String sql = "Select * from User where email="+email;
-		return (List<User>)em.createNativeQuery(sql, User.class).getResultList();
+		String sql = "Select * from User where email=?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1,email);
+		return (List<User>)query.getResultList();
 	}
 	public User createUser(String email, String password, String address, String credential) {
 		User user = new User();
@@ -30,7 +34,8 @@ public class UserDao {
 		return user;
 	}
 	public User findUserProfile(String email) {
-		String sql = "Select * from User where email="+email;
-		return (User)em.createNativeQuery(sql, User.class).getSingleResult();
+		String sql = "Select * from User where email=?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1,email);
+		return (User)query.getResultList();
 	}
 }

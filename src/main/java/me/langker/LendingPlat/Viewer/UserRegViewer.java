@@ -8,9 +8,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import me.langker.LendingPlat.Controller.UserController;
 
-@ManagedBean(name = "user")
+@ManagedBean(name = "userReg")
 @SessionScoped
-public class UserViewer {
+public class UserRegViewer {
 	@Inject UserController userController;
 	
 	private String email;
@@ -18,26 +18,15 @@ public class UserViewer {
 	private String credentail;
 	private String address;
 	
-	public void login() throws IOException {
+	public void reg() throws IOException {
 		try {
+			userController.reg(email, password, address, credentail);
 			userController.login(email, password);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("failure.xhtml");
 			e.printStackTrace();
 		}
-	}
-	public void handleEvent() {
-		try {
-			if(!userController.isLogin())
-				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public void reg() {
-		
 	}
 	public String getEmail() {
 		return email;
