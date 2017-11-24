@@ -1,11 +1,13 @@
 package me.langker.LendingPlat.Dao;
 
+import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Entity.User;
 
+@Stateless
 public class ProductDao {
 	@PersistenceContext
 	EntityManager em;
@@ -30,5 +32,10 @@ public class ProductDao {
 		prd.setUserid(userid);
 		em.merge(prd);
 		return prd;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Product> findAllProducts() {		
+		String sql = "Select * from Product";
+		return (List<Product>)em.createNativeQuery(sql, Product.class).getResultList();
 	}
 }

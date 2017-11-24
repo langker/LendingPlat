@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import me.langker.LendingPlat.Dao.UserDao;
 import me.langker.LendingPlat.Entity.User; 
 
+
 @Stateless
 public class UserController {  
 	@Inject UserDao userdao;
