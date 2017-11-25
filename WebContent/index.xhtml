@@ -5,31 +5,24 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
 	xmlns:p="http://primefaces.org/ui">   
 	<h:head>  
- 		<title>Hello World</title>  
-		<meta http-equiv="keywords" content="enter,your,keywords,here" />  
- 		<meta http-equiv="description" content="A short description of this page." />  
- 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />   
+ 		<title>Hello World</title>   
 	</h:head>   
  
     <h:body>
     	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
-    	<f:event listener="#{productList.getProductList}" type="preRenderView" />
-    	<p:spinner/>
-        <table class="book-table">
-          <tr>
-            <th>product</th>
-          </tr>
-          <tbody>
-            <ui:repeat var="o" value="#{productList.productList}" varStatus="status">
-              <h:panelGroup>
-                <tr>
-                  <td>
-                  	<div style="width:100px;height:200px;">#{o.name}</div>
-                  </td>
-                </tr>
-              </h:panelGroup>
-            </ui:repeat>
-          </tbody>
-        </table>
+    	<p:spinner /><br></br>
+    	<h:form id="search"> 
+	    	search: <h:inputText value="#{productList.keyword}"/>
+	    	<h:commandButton value="search" action="#{productList.getProductListByKeyword}" >
+	    		<f:ajax execute="@form" render="products:productlist" />
+	    	</h:commandButton>
+	    </h:form>
+    	<h:form id="products">
+	        <h:dataTable id="productlist" value="#{productList.productList}" var="list">
+	            <h:column>
+	               <div style="width:100px;height:200px;">#{list.name}</div>
+	            </h:column>
+	        </h:dataTable>
+    	</h:form>
     </h:body>
 </html>

@@ -36,6 +36,6 @@ public class UserDao {
 	public User findUserProfile(String email) {
 		String sql = "Select * from User where email=?";
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1,email);
-		return (User)query.getResultList();
+		return (User)query.getSingleResult();
 	}
 }

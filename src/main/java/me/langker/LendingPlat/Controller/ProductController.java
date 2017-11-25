@@ -14,4 +14,7 @@ public class ProductController {
 	public List<Product> getAllProducts() {
 		return productdao.findAllProducts();
 	}
+	public List<Product> searchProducts(String keyword) {
+		return productdao.findProductsByKeyword(keyword);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -16,14 +17,26 @@ import me.langker.LendingPlat.Entity.Product;
 @SessionScoped
 public class ProductListViewer {
 	private ArrayList<Product> productList;
+	private String keyword;
 	@Inject ProductController productController;
-	public ArrayList<Product> getProductList() {
+	
+	@PostConstruct
+	public void getProductAllList() {
 		productList = (ArrayList<Product>)productController.getAllProducts();
-//		productList = new ArrayList<Product>(Arrays.asList(
-//			    new Product(),
-//			    new Product(),
-//			    new Product()
-//			  ));
+	}
+	public void getProductListByKeyword() {
+		this.productList = (ArrayList<Product>)((ArrayList<Product>)productController.searchProducts(keyword)).clone();
+	}
+	public ArrayList<Product> getProductList() {
 		return productList;
+	}
+	public void setProductList(ArrayList<Product> productList) {
+		this.productList = productList;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 }
