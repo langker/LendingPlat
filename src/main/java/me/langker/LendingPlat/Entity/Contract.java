@@ -9,15 +9,12 @@ public class Contract {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-	@OneToOne
-    private User lenderid;
-	@OneToOne
-    private User lendeeid;
+    private int lenderid;
+    private int lendeeid;
     private String detail;
     private Date startDate;
     private int term;
-    @OneToOne
-    private Product productid;
+    private int productid;
     private int finalprice;
     private String location;
     private int age;
@@ -38,16 +35,16 @@ public class Contract {
     public void setId(int id) {
 		this.id = id;
 	}
-	public User getLenderid() {
+	public int getLenderid() {
 		return lenderid;
 	}
-	public void setLenderid(User lenderid) {
+	public void setLenderid(int lenderid) {
 		this.lenderid = lenderid;
 	}
-	public User getLendeeid() {
+	public int getLendeeid() {
 		return lendeeid;
 	}
-	public void setLendeeid(User lendeeid) {
+	public void setLendeeid(int lendeeid) {
 		this.lendeeid = lendeeid;
 	}
 	public Date getStartDate() {
@@ -62,10 +59,10 @@ public class Contract {
 	public void setTerm(int term) {
 		this.term = term;
 	}
-	public Product getProductid() {
+	public int getProductid() {
 		return productid;
 	}
-	public void setProductid(Product productid) {
+	public void setProductid(int productid) {
 		this.productid = productid;
 	}
 	public int getFinalprice() {

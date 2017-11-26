@@ -20,7 +20,11 @@
     	<h:form id="products">
 	        <h:dataTable id="productlist" value="#{productList.productList}" var="list">
 	            <h:column>
-	               <div style="width:100px;height:200px;">#{list.name}</div>
+	            	<div style="width:200px;height:300px;">
+	               		product's name: #{list.name} <br />
+	               		price: #{list.price} <br />
+	               		<img width="50px" height="100px" src="upload/#{list.photo}" /> <br />
+	               	</div>
 	            </h:column>
 	        </h:dataTable>
     	</h:form>

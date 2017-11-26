@@ -7,6 +7,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    private String photo;
     private String name;
     private String description;
     private int userid;
@@ -47,9 +48,6 @@ public class Product {
 	public Boolean getInsurance() {
 		return insurance;
 	}
-	public void setInsurance(Boolean insurance) {
-		this.insurance = insurance;
-	}
 	public int getPrice() {
 		return price;
 	}
@@ -61,5 +59,14 @@ public class Product {
 	}
 	public void setTimes(int times) {
 		this.times = times;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public void setInsurance(boolean insurance) {
+		this.insurance = insurance;
 	}
 }

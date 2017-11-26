@@ -13,7 +13,7 @@ public class ContractDao {
 	@PersistenceContext
 	EntityManager em;
 	
-	public Contract createContract(int age, String customer_detail,String detail,int finalprice,String location,User lenderid,Product product_id) {
+	public Contract createContract(int age, String customer_detail,String detail,int finalprice,String location,int lenderid,int product_id) {
 		Contract con = new Contract();
 		con.setAge(age);
 		con.setCustomer_detail(customer_detail);
@@ -25,7 +25,7 @@ public class ContractDao {
 		em.persist(con);
 		return con;
 	}
-	public Contract updateContract(int age, String customer_detail,String detail,int finalprice,String location,User lenderid,Product product_id) {
+	public Contract updateContract(int age, String customer_detail,String detail,int finalprice,String location,int lenderid,int product_id) {
 		Contract con = new Contract();
 		con.setAge(age);
 		con.setCustomer_detail(customer_detail);

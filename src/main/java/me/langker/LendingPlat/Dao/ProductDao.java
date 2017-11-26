@@ -11,7 +11,7 @@ import me.langker.LendingPlat.Entity.Product;
 public class ProductDao {
 	@PersistenceContext
 	EntityManager em;
-	public Product createProduct(String description, boolean insurance, String name, int price, int userid) {
+	public Product createProduct(String description, boolean insurance, String name, int price, int userid,String photo) {
 		Product prd = new Product();
 		prd.setInsurance(insurance);
 		prd.setName(name);
@@ -20,6 +20,7 @@ public class ProductDao {
 		prd.setTimes(0);
 		prd.setUserid(userid);
 		prd.setDescription(description);
+		prd.setPhoto(photo);
 		em.persist(prd);
 		return prd;
 	}

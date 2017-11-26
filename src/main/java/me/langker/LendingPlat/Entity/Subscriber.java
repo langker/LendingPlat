@@ -1,15 +1,16 @@
 package me.langker.LendingPlat.Entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Subscriber {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
-    private User userid;
+    private int userid;
     private String subscribe_name;
 	public int getId() {
 		return id;
@@ -17,10 +18,10 @@ public class Subscriber {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUserid() {
+	public int getUserid() {
 		return userid;
 	}
-	public void setUserid(User userid) {
+	public void setUserid(int userid) {
 		this.userid = userid;
 	}
 	public String getSubscribe_name() {

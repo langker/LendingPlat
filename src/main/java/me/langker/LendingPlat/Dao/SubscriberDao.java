@@ -10,7 +10,7 @@ import me.langker.LendingPlat.Entity.User;
 public class SubscriberDao {
 	@PersistenceContext
 	EntityManager em;
-	public Subscriber createSubscribe(User user, String name) {
+	public Subscriber createSubscribe(int user, String name) {
 		Subscriber sub = new Subscriber();
 		sub.setUserid(user);
 		sub.setSubscribe_name(name);

@@ -11,11 +11,12 @@
     <h:body>
     	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     	<p:spinner /><br></br>
-    	<h:form> 
+    	<h:form enctype="multipart/form-data"> 
 	    	name: <h:inputText value="#{addProduct.name}"/>
 	    	price: <h:inputText value="#{addProduct.price}"/>
 	    	description: <h:inputText value="#{addProduct.description}"/>
-	    	insruance: <h:inputText value="#{addProduct.insurance}"/>
+	    	insruance: <h:inputText value="#{addProduct.insurance}"/> 
+	    	<h:inputFile value="#{addProduct.file}" />
 	    	<h:commandButton value="submit" action="#{addProduct.addProduct}" />
 	    </h:form>
     </h:body>

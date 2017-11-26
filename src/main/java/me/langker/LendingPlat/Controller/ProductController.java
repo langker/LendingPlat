@@ -18,7 +18,7 @@ public class ProductController {
 	public List<Product> searchProducts(String keyword) {
 		return productdao.findProductsByKeyword(keyword);
 	}
-	public void addProduct(String name,int price, String description, boolean insurance, int userid) {
-		productdao.createProduct(description, insurance, name, price, userid);
+	public void addProduct(String name,int price, String description, boolean insurance, int userid, String photo) {
+		productdao.createProduct(description, insurance, name, price, userid, photo);
 	}
 }
