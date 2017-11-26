@@ -5,26 +5,25 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import me.langker.LendingPlat.Entity.Product;
-import me.langker.LendingPlat.Entity.User;
 
 @Stateless
 public class ProductDao {
 	@PersistenceContext
 	EntityManager em;
-	public Product createProduct(String description, String insurance, String name, int price, String status,User userid) {
+	public Product createProduct(String description, boolean insurance, String name, int price, int userid) {
 		Product prd = new Product();
 		prd.setInsurance(insurance);
 		prd.setName(name);
 		prd.setPrice(price);
-		prd.setStatus(status);
+		prd.setStatus(0);
 		prd.setTimes(0);
 		prd.setUserid(userid);
+		prd.setDescription(description);
 		em.persist(prd);
 		return prd;
 	}
-	public Product updateProduct(String description, String insurance, String name, int price, String status,User userid) {
+	public Product updateProduct(String description, Boolean insurance, String name, int price, int status,int userid) {
 		Product prd = new Product();
 		prd.setInsurance(insurance);
 		prd.setName(name);

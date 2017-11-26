@@ -25,7 +25,7 @@ public class ProductListViewer {
 		productList = (ArrayList<Product>)productController.getAllProducts();
 	}
 	public void getProductListByKeyword() {
-		this.productList = (ArrayList<Product>)((ArrayList<Product>)productController.searchProducts(keyword)).clone();
+		this.productList = (ArrayList<Product>)productController.searchProducts(keyword);
 	}
 	public ArrayList<Product> getProductList() {
 		return productList;

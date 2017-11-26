@@ -1,19 +1,17 @@
 package me.langker.LendingPlat.Entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Product {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
-    @OneToOne
-    private User userid;
-    private String status;
-    private String insurance;
+    private int userid;
+    private int status;
+    private boolean insurance;
     private int price;
     private int times;
 	public int getId() {
@@ -34,22 +32,22 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public User getUserid() {
+	public int getUserid() {
 		return userid;
 	}
-	public void setUserid(User userid) {
+	public void setUserid(int userid) {
 		this.userid = userid;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
-	public String getInsurance() {
+	public Boolean getInsurance() {
 		return insurance;
 	}
-	public void setInsurance(String insurance) {
+	public void setInsurance(Boolean insurance) {
 		this.insurance = insurance;
 	}
 	public int getPrice() {
