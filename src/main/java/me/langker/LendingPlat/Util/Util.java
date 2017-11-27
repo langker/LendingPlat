@@ -1,19 +1,13 @@
 package me.langker.LendingPlat.Util;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import org.primefaces.model.UploadedFile;
 
 @SessionScoped
 public class Util { 
@@ -37,4 +31,8 @@ public class Util {
 	    	return null;
 	    }
     }
+	public int getUserId() {
+		HttpSession session =(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		return (int)session.getAttribute("userid");
+	}
 }

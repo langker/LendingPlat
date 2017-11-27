@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import me.langker.LendingPlat.Dao.UserDao;
-import me.langker.LendingPlat.Entity.User; 
+import me.langker.LendingPlat.Entity.User;
+import me.langker.LendingPlat.Util.Util; 
 
 
 @Stateless
@@ -33,5 +34,11 @@ public class UserController {
 		} else {
 			return userdao.createUser(email, password, address, credential);
 		}
+	}
+	public void updateAddress(String address) {
+		userdao.updateAddress(Util.getInstance().getUserId(), address);
+	}
+	public User findUserProfile() {
+		return userdao.findUserProfile(Util.getInstance().getUserId());
 	}
 }   

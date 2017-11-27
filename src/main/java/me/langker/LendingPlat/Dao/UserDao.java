@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
+
+import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Entity.User;
 
 @Stateless
@@ -33,9 +35,14 @@ public class UserDao {
 		em.persist(user);
 		return user;
 	}
-	public User findUserProfile(String email) {
-		String sql = "Select * from User where email=?";
-		Query query = em.createNativeQuery(sql, User.class).setParameter(1,email);
+	public User findUserProfile(int id) {
+		String sql = "Select * from User where id=?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1,id);
 		return (User)query.getSingleResult();
+	}
+	public void updateAddress(int id, String address) {
+		String sql = "UPDATE User SET address =? WHERE id = ?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1,address).setParameter(2, id);
+		query.executeUpdate();
 	}
 }
