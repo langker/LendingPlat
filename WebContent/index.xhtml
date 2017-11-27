@@ -10,11 +10,12 @@
  
     <h:body>
     	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
+    	<f:event listener="#{productList.getProductAllList}" type="preRenderView" />
     	<p:spinner /><br></br>
     	<a href="profile.xhtml">profile</a> <br></br>
     	<a href="addproduct.xhtml">addproduct</a>
     	<h:form id="search"> 
-	    	search: <h:inputText value="#{pr/oductList.keyword}"/>
+	    	search: <h:inputText value="#{productList.keyword}"/>
 	    	<h:commandButton value="search" action="#{productList.getProductListByKeyword}" >
 	    		<f:ajax execute="@form" render="products:productlist" />
 	    	</h:commandButton>

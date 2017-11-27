@@ -2,6 +2,7 @@ package me.langker.LendingPlat.Viewer;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "addProduct")
+@ViewScoped
 @SessionScoped
 public class AddProductViewer {
 	private String name;

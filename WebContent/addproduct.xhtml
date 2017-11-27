@@ -15,7 +15,10 @@
 	    	name: <h:inputText value="#{addProduct.name}"/>
 	    	price: <h:inputText value="#{addProduct.price}"/>
 	    	description: <h:inputText value="#{addProduct.description}"/>
-	    	insruance: <h:inputText value="#{addProduct.insurance}"/> 
+	    	insruance: <h:selectOneRadio value="#{addProduct.insurance}">
+				<f:selectItem itemLabel="yes" itemValue="true"/>
+				<f:selectItem itemLabel="no" itemValue="false"/>
+			</h:selectOneRadio>
 	    	<h:inputFile value="#{addProduct.file}" />
 	    	<h:commandButton value="submit" action="#{addProduct.addProduct}" />
 	    </h:form>
