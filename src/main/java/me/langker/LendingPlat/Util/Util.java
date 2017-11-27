@@ -19,9 +19,9 @@ public class Util {
 		}
 		return instance;
 	}
-	public String submit(Part file) throws IOException{
+	public String submit(Part file, String savePath) throws IOException{
 		HttpSession session =(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		String rootPath = session.getServletContext().getRealPath("/upload/"); //得到服务器相对路径   
+		String rootPath = session.getServletContext().getRealPath(savePath); //得到服务器相对路径   
 		try (InputStream input = file.getInputStream()) {
 			String filename = String.valueOf(System.currentTimeMillis())+".jpg";
 	        Files.copy(input, new File(rootPath, filename).toPath());

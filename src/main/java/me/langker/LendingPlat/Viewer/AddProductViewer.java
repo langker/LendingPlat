@@ -1,16 +1,11 @@
 package me.langker.LendingPlat.Viewer;
 
-import java.io.IOException;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-
-import org.primefaces.model.UploadedFile;
-
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Util.Util;
 
@@ -32,7 +27,7 @@ public class AddProductViewer {
 	public void addProduct() {
 		try {
 			HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-			String filename = Util.getInstance().submit(file);
+			String filename = Util.getInstance().submit(file,"/upload_product/");
 			productController.addProduct(name,price,description,insurance, (int)session.getAttribute("userid"),filename);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		} catch (Exception e) {

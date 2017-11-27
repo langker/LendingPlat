@@ -11,8 +11,14 @@
 	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
  	<h:form id="profile">
  		EMAIL: #{profile.email}
- 		ADDRESS: <h:inputText required="true" value="#{profile.address}" /> <br></br>
+ 		ADDRESS: <h:inputText required="true" value="#{profile.address}" />
  		<h:commandButton value="save" action="#{profile.saveAddress}"/> 
+ 	</h:form> 
+ 	<h:form enctype="multipart/form-data"> 
+ 		upload your credential:
+ 		<h:inputFile value="#{profile.file}" />
+	    <h:commandButton value="submit" action="#{profile.saveCred}" /><br />
+	    <p:graphicImage value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
  	</h:form> 
 </h:body>   
 </html> 

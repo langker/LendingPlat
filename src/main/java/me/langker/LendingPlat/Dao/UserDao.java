@@ -45,4 +45,9 @@ public class UserDao {
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1,address).setParameter(2, id);
 		query.executeUpdate();
 	}
+	public void updateCred(int id, String filename) {
+		String sql = "UPDATE User SET credential =? WHERE id = ?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1,filename).setParameter(2, id);
+		query.executeUpdate();
+	}
 }

@@ -38,6 +38,9 @@ public class UserController {
 	public void updateAddress(String address) {
 		userdao.updateAddress(Util.getInstance().getUserId(), address);
 	}
+	public void updateCred(String filename) {
+		userdao.updateCred(Util.getInstance().getUserId(), filename);
+	}
 	public User findUserProfile() {
 		return userdao.findUserProfile(Util.getInstance().getUserId());
 	}
