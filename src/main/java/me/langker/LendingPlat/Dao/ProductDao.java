@@ -40,6 +40,10 @@ public class ProductDao {
 		String sql = "Select * from Product";
 		return (List<Product>)em.createNativeQuery(sql, Product.class).getResultList();
 	}
+	public Product findProductById(int id) {		
+		String sql = "Select * from Product where id=?";
+		return (Product)em.createNativeQuery(sql,Product.class).setParameter(1, id).getSingleResult();
+	}
 	@SuppressWarnings("unchecked")
 	public List<Product> findProductsByKeyword(String keyword) {		
 		String sql = "Select * from Product where name like ?";

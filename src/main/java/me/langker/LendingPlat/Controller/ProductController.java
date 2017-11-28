@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import me.langker.LendingPlat.Dao.ProductDao;
 import me.langker.LendingPlat.Entity.Product;
-import me.langker.LendingPlat.Entity.User;
 
 
 @Stateless

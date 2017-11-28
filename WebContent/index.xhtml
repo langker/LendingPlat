@@ -23,10 +23,16 @@
     	<h:form id="products">
 	        <h:dataTable id="productlist" value="#{productList.productList}" var="list">
 	            <h:column>
-	            	<div style="width:200px;height:300px;">
-	               		product's name: #{list.name} <br />
-	               		price: #{list.price} <br />
-	               		<img width="50px" height="100px" src="upload_product/#{list.photo}" /> <br />
+	            	<div style="width:400px;height:500px;">
+		            	<h:form id="rent"> 
+		               		product's name: #{list.name} <br />
+		               		price: #{list.price} <br />
+		         			des: #{list.description}<br />
+		               		<img width="50px" height="100px" src="upload_product/#{list.photo}" /> <br />
+						    <h:commandButton value="rent" action="#{productList.rentProduct(list.id,list.userid)}" rendered="#{list.userid!=profile.userid}">
+						    	<f:ajax/>
+						    </h:commandButton>  		
+		    			</h:form>
 	               	</div>
 	            </h:column>
 	        </h:dataTable>

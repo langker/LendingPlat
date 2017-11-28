@@ -19,13 +19,15 @@ public class Contract {
     private String location;
     private int age;
     private String customer_detail;
-    //0:waiting for lender
-    //1:lender agree to lend the product and make the contract
-    //2:lendee agree the contract
-    //3:lender send the product to the lendee
-    //4:lendee receive the product and the product is not available for others
-    //5:lendee return the product to the lender
-    //6:lender receive the product and the whole progress finish
+    //0:close or error or lender refuse to lend
+    //1:waiting for lender
+    //2:lender agree to lend the product and make the contract
+    //3:lendee agree the contract
+    //4:lender send the product to the lendee
+    //5:lendee receive the product and the product is not available for others
+    //6:lendee return the product to the lender
+    //7:lender receive the product and the whole progress finish
+    //8:finish
     private int status;
     
 

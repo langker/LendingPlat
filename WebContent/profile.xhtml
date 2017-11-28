@@ -9,7 +9,7 @@
 </h:head>   
 <h:body>  
 	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
- 	<h:form id="profile">
+	<h:form id="profile">
  		EMAIL: #{profile.email}
  		ADDRESS: <h:inputText required="true" value="#{profile.address}" />
  		<h:commandButton value="save" action="#{profile.saveAddress}"/> 
@@ -20,5 +20,35 @@
 	    <h:commandButton value="submit" action="#{profile.saveCred}" /><br />
 	    <p:graphicImage value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
  	</h:form> 
+ 	<h:dataTable id="contractlist" value="#{con.conList}" var="list">
+		<h:column>
+	    	<div style="width:400px;height:500px;">
+		    	<h:form id="contract"> 
+		    		<h:outputText value="contract closed" rendered="#{list.status==0}"/>
+		    		<h:outputText value="you have a new request" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="lender agree to lend the product and make the contract" rendered="#{list.status==2 and list.lenderid!=profile.userid}"/>
+		        	<h:outputText value="lendee agree the contract" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="lender send the product to the lendee" rendered="#{list.status==4 and list.lenderid!=profile.userid}"/>
+		        	<h:outputText value="lendee receive the product" rendered="#{list.status==5 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="lendee return the product to the lender" rendered="#{list.status==6 and list.lenderid!=profile.userid}"/>
+		        	<h:outputText value="lender receive the product" rendered="#{list.status==7 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="finish" rendered="#{list.status==8}"/>
+		        	<br />
+		    		product: <h:inputText value="#{list.productid}" /><br />
+		        	price: <h:inputText value="#{list.finalprice}" /><br />
+		        	location: <h:inputText value="#{list.location}" /><br />
+		        	detail: <h:inputText value="#{list.detail}" /><br />
+		        	customer_detail: <h:inputText value="#{list.customer_detail}" /><br />
+		        	<h:commandButton value="save and send to the lendee" action="#{con.setConStatus(list.id,2)}">
+		        		<f:ajax />
+		        	</h:commandButton>
+		        	<h:commandButton value="reject" action="#{con.setConStatus(list.id,0)}">
+		        		<f:ajax />
+		        	</h:commandButton>
+							
+		    	</h:form>
+	        </div>
+	     </h:column>
+	 </h:dataTable>
 </h:body>   
 </html> 

@@ -7,7 +7,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
-
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Util.Util;
@@ -19,9 +18,9 @@ public class ProfileViewer {
 	private String address;
 	private ArrayList<Product> productList;
 	private String cred;
+	private int userid;
 	private Part file;
 	@Inject UserController userController;
-	
 	public Part getFile() {  
         return file;  
     }  
@@ -59,5 +58,11 @@ public class ProfileViewer {
 	}
 	public void setCred(String cred) {
 		this.cred = cred;
+	}
+	public int getUserid() {
+		return Util.getInstance().getUserId();
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 }
