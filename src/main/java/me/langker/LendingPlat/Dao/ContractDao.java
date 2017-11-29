@@ -23,7 +23,7 @@ public class ContractDao {
 		con.setFinalprice(finalprice);
 		con.setLocation(location);
 		con.setLenderid(lenderid);
-		con.setLendeeid(lenderid);
+		con.setLendeeid(lendeeid);
 		con.setProductid(product_id);
 		con.setStatus(status);
 		em.persist(con);
@@ -43,8 +43,8 @@ public class ContractDao {
 		return con;
 	}
 	public List<Contract> findContractByLenderID(int uid) {
-		String sql = "Select * from Contract where lenderid=?";
-		return (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, uid).getResultList();
+		String sql = "Select * from Contract where lenderid=? or lendeeid=?";
+		return (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, uid).setParameter(2, uid).getResultList();
 	}
 	public void updateStatus(int cid, int s) {
 		String sql = "UPDATE Contract SET status =? WHERE id = ?";

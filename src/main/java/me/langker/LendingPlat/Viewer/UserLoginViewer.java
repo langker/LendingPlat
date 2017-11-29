@@ -7,6 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import me.langker.LendingPlat.Controller.UserController;
+import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "userLogin")
 @SessionScoped
@@ -22,6 +23,9 @@ public class UserLoginViewer {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("failure.xhtml");
 			e.printStackTrace();
 		}
+	}
+	public void logout() {
+		userController.logout();
 	}
 	public String getEmail() {
 		return email;

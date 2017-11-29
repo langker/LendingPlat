@@ -27,7 +27,6 @@ public class Contract {
     //5:lendee receive the product and the product is not available for others
     //6:lendee return the product to the lender
     //7:lender receive the product and the whole progress finish
-    //8:finish
     private int status;
     
 

@@ -19,30 +19,71 @@
  		<h:inputFile value="#{profile.file}" />
 	    <h:commandButton value="submit" action="#{profile.saveCred}" /><br />
 	    <p:graphicImage value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
+ 	</h:form>
+ 	<h:form id="subscribe">
+ 		keyword: <h:inputText required="true" value="#{sub.keyword}" />
+ 		<h:commandButton value="submit" action="#{sub.saveSub}"/> 
+ 		<h:dataTable id="subKeywords" value="#{sub.keywords}" var="sk">
+	            <h:column>
+					keyword: #{sk.subscribe_name} 
+					<h:commandButton value="delete" action="#{sub.delSub(sk.id)}" >
+						<f:ajax render="subscribe:subKeywords"/>
+					</h:commandButton>
+					<br />
+	            </h:column>
+	    </h:dataTable>
  	</h:form> 
  	<h:dataTable id="contractlist" value="#{con.conList}" var="list">
 		<h:column>
 	    	<div style="width:400px;height:500px;">
 		    	<h:form id="contract"> 
 		    		<h:outputText value="contract closed" rendered="#{list.status==0}"/>
+		    		
 		    		<h:outputText value="you have a new request" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
-		        	<h:outputText value="lender agree to lend the product and make the contract" rendered="#{list.status==2 and list.lenderid!=profile.userid}"/>
+		    		<h:outputText value="waiting for lender to agree" rendered="#{list.status==1 and list.lendeeid==profile.userid}"/>
+		        	
+		        	<h:outputText value="waiting for lendee to agree the contract" rendered="#{list.status==2 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="lender agree to lend the product and make the contract and pay" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+		        	
 		        	<h:outputText value="lendee agree the contract" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
-		        	<h:outputText value="lender send the product to the lendee" rendered="#{list.status==4 and list.lenderid!=profile.userid}"/>
-		        	<h:outputText value="lendee receive the product" rendered="#{list.status==5 and list.lenderid==profile.userid}"/>
-		        	<h:outputText value="lendee return the product to the lender" rendered="#{list.status==6 and list.lenderid!=profile.userid}"/>
-		        	<h:outputText value="lender receive the product" rendered="#{list.status==7 and list.lenderid==profile.userid}"/>
-		        	<h:outputText value="finish" rendered="#{list.status==8}"/>
+		        	<h:outputText value="waiting for lender to send the product" rendered="#{list.status==3 and list.lendeeid==profile.userid}"/>
+		        	
+		        	<h:outputText value="waiting for lendee to conform receive the product" rendered="#{list.status==4 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="please conform receive the product" rendered="#{list.status==4 and list.lendeeid==profile.userid}"/>
+		        	
+		        	
+		        	<h:outputText value="waiting for the lendee to return the product" rendered="#{list.status==5 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="when the time is over pls return the product to the lender" rendered="#{list.status==5 and list.lendeeid==profile.userid}"/>
+		        	
+		        	<h:outputText value="conform receive the product from lendee" rendered="#{list.status==6 and list.lenderid==profile.userid}"/>
+		        	<h:outputText value="waiting for the lender to conform receive the product" rendered="#{list.status==6 and list.lendeeid==profile.userid}"/>
+		        	
+		        	<h:outputText value="the contract finish" rendered="#{list.status==7}"/>
 		        	<br />
 		    		product: <h:inputText value="#{list.productid}" /><br />
 		        	price: <h:inputText value="#{list.finalprice}" /><br />
 		        	location: <h:inputText value="#{list.location}" /><br />
 		        	detail: <h:inputText value="#{list.detail}" /><br />
 		        	customer_detail: <h:inputText value="#{list.customer_detail}" /><br />
-		        	<h:commandButton value="save and send to the lendee" action="#{con.setConStatus(list.id,2)}">
+		        	<h:commandButton value="save the contract and send to the lendee" action="#{con.setConStatus(list.id,2)}" rendered="#{list.status==1 and list.lenderid==profile.userid}">
 		        		<f:ajax />
 		        	</h:commandButton>
-		        	<h:commandButton value="reject" action="#{con.setConStatus(list.id,0)}">
+		        	<h:commandButton value="accept and pay" action="#{con.setConStatus(list.id,3)}" rendered="#{list.status==2 and list.lendeeid==profile.userid}">
+		        		<f:ajax />
+		        	</h:commandButton>
+		        	<h:commandButton value="conform send the product" action="#{con.setConStatus(list.id,4)}" rendered="#{list.status==3 and list.lenderid==profile.userid}">
+		        		<f:ajax />
+		        	</h:commandButton>
+		        	<h:commandButton value="conform receive the product" action="#{con.setConStatus(list.id,5)}" rendered="#{list.status==4 and list.lendeeid==profile.userid}">
+		        		<f:ajax />
+		        	</h:commandButton>
+		        	<h:commandButton value="conform send the product" action="#{con.setConStatus(list.id,6)}" rendered="#{list.status==5 and list.lenderid==profile.userid}">
+		        		<f:ajax />
+		        	</h:commandButton>
+		        	<h:commandButton value="conform receive the product and finish the contract" action="#{con.setConStatus(list.id,7)}" rendered="#{list.status==6 and list.lendeeid==profile.userid}">
+		        		<f:ajax />
+		        	</h:commandButton>
+		        	<h:commandButton value="reject or cancel" action="#{con.setConStatus(list.id,0)}">
 		        		<f:ajax />
 		        	</h:commandButton>
 							

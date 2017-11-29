@@ -28,6 +28,10 @@ public class UserController {
 		if(session.getAttribute("userid")!=null)return true;
 		else return false;
 	}
+	public void logout() {
+		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("userid", null);
+	}
 	public User reg(String email, String password,String address,String credential) throws Exception {
 		if (userdao.findByEmail(email).size() >= 1)  {
 			throw new Exception("reg failed");

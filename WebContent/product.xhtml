@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui">   
+	<h:head>  
+ 		<title>Hello World</title>   
+	</h:head>   
+ 
+    <h:body>
+    	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
+    	<f:event listener="#{product.getProduct(param['id'])}" type="preRenderView" />
+    	<p:spinner /><br></br>
+			<h:form id="rent" value="product.p"> 
+				product's name: #{product.p.name} <br />
+				price: #{product.p.price} <br />
+				des: #{product.p.description}<br />
+				<img width="50px" height="100px" src="upload_product/#{product.p.photo}" /> <br />
+				<h:commandButton value="rent" action="#{product.rentProduct(product.p.id,product.p.userid)}" rendered="#{product.p.userid!=profile.userid}" />
+			</h:form>
+		               
+    </h:body>
+</html>

@@ -20,7 +20,6 @@ public class ProductListViewer {
 	private int id;
 	private int userid;
 	@Inject ProductController productController;
-	@Inject ContractController contractController;
 	public void getProductAllList() {
 		//avoid called during ajax
 		if (FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()) { 
@@ -28,9 +27,6 @@ public class ProductListViewer {
 		} else {
 			productList = (ArrayList<Product>)productController.getAllProducts();
 		}
-	}
-	public void rentProduct(String pid, String uid) {
-		contractController.addContract(Integer.valueOf(pid),Integer.valueOf(uid));
 	}
 	public void getProductListByKeyword() {
 		this.productList = (ArrayList<Product>)productController.searchProducts(keyword);
