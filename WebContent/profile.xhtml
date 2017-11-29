@@ -23,12 +23,20 @@
  	<h:form id="subscribe">
  		keyword: <h:inputText required="true" value="#{sub.keyword}" />
  		<h:commandButton value="submit" action="#{sub.saveSub}"/> 
+ 		keyword manage: <br />
  		<h:dataTable id="subKeywords" value="#{sub.keywords}" var="sk">
 	            <h:column>
 					keyword: #{sk.subscribe_name} 
 					<h:commandButton value="delete" action="#{sub.delSub(sk.id)}" >
 						<f:ajax render="subscribe:subKeywords"/>
 					</h:commandButton>
+					<br />
+	            </h:column>
+	    </h:dataTable>
+	    subcribed product: <br />
+	    <h:dataTable id="subProduct" value="#{sub.subProduct}" var="sp">
+	            <h:column>
+					<a href="product.xhtml?id=#{sp.id}">#{sp.name} </a> 
 					<br />
 	            </h:column>
 	    </h:dataTable>

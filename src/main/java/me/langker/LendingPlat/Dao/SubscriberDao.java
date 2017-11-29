@@ -5,7 +5,10 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Entity.Subscriber;
+import me.langker.LendingPlat.Util.Util;
 
 @Stateless
 public class SubscriberDao {
@@ -23,12 +26,16 @@ public class SubscriberDao {
 		em.createNativeQuery(sql,Subscriber.class).setParameter(1, id).executeUpdate();
 	}
 	public List<Subscriber> findSubByName(String name) {
-		String sql = "Select * from Subscriber where name ?";
+		String sql = "Select * from Subscriber where subscribe_name like ?";
 		return (List<Subscriber>)em.createNativeQuery(sql, Subscriber.class).setParameter(1, "%"+name+"%").getResultList();
 	}
 	public List<Subscriber> findSubByUserId(int userid) {
 		String sql = "Select * from Subscriber where userid=?";
 		return (List<Subscriber>)em.createNativeQuery(sql, Subscriber.class).setParameter(1, userid).getResultList();
+	}
+	public List<Product> findSubProdcut(int id) {
+		String sql = "select *from Product where id in (select pid from SubscriberNotify where userid=?)";
+		return (List<Product>)em.createNativeQuery(sql, Product.class).setParameter(1, id).getResultList();
 	}
 	
 }

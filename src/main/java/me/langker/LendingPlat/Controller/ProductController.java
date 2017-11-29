@@ -11,6 +11,7 @@ import me.langker.LendingPlat.Entity.Product;
 @Stateless
 public class ProductController {
 	@Inject ProductDao productdao;
+	@Inject SubscriberController sController;
 	public List<Product> getAllProducts() {
 		return productdao.findAllProducts();
 	}
@@ -18,6 +19,8 @@ public class ProductController {
 		return productdao.findProductsByKeyword(keyword);
 	}
 	public void addProduct(String name,int price, String description, boolean insurance, int userid, String photo) {
-		productdao.createProduct(description, insurance, name, price, userid, photo);
+		Product p = productdao.createProduct(description, insurance, name, price, userid, photo);
+		System.out.println("888");
+		sController.update(p.getId());
 	}
 }
