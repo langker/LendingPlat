@@ -15,8 +15,9 @@
     	<h:form id="logout"> 
 	    	<h:commandLink value="logout" action="#{userLogin.logout}" />
 	    </h:form>
-    	<a href="profile.xhtml">profile</a> <br></br>
-    	<a href="addproduct.xhtml">addproduct</a>
+    	<a href="profile.xhtml">profile</a> <br />
+    	<a href="addproduct.xhtml">addproduct</a><br />
+    	<h:outputLink value="admin.xhtml" rednered="true">admin </h:outputLink> <br />
     	<h:form id="search"> 
 	    	search: <h:inputText value="#{productList.keyword}"/>
 	    	<h:commandButton value="search" action="#{productList.getProductListByKeyword}" >

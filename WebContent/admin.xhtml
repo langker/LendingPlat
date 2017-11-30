@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:p="http://primefaces.org/ui">   
+	<h:head>  
+ 		<title>Hello World</title>   
+	</h:head>   
+ 
+    <h:body>
+    	<f:event listener="#{admin.checkIsAdmin}" type="preRenderView" />
+    	<p:spinner /><br></br>
+    	<h:form id="leaseperiod"> 
+    		short: <h:inputText required="true" value="#{profile.address}" /> <br />
+    		medium: <h:inputText required="true" value="#{profile.address}" /> <br />
+    		average: <h:inputText required="true" value="#{profile.address}" /> <br />
+    		<h:commandButton value="create" action="#{profile.saveAddress}"/>
+    		<h:commandButton value="update" action="#{profile.saveAddress}"/>  
+    	</h:form>
+    	<h:form id="user_profile">
+    		users:
+	        <h:dataTable id="userlist" value="#{admin.users}" var="list">
+	            <h:column>
+	            	email: #{list.email} <br />
+					address: #{list.address} <br />
+					<p:graphicImage width="50px" height="100px" src="upload_cred/#{list.credential}" rendered="#{list.credential!=null}"/> <br /> 	
+	            </h:column>
+	        </h:dataTable>
+    	</h:form>
+    	<h:form id="contract">
+    		cons:
+	        <h:dataTable id="con" value="#{admin.con}" var="list">
+	            <h:column>
+	            	startdate: #{list.startDate} <br />
+	            	detail: #{list.detail} <br />
+	            	cus_detail: #{list.customer_detail} <br />
+	            	final_price: #{list.finalprice} <br />
+	            	<a href="product.xhtml?id=#{list.productid}"> prodcut link </a>	
+				</h:column>
+	        </h:dataTable>
+    	</h:form>
+    </h:body>
+</html>

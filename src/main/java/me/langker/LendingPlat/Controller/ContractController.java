@@ -19,6 +19,9 @@ public class ContractController {
 	public List<Contract> getAllCon() {
 		return contractdao.findContractByLenderID(Util.getInstance().getUserId());
 	}
+	public List<Contract> getAllConForAdmin() {
+		return contractdao.findContracts();
+	}
 	public void setConStatus(int cid, int s) {
 		contractdao.updateStatus(cid, s);
 	}

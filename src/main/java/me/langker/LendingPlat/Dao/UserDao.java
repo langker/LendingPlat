@@ -40,6 +40,10 @@ public class UserDao {
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1,id);
 		return (User)query.getSingleResult();
 	}
+	public List<User> findAllUser() {
+		String sql = "Select * from User where isAdmin=0";
+		return (List<User>)em.createNativeQuery(sql, User.class).getResultList();
+	}
 	public void updateAddress(int id, String address) {
 		String sql = "UPDATE User SET address =? WHERE id = ?";
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1,address).setParameter(2, id);

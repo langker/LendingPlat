@@ -46,6 +46,10 @@ public class ContractDao {
 		String sql = "Select * from Contract where lenderid=? or lendeeid=?";
 		return (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, uid).setParameter(2, uid).getResultList();
 	}
+	public List<Contract> findContracts() {
+		String sql = "Select * from Contract";
+		return (List<Contract>)em.createNativeQuery(sql, Contract.class).getResultList();
+	}
 	public void updateStatus(int cid, int s) {
 		String sql = "UPDATE Contract SET status =? WHERE id = ?";
 		Query query = em.createNativeQuery(sql, Contract.class).setParameter(1,s).setParameter(2, cid);
