@@ -9,14 +9,14 @@
 	</h:head>   
  
     <h:body>
+    	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     	<f:event listener="#{admin.checkIsAdmin}" type="preRenderView" />
     	<p:spinner /><br></br>
     	<h:form id="leaseperiod"> 
-    		short: <h:inputText required="true" value="#{profile.address}" /> <br />
-    		medium: <h:inputText required="true" value="#{profile.address}" /> <br />
-    		average: <h:inputText required="true" value="#{profile.address}" /> <br />
-    		<h:commandButton value="create" action="#{profile.saveAddress}"/>
-    		<h:commandButton value="update" action="#{profile.saveAddress}"/>  
+    		short: <h:inputText required="true" value="#{admin.shortTerm}" /> <br />
+    		medium: <h:inputText required="true" value="#{admin.medium}" /> <br />
+    		average: <h:inputText required="true" value="#{admin.average}" /> <br />
+    		<h:commandButton value="save" action="#{admin.updateTerm}"/>  
     	</h:form>
     	<h:form id="user_profile">
     		users:

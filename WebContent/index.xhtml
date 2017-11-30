@@ -11,6 +11,7 @@
     <h:body>
     	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     	<f:event listener="#{productList.getProductAllList}" type="preRenderView" />
+    	<f:event listener="#{admin.initLP}" type="preRenderView" />
     	<p:spinner /><br></br>
     	<h:form id="logout"> 
 	    	<h:commandLink value="logout" action="#{userLogin.logout}" />
