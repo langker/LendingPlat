@@ -1,20 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">   
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">   
 <h:head>  
  <title>login or register</title>  
 </h:head>   
 <h:body>  
  	<h:form id="reg_form">
- 	<center>  
- 		<div style="position: absolute;left:50%;top:50%;width:400px;height:100px;margin-left:-200px;margin-top:-200px;">    
- 			EMAIL: <h:inputText required="true" value="#{userReg.email}" >
- 					<f:validateRegex pattern="(^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)" />
- 					</h:inputText><br></br>
- 			PASSWORD: <h:inputSecret required="true" value="#{userReg.password}" /> <br></br>
- 			ADDRESS: <h:inputText required="true" value="#{userReg.address}" /> <br></br>
- 			<h:commandButton value="regisiter and login" action="#{userReg.reg}"/> 
- 		</div>  
- 		</center>
+ 		<p:messages autoUpdate="true"/>
+		<h:panelGrid columns="1" style="position: absolute;left:35%;top:30%;display:block; text-align:center"> 
+			<h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto;">     
+				<h:outputText value="EMAIL:"/><p:inputText id="email" required="true" value="#{userReg.email}" />
+				<h:outputText value="PASSWORD:"/><p:password id="password" required="true" value="#{userReg.password}" />
+				<h:outputText value="ADDRESS:"/><p:password id="address" required="true" value="#{userReg.address}" />
+			</h:panelGrid>
+			<h:panelGrid columns="2" cellpadding="1" style="margin: 0 auto;">
+				<p:commandButton value="register" action="#{userReg.reg}"/>
+			</h:panelGrid>
+		</h:panelGrid>
  	</h:form> 
 </h:body>   
 </html> 

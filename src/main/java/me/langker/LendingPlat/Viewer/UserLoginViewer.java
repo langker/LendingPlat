@@ -1,15 +1,12 @@
 package me.langker.LendingPlat.Viewer;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import me.langker.LendingPlat.Controller.UserController;
-import me.langker.LendingPlat.Entity.User;
-import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "userLogin")
 @SessionScoped
@@ -18,7 +15,6 @@ public class UserLoginViewer {
 	private String password;
 	@Inject UserController userController;
 	public void login() throws IOException {
-		System.out.println(666);
 		try {
 			userController.login(email, password);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
