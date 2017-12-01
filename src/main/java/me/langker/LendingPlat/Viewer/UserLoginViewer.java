@@ -18,6 +18,7 @@ public class UserLoginViewer {
 	private String password;
 	@Inject UserController userController;
 	public void login() throws IOException {
+		System.out.println(666);
 		try {
 			userController.login(email, password);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
