@@ -20,6 +20,7 @@ public class ProfileViewer {
 	private String cred;
 	private int userid;
 	private Part file;
+	private boolean isAdmin;
 	@Inject UserController userController;
 	public Part getFile() {  
         return file;  
@@ -64,5 +65,12 @@ public class ProfileViewer {
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	public boolean getIsAdmin() {
+		isAdmin = userController.findUserProfile().getIsAdmin();
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }
