@@ -11,14 +11,46 @@
     <h:body>
     	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     	<f:event listener="#{product.getProduct(param['id'])}" type="preRenderView" />
-    	<p:spinner /><br></br>
-			<h:form id="rent" value="product.p"> 
-				product's name: #{product.p.name} <br />
-				price: #{product.p.price} <br />
-				des: #{product.p.description}<br />
-				<img width="50px" height="100px" src="upload_product/#{product.p.photo}" /> <br />
-				<h:commandButton value="rent" action="#{product.rentProduct(product.p.id,product.p.userid)}" rendered="#{product.p.userid!=profile.userid}" />
-			</h:form>
-		               
+    	<h:form>
+	    	<p:stack expanded="true">
+	    		<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
+			    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
+			    <p:menuitem value="adding" onclick="PF('addDlg').show();"/>
+			    <p:menuitem value="profile" url="profile.xhtml"/>
+			    <p:menuitem value="Home" url="index.xhtml"/>
+			</p:stack>
+		</h:form>
+		<h:form id="rent" value="product.p"> 
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				<h:outputLabel value="product's name:" style="font-weight:bold" /> <h:outputLabel value="#{product.p.name}" style="font-weight:bold" />
+				<h:outputLabel value="price:" style="font-weight:bold" /> <h:outputLabel value="#{product.p.price}" style="font-weight:bold" />
+				<h:outputLabel value="available date:" sytle="font-weight:bold" /> <h:outputLabel value="#{product.p.availableDate}" style="font-weight:bold" />
+				<h:outputLabel value="Description:" style="font-weight:bold" />
+			</h:panelGrid>
+			<h:outputText value="#{product.p.description}" escape="false" style="font-weight:bold" /><br />
+		</h:form>
+		<p:commandButton value="rent" type="button" onclick="PF('rentDlg').show();" rendered="#{product.p.userid!=profile.userid}" />
+		<p:dialog widgetVar="rentDlg" modal="true" position="center top">
+    		<h:form> 
+    			<h:message id="calendarmessage" for="popup" />
+    			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+    				<h:outputLabel value="the data you want to start renting" style="font-weight:bold" /> 
+    				<p:calendar id="popup" value="#{product.startRentingdate}" >
+    					<f:validator validatorId="calendarValidator" />
+    					<f:attribute name="productdate" value="#{product.p.availableDate}" />
+    				</p:calendar>
+    			</h:panelGrid>
+    			<h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+			    <h:outputLabel value="the term you want to start renting" style="font-weight:bold" />
+			    </h:panelGrid>
+			    <h:selectOneRadio value="#{product.term}" require="true">
+					<f:selectItem itemLabel="short(#{lp.shortTerm})" itemValue="#{lp.shortTerm}"/>
+					<f:selectItem itemLabel="medium(#{lp.mediumTerm})" itemValue="#{lp.mediumTerm}"/>
+					<f:selectItem itemLabel="average(#{lp.averageTerm})" itemValue="#{lp.averageTerm}"/>
+				</h:selectOneRadio>
+			    <p:commandButton validateClient="true" value="submit" action="#{product.rentProduct(product.p.id,product.p.userid)}" />
+		    
+		    </h:form>
+		</p:dialog>             
     </h:body>
 </html>

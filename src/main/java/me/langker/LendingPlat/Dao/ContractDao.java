@@ -1,21 +1,20 @@
 package me.langker.LendingPlat.Dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import me.langker.LendingPlat.Entity.Contract;
-import me.langker.LendingPlat.Entity.User;
 
 @Stateless
 public class ContractDao {
 	@PersistenceContext
 	EntityManager em;
 	
-	public Contract createContract(int age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid, int product_id,int status) {
+	public Contract createContract(int age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid, int product_id,int status,int term,Date date) {
 		Contract con = new Contract();
 		con.setAge(age);
 		con.setCustomer_detail(customer_detail);
@@ -26,6 +25,8 @@ public class ContractDao {
 		con.setLendeeid(lendeeid);
 		con.setProductid(product_id);
 		con.setStatus(status);
+		con.setTerm(term);
+		con.setStartDate(date);
 		em.persist(con);
 		return con;
 	}

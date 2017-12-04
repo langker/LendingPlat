@@ -1,5 +1,6 @@
 package me.langker.LendingPlat.Controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -13,8 +14,8 @@ import me.langker.LendingPlat.Util.Util;
 public class ContractController {
 	@Inject ContractDao contractdao;
 	@Inject ProductDao productdao;
-	public void addContract(int pid,int uid) {
-		contractdao.createContract(0, "", "", productdao.findProductById(pid).getPrice(), "", uid,Util.getInstance().getUserId(),pid,1);
+	public void addContract(int pid,int uid,int term,Date date) {
+		contractdao.createContract(0, "", "", productdao.findProductById(pid).getPrice(), "", uid,Util.getInstance().getUserId(),pid,1,term,date);
 	}
 	public List<Contract> getAllCon() {
 		return contractdao.findContractByLenderID(Util.getInstance().getUserId());

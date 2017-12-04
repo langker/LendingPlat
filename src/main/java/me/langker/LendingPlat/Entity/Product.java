@@ -1,5 +1,7 @@
 package me.langker.LendingPlat.Entity;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,7 @@ public class Product {
     private boolean insurance;
     private int price;
     private int times;
+    private Date availableDate;
 	public int getId() {
 		return id;
 	}
@@ -69,5 +72,11 @@ public class Product {
 	}
 	public void setInsurance(boolean insurance) {
 		this.insurance = insurance;
+	}
+	public Date getAvailableDate() {
+		return availableDate;
+	}
+	public void setAvailableData(Date availableDate) {
+		this.availableDate = availableDate;
 	}
 }

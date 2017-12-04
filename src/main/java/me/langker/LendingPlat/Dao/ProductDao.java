@@ -1,5 +1,6 @@
 package me.langker.LendingPlat.Dao;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,5 +50,10 @@ public class ProductDao {
 		String sql = "Select * from Product where name like ?";
 		Query query = em.createNativeQuery(sql, Product.class).setParameter(1, "%"+keyword+"%");
 		return (List<Product>)query.getResultList();
+	}
+	public void updateAvailableDate(int id,Date date) {
+		Product p = findProductById(id);
+		p.setAvailableData(date);
+		em.merge(p);
 	}
 }
