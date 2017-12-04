@@ -9,6 +9,7 @@ public class Product {
     private int id;
     private String photo;
     private String name;
+    @Column(length=65535) 
     private String description;
     private int userid;
     private int status;

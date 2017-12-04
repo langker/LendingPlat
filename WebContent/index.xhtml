@@ -17,7 +17,7 @@
 	    	<p:stack expanded="true">
 	    		<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
 			    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
-			    <p:menuitem value="adding" url="addproduct.xhtml"/>
+			    <p:menuitem value="adding" onclick="PF('addDlg').show();"/>
 			    <p:menuitem value="profile" url="profile.xhtml"/>
 			    <p:menuitem value="Home" url="index.xhtml"/>
 			</p:stack>
@@ -26,7 +26,7 @@
     	<h:form id="search" style="margin-bottom:10px;width:1000px;">
     		<p:panel id="panel" header="Search Form"> 
 		    	<center>
-		    		 <h:outputLabel value="keyword:" style="font-weight:bold" /> <h:inputText value="#{productList.keyword}"/>
+		    		<h:outputLabel value="keyword:" style="font-weight:bold" /> <h:inputText value="#{productList.keyword}"/>
 		    		<p:commandButton value="search" action="#{productList.getProductListByKeyword}" update="products" />
 		    	</center>
 	    	</p:panel>
@@ -34,7 +34,7 @@
     	<h:form id="products" style="margin-bottom:10px;width:1000px;">
     		<p:dataScroller value="#{productList.productList}" var="list" mode="inline" scrollHeight="500">
 		        <f:facet name="header">Scroll Down to Load More Prodcuts</f:facet>
-		        <h:panelGrid columns="2" style="width:100%">
+		        <h:panelGrid columns="2" columnClasses="logo,detail">
 		            <p:graphicImage value="upload_product/#{list.photo}" style="width:100px;height:120px;"/>
 		            <p:outputPanel>
 		                <h:panelGrid columns="2" cellpadding="5">
@@ -50,5 +50,24 @@
 		        </h:panelGrid>
 		    </p:dataScroller>
     	</h:form>
+    	
+    	<p:dialog header="Modal Dialog" widgetVar="addDlg" modal="true" position="center top">
+    		<h:form enctype="multipart/form-data"> 
+    			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			    	<h:outputLabel value="name:" style="font-weight:bold" /> <h:inputText value="#{addProduct.name}"/>
+			    	<h:outputLabel value="price:" style="font-weight:bold" /> <h:inputText value="#{addProduct.price}"/>
+			    	<p:outputLabel value="insurance:" style="font-weight:bold" />
+			    	<h:selectOneRadio value="#{addProduct.insurance}">
+						<f:selectItem itemLabel="yes" itemValue="true"/>
+						<f:selectItem itemLabel="no" itemValue="false"/>
+					</h:selectOneRadio>
+					<h:outputLabel value="select cover photo:" style="font-weight:bold" />
+			    	<h:inputFile value="#{addProduct.file}" />
+		    	</h:panelGrid>
+		    	<p:textEditor widgetVar="editor2" value="#{addProduct.description}" height="300" style="margin-bottom:10px" placeholder="Enter your content" />
+			    <h:commandButton value="submit" action="#{addProduct.addProduct}" />
+		    </h:form>
+		</p:dialog>   
+    
     </h:body>
 </html>
