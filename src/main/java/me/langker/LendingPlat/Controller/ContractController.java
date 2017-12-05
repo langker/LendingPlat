@@ -28,5 +28,6 @@ public class ContractController {
 	}
 	public void setConStatus(int cid, int s) {
 		contractdao.updateStatus(cid, s);
+		chdao.createContractHistory(cid, s);
 	}
 }

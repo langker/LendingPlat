@@ -9,38 +9,50 @@
 </h:head>   
 <h:body>  
 	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
-	<h:form id="profile">
- 		EMAIL: #{profile.email}
- 		ADDRESS: <h:inputText required="true" value="#{profile.address}" />
- 		<h:commandButton value="save" action="#{profile.saveAddress}"/> 
- 	</h:form> 
- 	<h:form enctype="multipart/form-data"> 
- 		upload your credential:
- 		<h:inputFile value="#{profile.file}" />
-	    <h:commandButton value="submit" action="#{profile.saveCred}" /><br />
-	    <p:graphicImage value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
- 	</h:form>
- 	<h:form id="subscribe">
- 		keyword: <h:inputText required="true" value="#{sub.keyword}" />
- 		<h:commandButton value="submit" action="#{sub.saveSub}"/> 
- 		keyword manage: <br />
- 		<h:dataTable id="subKeywords" value="#{sub.keywords}" var="sk">
-	            <h:column>
-					keyword: #{sk.subscribe_name} 
-					<h:commandButton value="delete" action="#{sub.delSub(sk.id)}" >
-						<f:ajax render="subscribe:subKeywords"/>
-					</h:commandButton>
-					<br />
-	            </h:column>
-	    </h:dataTable>
-	    subcribed product: <br />
-	    <h:dataTable id="subProduct" value="#{sub.subProduct}" var="sp">
-	            <h:column>
-					<a href="product.xhtml?id=#{sp.id}">#{sp.name} </a> 
-					<br />
-	            </h:column>
-	    </h:dataTable>
- 	</h:form> 
+	<h:form>
+	    	<p:stack expanded="true">
+	    		<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
+			    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
+			    <p:menuitem value="adding" onclick="PF('addDlg').show();"/>
+			    <p:menuitem value="profile" url="profile.xhtml"/>
+			    <p:menuitem value="Home" url="index.xhtml"/>
+			</p:stack>
+	</h:form>
+	<p:panel header="update your info" style="margin-bottom:10px;width:1000px;"> 
+		<h:form id="profile">
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				<h:outputLabel value="EMAIL:" style="font-weight:bold" /> <h:inputText value="#{profile.email}" style="font-weight:bold" />
+				<h:outputLabel value="ADDRESS:" style="font-weight:bold" /> <h:inputText value="#{profile.address}" style="font-weight:bold" />
+				<p:commandButton value="save" action="#{profile.saveAddress}"/> 
+			</h:panelGrid>
+		</h:form>
+ 	</p:panel>
+ 	<p:panel header="update your credential" style="margin-bottom:10px;width:1000px;">
+	 	<h:form enctype="multipart/form-data"> 
+	 		<h:outputLabel value="upload your credential:" style="font-weight:bold" />
+	 		<h:inputFile value="#{profile.file}" />
+		    <p:commandButton value="submit" action="#{profile.saveCred}" /><br />
+		    <p:graphicImage value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
+	 	</h:form>
+ 	</p:panel>
+ 	<p:panel header="subscribe manage" style="margin-bottom:10px;width:1000px;">
+	 	<h:form id="subscribe">
+		 	<h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+		 		<h:outputLabel value="keyword:" style="font-weight:bold" /><h:inputText required="true" value="#{sub.keyword}" />
+		 		<p:commandButton value="submit" update=":subscriber:subKeywords" action="#{sub.saveSub}"/> 
+		 	</h:panelGrid>
+		 </h:form>
+		 <h:form id="subscriber">
+			<h:dataTable id="subKeywords" value="#{sub.keywords}" var="sk">
+				<h:column>
+					<p:commandButton ajax="true" value="delete" update="@form" action="#{sub.delSub(sk.id)}" />
+					<h:outputLabel value="keyword:" style="font-weight:bold" />
+					<h:outputLabel value="#{sk.subscribe_name}" style="font-weight:bold" />	
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</p:panel>
+ 	
  	<h:dataTable id="contractlist" value="#{con.conList}" var="list">
 		<h:column>
 	    	<div style="width:400px;height:500px;">
@@ -91,7 +103,7 @@
 		        	<h:commandButton value="conform receive the product and finish the contract" action="#{con.setConStatus(list.id,7)}" rendered="#{list.status==6 and list.lendeeid==profile.userid}">
 		        		<f:ajax />
 		        	</h:commandButton>
-		        	<h:commandButton value="reject or cancel" action="#{con.setConStatus(list.id,0)}">
+		        	<h:commandButton value="reject or cancel" action="#{con.setConStatus(list.id,0)}" rendered="#{list.status!=7}">
 		        		<f:ajax />
 		        	</h:commandButton>
 							

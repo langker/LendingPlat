@@ -17,7 +17,7 @@ public class ContractHistoryDao {
 		ContractHistory ch = new ContractHistory();
 		ch.setContractid(conid);
 		ch.setStatus(status);
-		ch.setStatus(1);
+		ch.setStatus(status);
 		ch.setDate(new Date());
 		em.persist(ch);
 	}
