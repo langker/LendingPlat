@@ -48,6 +48,9 @@ public class UserController {
 	public User findUserProfile() {
 		return userdao.findUserProfile(Util.getInstance().getUserId());
 	}
+	public User findUserProfileById(int id) {
+		return userdao.findUserProfile(id);
+	}
 	public List<User> findAllUser() {
 		return userdao.findAllUser();
 	}

@@ -26,8 +26,14 @@ public class ContractController {
 	public List<Contract> getAllConForAdmin() {
 		return contractdao.findContracts();
 	}
+	public Contract getConById(int id) {
+		return contractdao.findContractsById(id);
+	}
 	public void setConStatus(int cid, int s) {
 		contractdao.updateStatus(cid, s);
 		chdao.createContractHistory(cid, s);
+	}
+	public void updateContract(int cid, int age, int price,String location,String cusdetail) {
+		contractdao.updateCon(cid, age, price, location, cusdetail);
 	}
 }
