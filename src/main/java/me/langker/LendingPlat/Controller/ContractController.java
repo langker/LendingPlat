@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import me.langker.LendingPlat.Dao.ContractDao;
+import me.langker.LendingPlat.Dao.ContractHistoryDao;
 import me.langker.LendingPlat.Dao.ProductDao;
 import me.langker.LendingPlat.Entity.Contract;
 import me.langker.LendingPlat.Util.Util;
@@ -14,8 +15,10 @@ import me.langker.LendingPlat.Util.Util;
 public class ContractController {
 	@Inject ContractDao contractdao;
 	@Inject ProductDao productdao;
+	@Inject ContractHistoryDao chdao;
 	public void addContract(int pid,int uid,int term,Date date) {
-		contractdao.createContract(0, "", "", productdao.findProductById(pid).getPrice(), "", uid,Util.getInstance().getUserId(),pid,1,term,date);
+		Contract con = contractdao.createContract(0, "", "", productdao.findProductById(pid).getPrice(), "", uid,Util.getInstance().getUserId(),pid,1,term,date);
+		chdao.createContractHistory(con.getId(), 1);
 	}
 	public List<Contract> getAllCon() {
 		return contractdao.findContractByLenderID(Util.getInstance().getUserId());

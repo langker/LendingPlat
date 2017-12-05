@@ -22,6 +22,7 @@ public class ProductDao {
 		prd.setUserid(userid);
 		prd.setDescription(description);
 		prd.setPhoto(photo);
+		prd.setAvailableData(new Date());
 		em.persist(prd);
 		return prd;
 	}
