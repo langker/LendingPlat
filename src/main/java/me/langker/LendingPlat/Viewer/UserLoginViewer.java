@@ -2,6 +2,7 @@ package me.langker.LendingPlat.Viewer;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -15,13 +16,12 @@ public class UserLoginViewer {
 	private String password;
 	@Inject UserController userController;
 	public void login() throws IOException {
-		try {
-			userController.login(email, password);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("failure.xhtml");
-			e.printStackTrace();
-		}
+			if(userController.login(email, password)!=null) {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			}else {
+				FacesContext.getCurrentInstance().addMessage(null,
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","wrong username or password"));
+			}
 	}
 	public void logout() {
 		userController.logout();

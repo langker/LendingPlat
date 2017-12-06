@@ -2,6 +2,7 @@ package me.langker.LendingPlat.Viewer;
 
 import java.io.IOException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -19,13 +20,13 @@ public class UserRegViewer {
 	private String address;
 	
 	public void reg() throws IOException {
-		try {
-			userController.reg(email, password, address, credentail);
+		
+		if(userController.reg(email, password, address, credentail)!=null) {
 			userController.login(email, password);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("failure.xhtml");
-			e.printStackTrace();
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","register failed!The same email"));
 		}
 	}
 	public String getEmail() {

@@ -14,14 +14,14 @@ import me.langker.LendingPlat.Util.Util;
 @Stateless
 public class UserController {  
 	@Inject UserDao userdao;
-	public User login(String email, String password) throws Exception {
+	public User login(String email, String password) {
 		List<User>res = userdao.findByEmailAndPassword(email, password);
 		if (res.size() >= 1) {
 			HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute("userid",res.get(0).getId());
 			return res.get(0);
 		} else 
-			throw new Exception("login failed");
+			return null;
 	}
 	public Boolean isLogin() {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -32,9 +32,9 @@ public class UserController {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute("userid", null);
 	}
-	public User reg(String email, String password,String address,String credential) throws Exception {
+	public User reg(String email, String password,String address,String credential) {
 		if (userdao.findByEmail(email).size() >= 1)  {
-			throw new Exception("reg failed");
+			return null;
 		} else {
 			return userdao.createUser(email, password, address, credential);
 		}
