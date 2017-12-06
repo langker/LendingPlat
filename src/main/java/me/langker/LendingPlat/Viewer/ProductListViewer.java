@@ -7,7 +7,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Entity.Product;
 

@@ -9,21 +9,9 @@
 	</h:head>   
  
     <h:body>
-    	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     	<f:event listener="#{productList.getProductAllList}" type="preRenderView" />
     	<f:event listener="#{admin.initLP}" type="preRenderView" />
-    	
-    	<h:form>
-	    	<p:stack expanded="true">
-	    		<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
-			    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
-			    <p:menuitem value="contract" url="contract.xhtml"/>
-			    <p:menuitem value="adding" onclick="PF('addDlg').show();"/>
-			    <p:menuitem value="profile" url="profile.xhtml"/>
-			    <p:menuitem value="Home" url="index.xhtml"/>
-			</p:stack>
-		</h:form>
-    	
+    	<ui:include src="stack.xhtml" />
     	<h:form id="search" style="margin-bottom:10px;width:1000px;">
     		<p:panel id="panel" header="Search Form"> 
 		    	<center>
@@ -74,24 +62,5 @@
 	    		</p:layoutUnit>
 		    </p:layout>
     	</h:form>
-    	
-    	<p:dialog header="adding product" widgetVar="addDlg" modal="true" position="center top">
-    		<h:form enctype="multipart/form-data"> 
-    			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-			    	<h:outputLabel value="name:" style="font-weight:bold" /> <h:inputText value="#{addProduct.name}"/>
-			    	<h:outputLabel value="price:" style="font-weight:bold" /> <h:inputText value="#{addProduct.price}"/>
-			    	<p:outputLabel value="insurance:" style="font-weight:bold" />
-			    	<h:selectOneRadio value="#{addProduct.insurance}">
-						<f:selectItem itemLabel="yes" itemValue="true"/>
-						<f:selectItem itemLabel="no" itemValue="false"/>
-					</h:selectOneRadio>
-					<h:outputLabel value="select cover photo:" style="font-weight:bold" />
-			    	<h:inputFile value="#{addProduct.file}" />
-		    	</h:panelGrid>
-		    	<p:textEditor value="#{addProduct.description}" height="300" style="margin-bottom:10px" placeholder="Enter your content" />
-			    <h:commandButton value="submit" action="#{addProduct.addProduct}" />
-		    </h:form>
-		</p:dialog>   
-    
     </h:body>
 </html>

@@ -9,17 +9,8 @@
 	</h:head>   
  
     <h:body>
-    	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
+    	<ui:include src="stack.xhtml" />
     	<f:event listener="#{admin.checkIsAdmin}" type="preRenderView" />
-    	<h:form>
-	    	<p:stack expanded="true">
-	    		<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
-			    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
-			    <p:menuitem value="adding" onclick="PF('contractDlg').show();"/>
-			    <p:menuitem value="profile" url="profile.xhtml"/>
-			    <p:menuitem value="Home" url="index.xhtml"/>
-			</p:stack>
-		</h:form>
 		<h:form id="leaseperiod" style="margin-bottom:10px;width:1000px;">
 			<p:panel header="edit the lease period" > 
 				<h:panelGrid columns="6" style="margin-bottom:10px" cellpadding="5">
