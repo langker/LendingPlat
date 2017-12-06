@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+
+import org.primefaces.event.SelectEvent;
 
 import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.LeasePeriodController;
@@ -16,6 +19,7 @@ import me.langker.LendingPlat.Entity.ContractHistory;
 import me.langker.LendingPlat.Entity.User;
 
 @ManagedBean(name = "admin")
+@ViewScoped
 @SessionScoped
 public class AdminViewer {
 	private ArrayList<User> users;
@@ -23,7 +27,7 @@ public class AdminViewer {
 	private int shortTerm;
 	private int medium;
 	private int average;
-	private Contract selCon;
+	private int selConId;
 	private ArrayList<ContractHistory> conHis;
 	@Inject UserController userController;
 	@Inject ContractController conController;
@@ -73,17 +77,17 @@ public class AdminViewer {
 	public void updateTerm() {
 		lpController.updateTerm(shortTerm, medium, average);
 	}
-	public Contract getSelCon() {
-		return selCon;
-	}
-	public void setSelCon(Contract selCon) {
-		this.selCon = selCon;
-	}
-	public ArrayList<ContractHistory> getConHis(int id) {
-		conHis = (ArrayList<ContractHistory>)conController.getConHistory(id);
+	public ArrayList<ContractHistory> getConHis() {
+		conHis = (ArrayList<ContractHistory>)conController.getConHistory(selConId);
 		return conHis;
 	}
 	public void setConHis(ArrayList<ContractHistory> conHis) {
 		this.conHis = conHis;
+	}
+	public int getSelConId() {
+		return selConId;
+	}
+	public void setSelConId(SelectEvent event) {
+		this.selConId = ((Contract)event.getObject()).getId();
 	}
 }

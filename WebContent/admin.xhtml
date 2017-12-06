@@ -64,24 +64,19 @@
 		                 rows="10" paginator="true"
 		                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		                 rowsPerPageTemplate="5,10,15"
-		                 selectionMode="single" rowKey="#{list.id}"
-		                 selection="#{admin.selCon}">
+		                 selectionMode="single" rowKey="#{list.id}">
 		 		<f:facet name="header">
 		 			Contract List
 		 		</f:facet>
 		 		<p:column headerText="Id">
 		            <h:outputText value="#{list.id}" />
 		        </p:column>
-		        <p:column style="width:50px;text-align: center" headerText="history">
-            		<p:commandButton oncomplete="PF('conDlg').show()" icon="ui-icon-search" title="View">
-                		<f:setPropertyActionListener value="#{list}" target="#{admin.selCon}" />
-            		</p:commandButton>
-        		</p:column>
+		        <p:ajax event="rowSelect" oncomplete="PF('conDlg').show()" listener="#{admin.setSelConId}" update="conDlg"/>
 		 	</p:dataTable>
 		</h:form>
-		<p:dialog widgetVar="conDlg" header="contract history">
+		<p:dialog id="conDlg" widgetVar="conDlg" header="contract history" dynamic="true">
 			<p:outputPanel id="multiCarDetail" style="text-align:center;">
-            <ui:repeat value="#{admin.getConHis(admin.selCon.id)}" var="contract">
+            <ui:repeat value="#{admin.getConHis()}" var="contract">
             	<h:panelGrid columns="2" cellpadding="5">  
 	                <h:outputText value="the contract created at" style="display:block" rendered="#{contract.status==1}"/>
 	                <h:outputText value="#{contract.date}" style="display:block;font-weight:bold;" rendered="#{contract.status==1}"/>
