@@ -12,6 +12,7 @@ import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.LeasePeriodController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Contract;
+import me.langker.LendingPlat.Entity.ContractHistory;
 import me.langker.LendingPlat.Entity.User;
 
 @ManagedBean(name = "admin")
@@ -22,6 +23,8 @@ public class AdminViewer {
 	private int shortTerm;
 	private int medium;
 	private int average;
+	private Contract selCon;
+	private ArrayList<ContractHistory> conHis;
 	@Inject UserController userController;
 	@Inject ContractController conController;
 	@Inject LeasePeriodController lpController;
@@ -69,5 +72,18 @@ public class AdminViewer {
 	}
 	public void updateTerm() {
 		lpController.updateTerm(shortTerm, medium, average);
+	}
+	public Contract getSelCon() {
+		return selCon;
+	}
+	public void setSelCon(Contract selCon) {
+		this.selCon = selCon;
+	}
+	public ArrayList<ContractHistory> getConHis(int id) {
+		conHis = (ArrayList<ContractHistory>)conController.getConHistory(id);
+		return conHis;
+	}
+	public void setConHis(ArrayList<ContractHistory> conHis) {
+		this.conHis = conHis;
 	}
 }

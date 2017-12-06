@@ -9,6 +9,7 @@ import me.langker.LendingPlat.Dao.ContractDao;
 import me.langker.LendingPlat.Dao.ContractHistoryDao;
 import me.langker.LendingPlat.Dao.ProductDao;
 import me.langker.LendingPlat.Entity.Contract;
+import me.langker.LendingPlat.Entity.ContractHistory;
 import me.langker.LendingPlat.Util.Util;
 
 @Stateless
@@ -35,5 +36,8 @@ public class ContractController {
 	}
 	public void updateContract(int cid, int age, int price,String location,String cusdetail) {
 		contractdao.updateCon(cid, age, price, location, cusdetail);
+	}
+	public List<ContractHistory> getConHistory(int id) {
+		return chdao.findContractHistoryByConid(id);
 	}
 }
