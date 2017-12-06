@@ -44,9 +44,9 @@
 		        </p:column>
 		        
 		        <p:column headerText="credential">
-		           <!-- <p:link outcome="upload_cred/#{list.credential}" value="66"  ></p:link> -->
+		         	<h:outputText value="No Credential" rendered="#{list.credential==null}"/>
+		        	<p:commandLink value="click here to see"  oncomplete="window.open('upload_cred/#{list.credential}');"  rendered="#{list.credential!=null}"/>
 		        </p:column>
-		 
 		    </p:dataTable>
 		</h:form>
 		<br />
@@ -61,6 +61,12 @@
 		 		</f:facet>
 		 		<p:column headerText="Id">
 		            <h:outputText value="#{list.id}" />
+		        </p:column>
+		        <p:column headerText="term">
+		            <h:outputText value="#{list.term} days" />
+		        </p:column>
+		        <p:column headerText="product">
+		            <p:link outcome="product.xhtml?id=#{list.productid}" value="product detail" />
 		        </p:column>
 		        <p:ajax event="rowSelect" oncomplete="PF('conDlg').show()" listener="#{admin.setSelConId}" update="conDlg"/>
 		 	</p:dataTable>
