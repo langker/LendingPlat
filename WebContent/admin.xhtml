@@ -5,29 +5,55 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
 	xmlns:p="http://primefaces.org/ui">   
 	<h:head>  
- 		<title>Hello World</title>   
+ 		<title>admin</title>   
 	</h:head>   
  
     <h:body>
     	<f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     	<f:event listener="#{admin.checkIsAdmin}" type="preRenderView" />
-    	<p:spinner /><br></br>
+    	<h:form>
+	    	<p:stack expanded="true">
+	    		<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
+			    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
+			    <p:menuitem value="adding" onclick="PF('contractDlg').show();"/>
+			    <p:menuitem value="profile" url="profile.xhtml"/>
+			    <p:menuitem value="Home" url="index.xhtml"/>
+			</p:stack>
+		</h:form>
     	<h:form id="leaseperiod"> 
     		short: <h:inputText required="true" value="#{admin.shortTerm}" /> <br />
     		medium: <h:inputText required="true" value="#{admin.medium}" /> <br />
     		average: <h:inputText required="true" value="#{admin.average}" /> <br />
     		<h:commandButton value="save" action="#{admin.updateTerm}"/>  
     	</h:form>
-    	<h:form id="user_profile">
-    		users:
-	        <h:dataTable id="userlist" value="#{admin.users}" var="list">
-	            <h:column>
-	            	email: #{list.email} <br />
-					address: #{list.address} <br />
-					<p:graphicImage width="50px" height="100px" src="upload_cred/#{list.credential}" rendered="#{list.credential!=null}"/> <br /> 	
-	            </h:column>
-	        </h:dataTable>
-    	</h:form>
+    	<h:form style="width:1000px">
+		    <p:dataTable id="userList" var="list" value="#{admin.users}" widgetVar="userTable" multiViewState="true"
+		                 rows="10" paginator="true"
+		                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		                 rowsPerPageTemplate="5,10,15"
+		                 selectionMode="single" rowKey="#{list.id}"
+		                 filteredValue="">
+		 		<f:facet name="header">
+        			User Profile
+    			</f:facet>
+		        <p:column headerText="Id">
+		            <h:outputText value="#{list.id}" />
+		        </p:column>
+		 
+		        <p:column headerText="email">
+		            <h:outputText value="#{list.email}" />
+		        </p:column>
+		 
+		        <p:column headerText="address">
+		            <h:outputText value="#{list.address}" />
+		        </p:column>
+		        
+		        <p:column headerText="credential">
+		           <!-- <p:link outcome="upload_cred/#{list.credential}" value="66"  ></p:link> -->
+		        </p:column>
+		 
+		    </p:dataTable>
+		</h:form>
     	<h:form id="contract">
     		cons:
 	        <h:dataTable id="con" value="#{admin.con}" var="list">

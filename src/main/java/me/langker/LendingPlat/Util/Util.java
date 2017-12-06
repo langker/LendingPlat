@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.primefaces.model.UploadedFile;
+
 @SessionScoped
 public class Util { 
 	private static Util instance;
@@ -19,17 +21,20 @@ public class Util {
 		}
 		return instance;
 	}
-	public String submit(Part file, String savePath) throws IOException{
+	public String submit(InputStream input, String savePath) {
 		HttpSession session =(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		String rootPath = session.getServletContext().getRealPath(savePath); //得到服务器相对路径   
-		try (InputStream input = file.getInputStream()) {
+		
+		
 			String filename = String.valueOf(System.currentTimeMillis())+".jpg";
-	        Files.copy(input, new File(rootPath, filename).toPath());
+	        try {
+				Files.copy(input, new File(rootPath, filename).toPath());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	        return filename;
-	    }
-	    catch (IOException e) {
-	    	return null;
-	    }
+	   
     }
 	public int getUserId() {
 		HttpSession session =(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);

@@ -7,6 +7,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Util.Util;
@@ -19,17 +23,17 @@ public class ProfileViewer {
 	private ArrayList<Product> productList;
 	private String cred;
 	private int userid;
-	private Part file;
+	private UploadedFile file;
 	private boolean isAdmin;
 	@Inject UserController userController;
-	public Part getFile() {  
+	public UploadedFile getFile() {  
         return file;  
     }  
-    public void setFile(Part file) {  
+    public void setFile(UploadedFile file) {  
         this.file = file;  
     }
-    public void saveCred() throws IOException {
-    	String filename = Util.getInstance().submit(file,"/upload_cred");
+    public void saveCred(FileUploadEvent event) throws IOException {
+    	String filename = Util.getInstance().submit(event.getFile().getInputstream(),"/upload_cred");
     	userController.updateCred(filename);
     }
 	public void saveAddress() {

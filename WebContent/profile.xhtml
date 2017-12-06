@@ -30,8 +30,8 @@
  	<p:panel header="update your credential" style="margin-bottom:10px;width:1000px;">
 	 	<h:form enctype="multipart/form-data"> 
 	 		<h:outputLabel value="upload your credential:" style="font-weight:bold" />
-	 		<h:inputFile value="#{profile.file}" />
-		    <p:commandButton value="submit" action="#{profile.saveCred}" /><br />
+	 		<p:fileUpload fileUploadListener="#{profile.saveCred}" mode="advanced" dragDropSupport="false"
+           fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 		    <p:graphicImage value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
 	 	</h:form>
  	</p:panel>
