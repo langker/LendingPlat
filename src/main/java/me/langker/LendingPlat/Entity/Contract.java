@@ -17,7 +17,7 @@ public class Contract {
     private int productid;
     private int finalprice;
     private String location;
-    private int age;
+    private String age;
     @Column(length=65535) 
     private String customer_detail;
     @Column(length=65535) 
@@ -83,10 +83,10 @@ public class Contract {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 	public String getCustomer_detail() {

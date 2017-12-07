@@ -19,7 +19,7 @@ public class ContractController {
 	@Inject ContractHistoryDao chdao;
 	public void addContract(int pid,int uid,int term,Date date) {
 		int price = productdao.findProductById(pid).getPrice()*term;
-		Contract con = contractdao.createContract(0, "", "",price, "", uid,Util.getInstance().getUserId(),pid,1,term,date);
+		Contract con = contractdao.createContract(null, "", "",price, "", uid,Util.getInstance().getUserId(),pid,1,term,date);
 		chdao.createContractHistory(con.getId(), 1);
 	}
 	public List<Contract> getAllCon() {
@@ -35,7 +35,7 @@ public class ContractController {
 		contractdao.updateStatus(cid, s);
 		chdao.createContractHistory(cid, s);
 	}
-	public void updateContract(int cid, int age, int price,String location,String cusdetail,String lenderS) {
+	public void updateContract(int cid, String age, int price,String location,String cusdetail,String lenderS) {
 		contractdao.updateCon(cid, age, price, location, cusdetail,lenderS);
 	}
 	public void updateLendeeSign(int cid, String lendeeS) {

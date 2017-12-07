@@ -1,8 +1,8 @@
 package me.langker.LendingPlat.Viewer;
 
+
 import java.util.ArrayList;
 import java.util.Date;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ import me.langker.LendingPlat.Entity.User;
 public class ContractViewer {
 	private ArrayList<Contract> conList;
 	private String location;
-	private int age;
+	private String age;
 	private int price;
 	private String customer_detail;
 	private String lendeeAddress;
@@ -64,10 +64,10 @@ public class ContractViewer {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 	public int getPrice() {

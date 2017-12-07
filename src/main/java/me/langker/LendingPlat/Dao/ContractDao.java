@@ -14,7 +14,7 @@ public class ContractDao {
 	@PersistenceContext
 	EntityManager em;
 	
-	public Contract createContract(int age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid, int product_id,int status,int term,Date date) {
+	public Contract createContract(String age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid, int product_id,int status,int term,Date date) {
 		Contract con = new Contract();
 		con.setAge(age);
 		con.setCustomer_detail(customer_detail);
@@ -30,7 +30,7 @@ public class ContractDao {
 		em.persist(con);
 		return con;
 	}
-	public Contract updateContract(int age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid,int product_id) {
+	public Contract updateContract(String age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid,int product_id) {
 		Contract con = new Contract();
 		con.setAge(age);
 		con.setCustomer_detail(customer_detail);
@@ -53,16 +53,17 @@ public class ContractDao {
 	}
 	public Contract findContractsById(int id) {
 		String sql = "Select * from Contract where id=?";
-		return (Contract)em.createNativeQuery(sql, Contract.class).setParameter(1, id).getSingleResult();
+		List<Contract> tmp = em.createNativeQuery(sql, Contract.class).setParameter(1, id).getResultList();
+		return (tmp.isEmpty())? null:tmp.get(0);
 	}
 	public void updateStatus(int cid, int s) {
 		String sql = "UPDATE Contract SET status =? WHERE id = ?";
 		Query query = em.createNativeQuery(sql, Contract.class).setParameter(1,s).setParameter(2, cid);
 		query.executeUpdate();
 	}
-	public void updateCon(int cid, int age, int price,String location,String cusdetail,String lenderSignature) {
+	public void updateCon(int cid, String age, int price,String location,String cusdetail,String lenderSignature) {
 		Contract con = findContractsById(cid);
-		if (age!=0) con.setAge(age);
+		if (age!=null) con.setAge(age);
 		if (price!=0) con.setFinalprice(price);
 		if (location!=null) con.setLocation(location);
 		if (cusdetail!=null) con.setCustomer_detail(cusdetail);
