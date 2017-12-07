@@ -26,8 +26,8 @@ public class SubscriberDao {
 		em.createNativeQuery(sql,Subscriber.class).setParameter(1, id).executeUpdate();
 	}
 	public List<Subscriber> findSubByName(String name) {
-		String sql = "Select * from Subscriber where subscribe_name like ?";
-		return (List<Subscriber>)em.createNativeQuery(sql, Subscriber.class).setParameter(1, "%"+name+"%").getResultList();
+		String sql = "Select * from Subscriber where InStr(?,rtrim(subscribe_name))";
+		return (List<Subscriber>)em.createNativeQuery(sql, Subscriber.class).setParameter(1, name).getResultList();
 	}
 	public List<Subscriber> findSubByUserId(int userid) {
 		String sql = "Select * from Subscriber where userid=?";

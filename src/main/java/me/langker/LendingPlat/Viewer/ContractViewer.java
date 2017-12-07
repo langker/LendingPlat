@@ -7,6 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
+import org.primefaces.event.TabChangeEvent;
+
 import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Controller.UserController;
@@ -26,6 +28,7 @@ public class ContractViewer {
 	private String lenderSignature;
     private String lendeeSignature;
     private User lendeeProf;
+    private int selectcid;
 	@Inject ProductController pController;
 	@Inject ContractController conController;
 	@Inject UserController userController;
@@ -115,4 +118,7 @@ public class ContractViewer {
 	public void setLendeeProf(User lendeeProf) {
 		this.lendeeProf = lendeeProf;
 	}
+	public void onTabChange(TabChangeEvent event) {
+        System.out.println(event.getTab().getId());
+    }
 }

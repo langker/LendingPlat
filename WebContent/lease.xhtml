@@ -10,11 +10,11 @@
 	<h:body>
 		<f:event listener="#{lease.getLease(param['id'])}" type="preRenderView" />
 		<h:form id="lease">
-			<center><h:outputText value= "Lease" /></center>
-			<h:outputText value = "Detail"/>
-			<h:outputText value = "The lease between #{lease.lender.name} and #{lease.lendee.name} on the #(#{lease.pro.name}) will start at the #{lease.lease.startDate}, lasting #{lease.lease.term} days." rendered="#{lease.lease.term==lp.shortTerm}"/>
-			<h:outputText value = "The lease between #{lease.lender.name} and #{lease.lendee.name} on the #(#{lease.pro.name}) will start at the #{lease.lease.startDate}, lasting #{lease.lease.term} days." rendered="#{lease.lease.term==lp.mediumTerm}"/>
-			<h:outputText value = "The lease between #{lease.lender.name} and #{lease.lendee.name} on the #(#{lease.pro.name}) will start at the #{lease.lease.startDate}, lasting #{lease.lease.term} days." rendered="#{lease.lease.term==lp.averageTerm}"/>
+			<center><h:outputText value= "Lease" style="font-size:24px;display:block"/></center>
+			<h:outputText value = "Detail" style="font-size:24px;display:block"/><br />
+			<h:outputText style="font-size:24px;display:block" value = "The lease between #{lease.lender.name} and #{lease.lendee.name} on the #{lease.pro.name} will start at the #{lease.lease.startDate}, lasting #{lease.lease.term} days." rendered="#{lease.lease.term==lp.shortTerm}"/>
+			<h:outputText style="font-size:24px;display:block" value = "The lease between #{lease.lender.name} and #{lease.lendee.name} on the #{lease.pro.name} will start at the #{lease.lease.startDate}, lasting #{lease.lease.term} days." rendered="#{lease.lease.term==lp.mediumTerm}"/>
+			<h:outputText style="font-size:24px;display:block" value = "The lease between #{lease.lender.name} and #{lease.lendee.name} on the #{lease.pro.name} will start at the #{lease.lease.startDate}, lasting #{lease.lease.term} days." rendered="#{lease.lease.term==lp.averageTerm}"/>
 			
 			<h:outputText value = "Customer Detail" rendered="#{lease.lease.customer_detail!=''}"/>
 			<h:outputText value = "#{lease.lease.customer_detail}" rendered="#{lease.lease.customer_detail!=''}"/>
@@ -29,9 +29,9 @@
 				<h:outputText style="font-size:24px;display:block" value="#{lease.lease.location}" rendered="#{lease.lease.location!=''}"/>
 	        	
 	        	<h:outputText style="font-size:24px;display:block" value="Lender's Identify" />
-	        	<p:graphicImage value="upload_cred/#{lease.lender.credential}" />
+	        	<p:graphicImage style="width:180px;height:270px;" value="upload_cred/#{lease.lender.credential}" />
 	        	<h:outputText style="font-size:24px;display:block" value="Lendee's Identify" />
-	        	<p:graphicImage value="upload_cred/#{lease.lendee.credential}" />
+	        	<p:graphicImage style="width:180px;height:270px;" value="upload_cred/#{lease.lendee.credential}" />
 	        	
 	    		<h:outputText style="font-size:24px;display:block" value="Lender's Signature" />
 	        	<p:signature style="width:400px;height:200px;" value="#{lease.lease.lenderSignature}" readonly="true"

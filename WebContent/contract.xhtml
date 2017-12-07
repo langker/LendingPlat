@@ -12,9 +12,13 @@
 	<h3>Contract List</h3>
 	<h:form>
 		<p:accordionPanel id="acc" value="#{con.conList}" var="list" style="width:1000px">
+		<p:ajax event="tabChange" listener="#{con.onTabChange}" update="acc" />
 	        <p:tab title="contract start from #{list.startDate} lasting #{list.term} days">
 	        	<p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
-	            <h:panelGrid columns="2" cellpadding="5">                  
+	            <h:panelGrid columns="2" cellpadding="5">         
+	            	<h:outputText value="Lease Link" style="font-weight: bold" />
+	                <p:link outcome="lease.xhtml?id=#{list.id}" value="click here" />         
+	                
 	                <h:outputText value="Product Detail:" style="font-weight: bold" />
 	                <p:link outcome="product.xhtml?id=#{list.productid}" value="click here" />
 	                
@@ -55,7 +59,7 @@
 					<p:textEditor value="#{con.customer_detail}" width="400" height="300" style="margin-bottom:10px" placeholder="Enter your content" rendered="#{list.status==1 and list.lenderid==profile.userid}" />
 					<h:outputLabel value="sign here" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
 					<p:signature id="sign" value="#{con.lenderSignature}" style="width:400px;height:200px" widgetVar="sig" required="true" guideline="true" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
-					<p:commandButton value="save the contract and send to the lendee" ajax="true" validateClient="true" update="message" action="#{con.updateContractWithFirstTime(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
+					<p:commandButton ajax="false" value="save the contract and send to the lendee" validateClient="true" update="message" action="#{con.updateContractWithFirstTime(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
 					
 					<h:outputLabel value="limited age:" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="#{list.age}" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
@@ -82,21 +86,21 @@
 			        </p:selectOneMenu>
 			        <h:outputLabel value="sign here" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<p:signature id="signature" value="#{con.lendeeSignature}" style="width:400px;height:200px" widgetVar="sig" required="true" guideline="true" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
-					<p:commandButton value="accept and pay" action="#{con.lendeeSign(list.id,3)}" ajax="true" validateClient="true" update="message" rendered="#{list.status==2 and list.lendeeid==profile.userid}" />
+					<p:commandButton ajax="false" value="accept and pay" action="#{con.lendeeSign(list.id,3)}" validateClient="true" update="message" rendered="#{list.status==2 and list.lendeeid==profile.userid}" />
 					
 					<h:outputLabel value="lendee's address" style="font-weight:bold" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
 					<h:outputLabel value="#{con.getLendeeAddress(list.id)}" style="font-weight:bold" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
-					<p:commandButton value="conform send the product" action="#{con.setConStatus(list.id,4)}" rendered="#{list.status==3 and list.lenderid==profile.userid}" />
+					<p:commandButton ajax="false" value="conform send the product" action="#{con.setConStatus(list.id,4)}" rendered="#{list.status==3 and list.lenderid==profile.userid}" />
 					
-					<p:commandButton value="conform receive the product" action="#{con.setConStatus(list.id,5)}" rendered="#{list.status==4 and list.lendeeid==profile.userid}" />
+					<p:commandButton ajax="false" value="conform receive the product" action="#{con.setConStatus(list.id,5)}" rendered="#{list.status==4 and list.lendeeid==profile.userid}" />
 					
 					<h:outputLabel value="lender's address" style="font-weight:bold" rendered="#{list.status==5 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="#{con.getLenderAddress(list.id)}" style="font-weight:bold" rendered="#{list.status==5 and list.lendeeid==profile.userid}"/>
-					<p:commandButton value="conform send the product" action="#{con.setConStatus(list.id,6)}" rendered="#{list.status==5 and list.lendeeid==profile.userid}" />
+					<p:commandButton ajax="false" value="conform send the product" action="#{con.setConStatus(list.id,6)}" rendered="#{list.status==5 and list.lendeeid==profile.userid}" />
 					
-					<p:commandButton value="conform receive the product and finish the contract" action="#{con.finishContract(list.id,7)}" rendered="#{list.status==6 and list.lenderid==profile.userid}" />
+					<p:commandButton ajax="false" value="conform receive the product and finish the contract" action="#{con.finishContract(list.id,7)}" rendered="#{list.status==6 and list.lenderid==profile.userid}" />
 					
-					<p:commandButton value="reject or cancel" action="#{con.rejectContract(list.id,0)}" rendered="#{list.status!=7}" />
+					<p:commandButton ajax="false" value="reject or cancel" action="#{con.rejectContract(list.id,0)}" rendered="#{list.status!=7 and list.status!=0}" />
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:accordionPanel>
