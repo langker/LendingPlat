@@ -1,20 +1,13 @@
 package me.langker.LendingPlat.Viewer;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.servlet.http.Part;
-
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import me.langker.LendingPlat.Controller.UserController;
-import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "profile")
@@ -22,11 +15,12 @@ import me.langker.LendingPlat.Util.Util;
 public class ProfileViewer {
 	private String email;
 	private String address;
-	private ArrayList<Product> productList;
 	private String cred;
 	private int userid;
 	private UploadedFile file;
 	private boolean isAdmin;
+	private String name;
+	private String phone;
 	@Inject UserController userController;
 	public UploadedFile getFile() {  
         return file;  
@@ -38,26 +32,22 @@ public class ProfileViewer {
     	String filename = Util.getInstance().submit(event.getFile().getInputstream(),"/upload_cred");
     	userController.updateCred(filename);
     }
-	public void saveAddress() {
-		userController.updateAddress(address);
+	public void updateProfile() {
+		userController.updateProfile(address, name, phone);
 	}
 	public String getEmail() {
-		return userController.findUserProfile().getEmail();
+		email = userController.findUserProfile().getEmail();
+		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	public String getAddress() {
-		return userController.findUserProfile().getAddress();
+		address = userController.findUserProfile().getAddress();
+		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public ArrayList<Product> getProductList() {
-		return productList;
-	}
-	public void setProductList(ArrayList<Product> productList) {
-		this.productList = productList;
 	}
 	public String getCred() {
 		cred = userController.findUserProfile().getCredential();
@@ -67,7 +57,8 @@ public class ProfileViewer {
 		this.cred = cred;
 	}
 	public int getUserid() {
-		return Util.getInstance().getUserId();
+		userid = Util.getInstance().getUserId();
+		return userid;
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
@@ -78,5 +69,19 @@ public class ProfileViewer {
 	}
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public String getName() {
+		name = userController.findUserProfile().getName();
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		phone = userController.findUserProfile().getPhone();
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

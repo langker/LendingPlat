@@ -26,11 +26,12 @@ public class UserDao {
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1,email);
 		return (List<User>)query.getResultList();
 	}
-	public User createUser(String email, String password, String address, String credential) {
+	public User createUser(String email, String password, String address, String name,String phone) {
 		password = Util.getMD5(password);
 		User user = new User();
 		user.setAddress(address);
-		user.setCredential(credential);
+		user.setName(name);
+		user.setPhone(phone);
 		user.setEmail(email);
 		user.setIsAdmin(false);
 		user.setPassword(password);
@@ -47,10 +48,12 @@ public class UserDao {
 		String sql = "Select * from User where isAdmin=0";
 		return (List<User>)em.createNativeQuery(sql, User.class).getResultList();
 	}
-	public void updateAddress(int id, String address) {
-		String sql = "UPDATE User SET address =? WHERE id = ?";
-		Query query = em.createNativeQuery(sql, User.class).setParameter(1,address).setParameter(2, id);
-		query.executeUpdate();
+	public void updateProfile(int id, String address,String name, String phone) {
+		User user = findUserProfile(id);
+		if (address!=null) user.setAddress(address);
+		if (name!=null) user.setName(name);
+		if (phone!=null) user.setPhone(phone);
+		em.merge(user);
 	}
 	public void updateCred(int id, String filename) {
 		String sql = "UPDATE User SET credential =? WHERE id = ?";

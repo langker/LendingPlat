@@ -16,12 +16,13 @@ public class UserRegViewer {
 	
 	private String email;
 	private String password;
-	private String credentail;
 	private String address;
+	private String name;
+	private String phone;
 	
 	public void reg() throws IOException {
 		
-		if(userController.reg(email, password, address, credentail)!=null) {
+		if(userController.reg(email, password, address, name, phone)!=null) {
 			userController.login(email, password);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		} else {
@@ -41,16 +42,22 @@ public class UserRegViewer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCredentail() {
-		return credentail;
-	}
-	public void setCredentail(String credentail) {
-		this.credentail = credentail;
-	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

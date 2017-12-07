@@ -32,15 +32,15 @@ public class UserController {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute("userid", null);
 	}
-	public User reg(String email, String password,String address,String credential) {
+	public User reg(String email, String password,String address,String name, String phone) {
 		if (userdao.findByEmail(email).size() >= 1)  {
 			return null;
 		} else {
-			return userdao.createUser(email, password, address, credential);
+			return userdao.createUser(email, password, address, name,phone);
 		}
 	}
-	public void updateAddress(String address) {
-		userdao.updateAddress(Util.getInstance().getUserId(), address);
+	public void updateProfile(String address,String name, String phone) {
+		userdao.updateProfile(Util.getInstance().getUserId(), address,name,phone);
 	}
 	public void updateCred(String filename) {
 		userdao.updateCred(Util.getInstance().getUserId(), filename);
