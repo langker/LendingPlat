@@ -16,7 +16,8 @@
 		</p:stack>
 	</h:form>
 	<p:dialog id="addDlg" header="adding product" widgetVar="addDlg" modal="true" position="center top">
-    		<h:form enctype="multipart/form-data"> 
+    		<h:form enctype="multipart/form-data" style="width:700px;"> 
+    			<p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
     			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 			    	<h:outputLabel value="name:" style="font-weight:bold" /> 
 			    	<h:inputText required="true" value="#{addProduct.name}"/>
@@ -28,10 +29,10 @@
 						<f:selectItem itemLabel="no" itemValue="false"/>
 					</h:selectOneRadio>
 					<h:outputLabel value="select cover photo:" style="font-weight:bold" />
-			    	<h:inputFile required="true" value="#{addProduct.file}" />
+					<p:fileUpload fileUploadListener="#{addProduct.saveFile}" mode="advanced" dragDropSupport="false" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 		    	</h:panelGrid>
-		    	<p:textEditor value="#{addProduct.description}" height="300" style="margin-bottom:10px" placeholder="Enter your content" />
-			    <h:commandButton  oncomplete="alert(66);" validateClient="true" value="submit" action="#{addProduct.addProduct}" />
+		    	<p:textEditor value="#{addProduct.description}" height="200" style="margin-bottom:10px;" placeholder="Enter your content" />
+			    <p:commandButton ajax="true" validateClient="true" value="submit" action="#{addProduct.addProduct}" update="message"/>
 		    </h:form>
 		</p:dialog> 
 </ui:composition>

@@ -1,5 +1,9 @@
 package me.langker.LendingPlat.Viewer;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
@@ -8,6 +12,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import me.langker.LendingPlat.Controller.ProductController;
@@ -21,22 +26,19 @@ public class AddProductViewer {
 	private int price;
 	private String description;
 	private boolean insurance;
-	private Part file; 
-    public Part getFile() {  
-        return file;  
-    }  
-    public void setFile(Part file) {  
-        this.file = file;  
-    }
+	private InputStream stream;
 	@Inject ProductController productController;
-	public void addProduct() {
-		try {
-			HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-			String filename = Util.getInstance().submit(file.getInputStream(),"/upload_product/");
+	public void saveFile(FileUploadEvent event) throws IOException {
+		 stream = event.getFile().getInputstream();
+    }
+	public void addProduct() throws IOException {
+		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		if (stream!=null) {
+			String filename = Util.getInstance().submit(stream,"/upload_product/");
 			productController.addProduct(name,price,description,insurance, (int)session.getAttribute("userid"),filename);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		} catch (Exception e) {
-			e.printStackTrace();
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No Cover Photo Select"));
 		}
 	}    
 	public String getName() {

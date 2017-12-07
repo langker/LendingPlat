@@ -12,9 +12,12 @@
     	<f:event listener="#{product.getProduct(param['id'])}" type="preRenderView" />
 		<h:form id="rent" value="product.p"> 
 			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-				<h:outputLabel value="product's name:" style="font-weight:bold" /> <h:outputLabel value="#{product.p.name}" style="font-weight:bold" />
-				<h:outputLabel value="price per day:" style="font-weight:bold" /> <h:outputLabel value="#{product.p.price}" style="font-weight:bold" />
-				<h:outputLabel value="available date:" sytle="font-weight:bold" /> <h:outputLabel value="#{product.p.availableDate}" style="font-weight:bold" />
+				<h:outputLabel value="product's name:" style="font-weight:bold" />
+				 <h:outputLabel value="#{product.p.name}" style="font-weight:bold" />
+				<h:outputLabel value="price per day:" style="font-weight:bold" /> 
+				<h:outputLabel value="#{product.p.price}" style="font-weight:bold" />
+				<h:outputLabel value="available date:" sytle="font-weight:bold" />
+				 <h:outputLabel value="#{product.p.availableDate}" style="font-weight:bold" />
 				<h:outputLabel value="Description:" style="font-weight:bold" />
 			</h:panelGrid>
 			<h:outputText value="#{product.p.description}" escape="false" style="font-weight:bold" /><br />
