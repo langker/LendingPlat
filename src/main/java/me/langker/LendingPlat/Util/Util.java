@@ -3,13 +3,13 @@ package me.langker.LendingPlat.Util;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.nio.file.Files;
+import java.security.MessageDigest;
+
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-
-import org.primefaces.model.UploadedFile;
 
 @SessionScoped
 public class Util { 
@@ -39,5 +39,15 @@ public class Util {
 	public int getUserId() {
 		HttpSession session =(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		return (int)session.getAttribute("userid");
+	}
+	public static String getMD5(String str) {
+	    try {
+	        MessageDigest md = MessageDigest.getInstance("MD5");
+	        md.update(str.getBytes());
+	        return new BigInteger(1, md.digest()).toString(16);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+		return null;
 	}
 }

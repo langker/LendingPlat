@@ -5,8 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
-import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Entity.User;
+import me.langker.LendingPlat.Util.Util;
 
 @Stateless
 public class UserDao {
@@ -15,6 +15,7 @@ public class UserDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findByEmailAndPassword(String email, String password) {
+		password = Util.getMD5(password);
 		String sql = "Select * from User where email=? and password=?";
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1, email).setParameter(2, password);
 		return (List<User>)query.getResultList();
@@ -26,6 +27,7 @@ public class UserDao {
 		return (List<User>)query.getResultList();
 	}
 	public User createUser(String email, String password, String address, String credential) {
+		password = Util.getMD5(password);
 		User user = new User();
 		user.setAddress(address);
 		user.setCredential(credential);
@@ -40,6 +42,7 @@ public class UserDao {
 		Query query = em.createNativeQuery(sql, User.class).setParameter(1,id);
 		return (User)query.getSingleResult();
 	}
+	@SuppressWarnings("unchecked")
 	public List<User> findAllUser() {
 		String sql = "Select * from User where isAdmin=0";
 		return (List<User>)em.createNativeQuery(sql, User.class).getResultList();

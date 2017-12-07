@@ -20,7 +20,7 @@ public class UserLoginViewer {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			}else {
 				FacesContext.getCurrentInstance().addMessage(null,
-	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","wrong username or password"));
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR: wrong username or password",""));
 			}
 	}
 	public void logout() {

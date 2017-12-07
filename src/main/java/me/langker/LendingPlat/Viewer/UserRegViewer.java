@@ -26,7 +26,7 @@ public class UserRegViewer {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
-	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR","register failed!The same email"));
+	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR: register failed!The same email",""));
 		}
 	}
 	public String getEmail() {
