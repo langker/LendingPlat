@@ -13,6 +13,7 @@
 	<h:form>
 		<p:accordionPanel id="acc" value="#{con.conList}" var="list" style="width:1000px">
 	        <p:tab title="contract start from #{list.startDate} lasting #{list.term} days">
+	        	<p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
 	            <h:panelGrid columns="2" cellpadding="5">                  
 	                <h:outputText value="Product Detail:" style="font-weight: bold" />
 	                <p:link outcome="product.xhtml?id=#{list.productid}" value="click here" />
@@ -41,15 +42,20 @@
 			        	
 			        <h:outputText value="the contract finish" rendered="#{list.status==7}"/>
 			        
+			        <h:outputLabel value="lendee's profile" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
+				    <p:commandLink onclick="PF('proDlg').show()" value="click here" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
+				    
 					<h:outputLabel value="input the location of the product to be used if necessary:" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
 				    <h:inputText value="#{con.location}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
 					<h:outputLabel value="input the age of the user to use the product if necessary:" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
 					<h:inputText value="#{con.age}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>		
-					<h:outputLabel value="input the price(totally and include post fee if you want) of the product if you want to change it:" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
-					<h:inputText value="#{con.price(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>		
+					<h:outputLabel value="input the price(totally and include post fee if you want) of the product if you want to change it(default #{list.finalprice} EUR):" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
+					<h:inputText value="#{con.price}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>		
 					<h:outputLabel value="input the additional contract detail if you want" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
-					<p:textEditor value="#{con.customer_detail}" width="400" height="300" style="margin-bottom:10px" placeholder="Enter your content" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
-					<p:commandButton value="save the contract and send to the lendee" action="#{con.updateContractWithFirstTime(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
+					<p:textEditor value="#{con.customer_detail}" width="400" height="300" style="margin-bottom:10px" placeholder="Enter your content" rendered="#{list.status==1 and list.lenderid==profile.userid}" />
+					<h:outputLabel value="sign here" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
+					<p:signature id="sign" value="#{con.lenderSignature}" style="width:400px;height:200px" widgetVar="sig" required="true" guideline="true" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
+					<p:commandButton value="save the contract and send to the lendee" ajax="true" validateClient="true" update="message" action="#{con.updateContractWithFirstTime(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
 					
 					<h:outputLabel value="limited age:" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="#{list.age}" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
@@ -65,16 +71,18 @@
 					<h:inputText style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="pay by bitcoin" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:inputText style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
-					<p:outputLabel for="console" value="choose billing schemes(it will automatic paid since you choose):" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
-					<p:selectOneMenu id="console" style="width:125px" rendered="#{list.status==2 and list.lendeeid==profile.userid}">
+					<p:outputLabel for="console" value="choose billing schemes(it will automatic paid since you choose):" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+					<p:selectOneMenu id="console" value="daily" style="width:125px" rendered="#{list.status==2 and list.lendeeid==profile.userid}">
 			            <f:selectItem itemLabel="hourly" />
 			            <f:selectItem itemLabel="daily" />
-			            <f:selectItem itemLabel="weekly"  rendered="#{list.term>=7}" />
-			            <f:selectItem itemLabel="fortnight" rendered="#{list.term>=14}" />
-			            <f:selectItem itemLabel="monthly" rendered="#{list.term>=30}" />
-			            <f:selectItem itemLabel="yearly" rendered="#{list.term>=365}" />
+			            <f:selectItem itemLabel="weekly"  itemDisabled ="#{7 > list.term}" />
+			            <f:selectItem itemLabel="fortnight" itemDisabled ="#{14 > list.term}" />
+			            <f:selectItem itemLabel="monthly" itemDisabled ="#{30 > list.term}" />
+			            <f:selectItem itemLabel="yearly" itemDisabled = "#{365 > list.term}" />
 			        </p:selectOneMenu>
-					<p:commandButton value="accept and pay" action="#{con.setConStatus(list.id,3)}" rendered="#{list.status==2 and list.lendeeid==profile.userid}" />
+			        <h:outputLabel value="sign here" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+					<p:signature id="signature" value="#{con.lendeeSignature}" style="width:400px;height:200px" widgetVar="sig" required="true" guideline="true" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+					<p:commandButton value="accept and pay" action="#{con.lendeeSign(list.id,3)}" ajax="true" validateClient="true" update="message" rendered="#{list.status==2 and list.lendeeid==profile.userid}" />
 					
 					<h:outputLabel value="lendee's address" style="font-weight:bold" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
 					<h:outputLabel value="#{con.getLendeeAddress(list.id)}" style="font-weight:bold" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
@@ -92,6 +100,18 @@
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:accordionPanel>
-	    </h:form>
+	</h:form>
+	<p:dialog header="Basic Dialog" widgetVar="proDlg">
+		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+			<h:outputLabel value="EMAIL:" style="font-weight:bold" /> 
+			<h:outputLabel value="#{con.getLendeeProf(list.id).email}" style="font-weight:bold" />
+			<h:outputLabel value="NAME:" style="font-weight:bold" /> 
+			<h:outputLabel value="#{con.getLendeeProf(list.id).name}" style="font-weight:bold" />
+			<h:outputLabel value="PHONE:" style="font-weight:bold" /> 
+			<h:outputLabel value="#{con.getLendeeProf(list.id).phone}" style="font-weight:bold" />
+			<h:outputLabel value="ADDRESS:" style="font-weight:bold" /> 
+			<h:outputLabel value="#{con.getLendeeProf(list.id).address}" style="font-weight:bold" />
+		</h:panelGrid>
+	</p:dialog>
 </h:body>
 </html>

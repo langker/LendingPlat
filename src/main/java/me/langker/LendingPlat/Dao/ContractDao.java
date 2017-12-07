@@ -60,12 +60,18 @@ public class ContractDao {
 		Query query = em.createNativeQuery(sql, Contract.class).setParameter(1,s).setParameter(2, cid);
 		query.executeUpdate();
 	}
-	public void updateCon(int cid, int age, int price,String location,String cusdetail) {
+	public void updateCon(int cid, int age, int price,String location,String cusdetail,String lenderSignature) {
 		Contract con = findContractsById(cid);
 		if (age!=0) con.setAge(age);
 		if (price!=0) con.setFinalprice(price);
 		if (location!=null) con.setLocation(location);
 		if (cusdetail!=null) con.setCustomer_detail(cusdetail);
+		con.setLenderSignature(lenderSignature);
+		em.merge(con);
+	}
+	public void updateLendeeSign(int cid,String lendeeSignature) {
+		Contract con = findContractsById(cid);
+		con.setLendeeSignature(lendeeSignature);
 		em.merge(con);
 	}
 }

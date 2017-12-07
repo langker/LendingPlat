@@ -11,6 +11,7 @@ import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Contract;
+import me.langker.LendingPlat.Entity.User;
 
 @ManagedBean(name = "con")
 @SessionScoped
@@ -22,6 +23,9 @@ public class ContractViewer {
 	private String customer_detail;
 	private String lendeeAddress;
 	private String lenderAddress;
+	private String lenderSignature;
+    private String lendeeSignature;
+    private User lendeeProf;
 	@Inject ProductController pController;
 	@Inject ContractController conController;
 	@Inject UserController userController;
@@ -31,6 +35,10 @@ public class ContractViewer {
 	}
 	public void setConList(ArrayList<Contract> conList) {
 		this.conList = conList;
+	}
+	public void lendeeSign(int cid,int s) {
+		conController.updateLendeeSign(cid, lendeeSignature);
+		setConStatus(cid,s);
 	}
 	public void rejectContract(int cid,int s) {
 		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProductid(), 0, new Date(), 0);
@@ -47,7 +55,7 @@ public class ContractViewer {
 	//When the lendee send the contract to the lender, 
 	//this call on, lender call it to fill the location,the age,the price and the customer detail 
 	public void updateContractWithFirstTime(int id) {
-		conController.updateContract(id,age , price, location,customer_detail);
+		conController.updateContract(id,age , price, location,customer_detail,lenderSignature);
 		conController.setConStatus(id, 2);
 	}
 	public String getLocation() {
@@ -62,9 +70,7 @@ public class ContractViewer {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public int getPrice(int cid) {
-		price = conController.getConById(cid).getTerm()* 
-				pController.findProductById(conController.getConById(cid).getProductid()).getPrice();
+	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
@@ -89,5 +95,24 @@ public class ContractViewer {
 	}
 	public void setLenderAddress(String lenderAddress) {
 		this.lenderAddress = lenderAddress;
+	}
+	public String getLenderSignature() {
+		return lenderSignature;
+	}
+	public void setLenderSignature(String lenderSignature) {
+		this.lenderSignature = lenderSignature;
+	}
+	public String getLendeeSignature() {
+		return lendeeSignature;
+	}
+	public void setLendeeSignature(String lendeeSignature) {
+		this.lendeeSignature = lendeeSignature;
+	}
+	public User getLendeeProf(int cid) {
+		lendeeProf = userController.findUserProfileById(conController.getConById(cid).getLendeeid());
+		return lendeeProf;
+	}
+	public void setLendeeProf(User lendeeProf) {
+		this.lendeeProf = lendeeProf;
 	}
 }

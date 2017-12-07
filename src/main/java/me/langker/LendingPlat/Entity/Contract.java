@@ -18,7 +18,12 @@ public class Contract {
     private int finalprice;
     private String location;
     private int age;
+    @Column(length=65535) 
     private String customer_detail;
+    @Column(length=65535) 
+    private String lenderSignature;
+    @Column(length=65535) 
+    private String lendeeSignature;
     //0:close or error or lender refuse to lend
     //1:waiting for lender
     //2:lender agree to lend the product and make the contract
@@ -101,5 +106,17 @@ public class Contract {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getLenderSignature() {
+		return lenderSignature;
+	}
+	public void setLenderSignature(String lenderSignature) {
+		this.lenderSignature = lenderSignature;
+	}
+	public String getLendeeSignature() {
+		return lendeeSignature;
+	}
+	public void setLendeeSignature(String lendeeSignature) {
+		this.lendeeSignature = lendeeSignature;
 	}
 }
