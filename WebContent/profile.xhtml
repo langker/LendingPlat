@@ -27,7 +27,7 @@
 		    	<p:graphicImage id="credPhoto" style="width:180px;height:270px;" value="upload_cred/#{profile.cred}" rendered="#{profile.cred!=null}"/>
 	 		</p:layoutUnit>
     		<p:layoutUnit position="center">
-	 			<h:outputLabel value="upload your credential:" style="font-weight:bold" />
+	 			<h:outputLabel value="upload your credential(or you can't add or lend the product):" style="font-weight:bold" />
 	 			<p:fileUpload fileUploadListener="#{profile.saveCred}" mode="advanced" dragDropSupport="false"
            		fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" update="credPhoto" />
            	</p:layoutUnit>

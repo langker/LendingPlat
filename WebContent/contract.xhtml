@@ -77,9 +77,9 @@
 					<h:outputLabel value="#{con.getLenderAddress(list.id)}" style="font-weight:bold" rendered="#{list.status==5 and list.lendeeid==profile.userid}"/>
 					<p:commandButton value="conform send the product" action="#{con.setConStatus(list.id,6)}" rendered="#{list.status==5 and list.lendeeid==profile.userid}" />
 					
-					<p:commandButton value="conform receive the product and finish the contract" action="#{con.setConStatus(list.id,7)}" rendered="#{list.status==6 and list.lenderid==profile.userid}" />
+					<p:commandButton value="conform receive the product and finish the contract" action="#{con.finishContract(list.id,7)}" rendered="#{list.status==6 and list.lenderid==profile.userid}" />
 					
-					<p:commandButton value="reject or cancel" action="#{con.setConStatus(list.id,0)}" rendered="#{list.status!=7}" />
+					<p:commandButton value="reject or cancel" action="#{con.rejectContract(list.id,0)}" rendered="#{list.status!=7}" />
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:accordionPanel>

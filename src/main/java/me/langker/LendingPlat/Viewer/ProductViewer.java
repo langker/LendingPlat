@@ -51,7 +51,8 @@ public class ProductViewer {
 						new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "the date you choose should after the available date!"));
 				
 			} else {
-				pController.setNewAvailableDate(Integer.valueOf(pid), term, startRentingdate);
+				// start main processing
+				pController.setNewAvailableDateAndStatus(Integer.valueOf(pid), term, startRentingdate,1);
 				contractController.addContract(Integer.valueOf(pid),Integer.valueOf(uid),term,startRentingdate);
 				RequestContext.getCurrentInstance().execute("alert('rent successful');PF('rentDlg').hide()");
 			}

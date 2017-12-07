@@ -1,12 +1,14 @@
 package me.langker.LendingPlat.Viewer;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import me.langker.LendingPlat.Controller.ContractController;
+import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Contract;
 
@@ -20,6 +22,7 @@ public class ContractViewer {
 	private String customer_detail;
 	private String lendeeAddress;
 	private String lenderAddress;
+	@Inject ProductController pController;
 	@Inject ContractController conController;
 	@Inject UserController userController;
 	public ArrayList<Contract> getConList() {
@@ -28,6 +31,15 @@ public class ContractViewer {
 	}
 	public void setConList(ArrayList<Contract> conList) {
 		this.conList = conList;
+	}
+	public void rejectContract(int cid,int s) {
+		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProductid(), 0, new Date(), 0);
+		setConStatus(cid,s);
+	}
+	public void finishContract(int cid,int s) {
+		pController.addTimeOfProdcut(conController.getConById(cid).getProductid());
+		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProductid(), 0, new Date(), 0);
+		setConStatus(cid,s);
 	}
 	public void setConStatus(int cid,int s) {
 		conController.setConStatus(cid, s);

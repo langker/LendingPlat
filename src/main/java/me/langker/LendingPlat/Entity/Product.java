@@ -14,6 +14,8 @@ public class Product {
     @Column(length=65535) 
     private String description;
     private int userid;
+    //0:can be lent
+    //1:lent to others
     private int status;
     private boolean insurance;
     private int price;

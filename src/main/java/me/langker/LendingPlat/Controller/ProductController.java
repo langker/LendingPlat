@@ -27,10 +27,13 @@ public class ProductController {
 	public Product findProductById(int id) {
 		return productdao.findProductById(id);
 	}
-	public void setNewAvailableDate(int id,int term,Date date) {
+	public void setNewAvailableDateAndStatus(int id,int term,Date date,int status) {
 		Calendar tmp = Calendar.getInstance();
 		tmp.setTime(date);
 		tmp.add(Calendar.DAY_OF_YEAR, term);
-		productdao.updateAvailableDate(id,tmp.getTime());		
+		productdao.updateAvailableDateAndStatus(id,tmp.getTime(),status);		
+	}
+	public void addTimeOfProdcut(int id) {
+		productdao.updateTime(id);
 	}
 }

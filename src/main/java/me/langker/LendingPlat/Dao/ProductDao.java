@@ -52,9 +52,15 @@ public class ProductDao {
 		Query query = em.createNativeQuery(sql, Product.class).setParameter(1, "%"+keyword+"%");
 		return (List<Product>)query.getResultList();
 	}
-	public void updateAvailableDate(int id,Date date) {
+	public void updateAvailableDateAndStatus(int id,Date date,int status) {
 		Product p = findProductById(id);
 		p.setAvailableData(date);
+		p.setStatus(status);
+		em.merge(p);
+	}
+	public void updateTime(int id) {
+		Product p = findProductById(id);
+		p.setTimes(p.getTimes()+1);
 		em.merge(p);
 	}
 }
