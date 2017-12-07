@@ -65,6 +65,15 @@
 					<h:inputText style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="pay by bitcoin" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:inputText style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+					<p:outputLabel for="console" value="choose billing schemes(it will automatic paid since you choose):" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+					<p:selectOneMenu id="console" style="width:125px" rendered="#{list.status==2 and list.lendeeid==profile.userid}">
+			            <f:selectItem itemLabel="hourly" />
+			            <f:selectItem itemLabel="daily" />
+			            <f:selectItem itemLabel="weekly"  rendered="#{list.term>=7}" />
+			            <f:selectItem itemLabel="fortnight" rendered="#{list.term>=14}" />
+			            <f:selectItem itemLabel="monthly" rendered="#{list.term>=30}" />
+			            <f:selectItem itemLabel="yearly" rendered="#{list.term>=365}" />
+			        </p:selectOneMenu>
 					<p:commandButton value="accept and pay" action="#{con.setConStatus(list.id,3)}" rendered="#{list.status==2 and list.lendeeid==profile.userid}" />
 					
 					<h:outputLabel value="lendee's address" style="font-weight:bold" rendered="#{list.status==3 and list.lenderid==profile.userid}"/>
