@@ -27,7 +27,7 @@
 			</h:panelGrid>
 			<h:outputText value="#{product.p.description}" escape="false" style="font-weight:bold" /><br />
 		</h:form>
-		<h:outputLabel value="you can not rent the product without cred" rendered="profile.cred==null"/>
+		<h:outputLabel value="you can not rent the product without cred" rendered="#{profile.cred==null}"/>
 		<p:commandButton ajax="true"  value="rent" type="button" onclick="PF('rentDlg').show();" rendered="#{product.p.userid!=profile.userid and profile.cred!=null}" />
 		
 		<p:dialog widgetVar="rentDlg" modal="true" position="center top">
