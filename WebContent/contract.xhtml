@@ -46,7 +46,7 @@
 					<h:outputLabel value="input the age of the user to use the product if necessary:" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
 					<h:inputText value="#{con.age}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>		
 					<h:outputLabel value="input the price(totally and include post fee if you want) of the product if you want to change it:" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/> 
-					<h:inputText value="#{con.price}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>		
+					<h:inputText value="#{con.price(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>		
 					<h:outputLabel value="input the additional contract detail if you want" style="font-weight:bold" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
 					<p:textEditor value="#{con.customer_detail}" width="400" height="300" style="margin-bottom:10px" placeholder="Enter your content" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
 					<p:commandButton value="save the contract and send to the lendee" action="#{con.updateContractWithFirstTime(list.id)}" rendered="#{list.status==1 and list.lenderid==profile.userid}"/>
@@ -55,7 +55,7 @@
 					<h:outputLabel value="#{list.age}" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="limited location:" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="#{list.location}" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
-					<h:outputLabel value="finalprice:" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
+					<h:outputLabel value="price you should pay totally:" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="#{list.finalprice}" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel value="customer_detail:" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>
 					<h:outputLabel escape="false" value="#{list.customer_detail}" style="font-weight:bold" rendered="#{list.status==2 and list.lendeeid==profile.userid}"/>

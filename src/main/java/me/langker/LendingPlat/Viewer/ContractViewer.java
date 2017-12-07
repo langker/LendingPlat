@@ -62,7 +62,9 @@ public class ContractViewer {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public int getPrice() {
+	public int getPrice(int cid) {
+		price = conController.getConById(cid).getTerm()* 
+				pController.findProductById(conController.getConById(cid).getProductid()).getPrice();
 		return price;
 	}
 	public void setPrice(int price) {
