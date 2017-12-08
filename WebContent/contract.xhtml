@@ -11,9 +11,9 @@
 	<ui:include src="stack.xhtml" />
 	<h3>Contract List</h3>
 	<h:form>
-		<p:accordionPanel id="acc" value="#{con.conList}" var="list" style="width:1000px">
-		<p:ajax event="tabChange" listener="#{con.onTabChange}" update="acc" />
-	        <p:tab title="contract start from #{list.startDate} lasting #{list.term} days">
+		<p:accordionPanel id="acc" value="#{con.conList}" activeIndex="null" var="list" style="width:1000px">
+		<p:ajax event="tabChange" listener="#{con.onTabChange}" update="proDlg" />
+	        <p:tab title="contract start from #{list.startDate} lasting #{list.term} days which id is #{list.id}">
 	        	<p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
 	            <h:panelGrid columns="2" cellpadding="5">         
 	            	<h:outputText value="Lease Link" style="font-weight: bold" />
@@ -105,16 +105,16 @@
 	        </p:tab>
 	    </p:accordionPanel>
 	</h:form>
-	<p:dialog header="Basic Dialog" widgetVar="proDlg">
+	<p:dialog header="lendee profile" id="proDlg" widgetVar="proDlg" dynamic="true">
 		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 			<h:outputLabel value="EMAIL:" style="font-weight:bold" /> 
-			<h:outputLabel value="#{con.getLendeeProf(list.id).email}" style="font-weight:bold" />
+			<h:outputLabel value="#{con.lendeeProf.email}" style="font-weight:bold" />
 			<h:outputLabel value="NAME:" style="font-weight:bold" /> 
-			<h:outputLabel value="#{con.getLendeeProf(list.id).name}" style="font-weight:bold" />
+			<h:outputLabel value="#{con.lendeeProf.name}" style="font-weight:bold" />
 			<h:outputLabel value="PHONE:" style="font-weight:bold" /> 
-			<h:outputLabel value="#{con.getLendeeProf(list.id).phone}" style="font-weight:bold" />
+			<h:outputLabel value="#{con.lendeeProf.phone}" style="font-weight:bold" />
 			<h:outputLabel value="ADDRESS:" style="font-weight:bold" /> 
-			<h:outputLabel value="#{con.getLendeeProf(list.id).address}" style="font-weight:bold" />
+			<h:outputLabel value="#{con.lendeeProf.address}" style="font-weight:bold" />
 		</h:panelGrid>
 	</p:dialog>
 </h:body>
