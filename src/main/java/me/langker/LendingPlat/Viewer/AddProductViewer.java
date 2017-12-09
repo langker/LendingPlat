@@ -10,10 +10,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
 
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Util.Util;

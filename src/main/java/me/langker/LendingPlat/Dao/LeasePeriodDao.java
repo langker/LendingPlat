@@ -5,7 +5,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import me.langker.LendingPlat.Entity.LeasePeriod;
-import me.langker.LendingPlat.Entity.User;
 
 @Stateless
 public class LeasePeriodDao {
@@ -21,6 +20,7 @@ public class LeasePeriodDao {
 		String sql = "Select * from LeasePeriod where name=?";
 		return (LeasePeriod)em.createNativeQuery(sql, LeasePeriod.class).setParameter(1, name).getSingleResult();
 	}
+	@SuppressWarnings("unchecked")
 	public List<LeasePeriod> findAllLeasePeriod() {
 		String sql = "Select * from LeasePeriod";
 		return (List<LeasePeriod>)em.createNativeQuery(sql, LeasePeriod.class).getResultList();

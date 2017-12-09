@@ -43,16 +43,19 @@ public class ContractDao {
 		em.merge(con);
 		return con;
 	}
+	@SuppressWarnings("unchecked")
 	public List<Contract> findContractByLenderID(int uid) {
 		String sql = "Select * from Contract where lenderid=? or lendeeid=?";
 		return (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, uid).setParameter(2, uid).getResultList();
 	}
+	@SuppressWarnings("unchecked")
 	public List<Contract> findContracts() {
 		String sql = "Select * from Contract";
 		return (List<Contract>)em.createNativeQuery(sql, Contract.class).getResultList();
 	}
 	public Contract findContractsById(int id) {
 		String sql = "Select * from Contract where id=?";
+		@SuppressWarnings("unchecked")
 		List<Contract> tmp = em.createNativeQuery(sql, Contract.class).setParameter(1, id).getResultList();
 		return (tmp.isEmpty())? null:tmp.get(0);
 	}

@@ -21,6 +21,7 @@ public class ContractHistoryDao {
 		ch.setDate(new Date());
 		em.persist(ch);
 	}
+	@SuppressWarnings("unchecked")
 	public List<ContractHistory> findContractHistoryByConid(int conid) {
 		String sql = "Select * from ContractHistory where contractid=?";
 		return (List<ContractHistory>)em.createNativeQuery(sql, ContractHistory.class).setParameter(1, conid).getResultList();

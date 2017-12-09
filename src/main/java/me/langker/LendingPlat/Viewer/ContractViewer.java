@@ -6,8 +6,6 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
-
-import org.primefaces.component.tabview.TabView;
 import org.primefaces.event.TabChangeEvent;
 
 import me.langker.LendingPlat.Controller.ContractController;
