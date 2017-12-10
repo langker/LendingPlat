@@ -13,13 +13,74 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <profiles>
+  	<profile>
+  		<id>WILDFLY_REMOTE_8.X</id>
+  		<dependencies>
+  			<dependency>
+  				<groupId>org.wildfly</groupId>
+  				<artifactId>wildfly-arquillian-container-remote</artifactId>
+  				<version>8.2.1.Final</version>
+  			</dependency>
+  		</dependencies>
+  	</profile>
+  </profiles>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+    <!-- the test -->
+    <!-- Make Arquillian work with JUnit -->
+<dependency>
+  <groupId>org.jboss.arquillian.junit</groupId>
+  <artifactId>arquillian-junit-container</artifactId>
+  <scope>test</scope>
+</dependency>
+ 
+<dependency>
+  <groupId>org.jboss.arquillian.protocol</groupId>
+  <artifactId>arquillian-protocol-servlet</artifactId>
+  <scope>test</scope>
+</dependency>
+ 
+<!-- For managing and wrapping of maven dependencies used by the application under test -->
+<dependency>
+  <groupId>org.jboss.shrinkwrap.resolver</groupId>
+  <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+  <scope>test</scope>
+</dependency>
+ 
+<dependency>
+  <groupId>org.jboss.arquillian.extension</groupId>
+  <artifactId>arquillian-persistence-dbunit</artifactId>
+  <version>1.0.0.Alpha7</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+       <version>1.7.5</version>
+   </dependency>
+   <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-log4j12</artifactId>
+       <version>1.7.5</version>
+   </dependency>
+	<dependency>
+	    <groupId>org.jboss.weld</groupId>
+	    <artifactId>weld-core</artifactId>
+	    <version>2.3.5.Final</version>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.jboss.arquillian.container</groupId>
+	    <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
+	    <version>1.0.0.CR9</version>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>javax.transaction</groupId>
+	    <artifactId>jta</artifactId>
+	    <version>1.1</version>
+	</dependency>
+    <!-- end  -->
 	<dependency>
     	<groupId>javax.persistence</groupId>
     	<artifactId>persistence-api</artifactId>
@@ -54,4 +115,15 @@
 	</dependency>
 	
   </dependencies>
+   <dependencyManagement>  
+        <dependencies>  
+            <dependency>
+	            <groupId>org.jboss.arquillian</groupId>
+	            <artifactId>arquillian-bom</artifactId>
+	            <version>1.1.11.Final</version>
+	            <scope>import</scope>
+	            <type>pom</type>
+        	</dependency>
+        </dependencies>  
+    </dependencyManagement>
 </project>
