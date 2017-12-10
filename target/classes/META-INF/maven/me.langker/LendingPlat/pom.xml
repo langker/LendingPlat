@@ -13,6 +13,37 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-ejb-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <ejbVersion>3.1</ejbVersion>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+	    <artifactId>maven-surefire-plugin</artifactId>
+	    <version>2.17</version>
+	  </plugin>
+	  <plugin>       
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webXml>WebContent\WEB-INF\web.xml</webXml>
+                    <source>1.7</source>
+         		    <target>1.7</target>
+                </configuration>
+            </plugin>
+    </plugins>
+  </build>
   <profiles>
   	<profile>
   		<id>WILDFLY_REMOTE_8.X</id>
