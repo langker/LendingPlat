@@ -1,16 +1,11 @@
 package me.langker.LendingPlat.test;
 
-import java.io.File;
-
-import org.apache.log4j.Logger;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ArchivePaths;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,13 +25,13 @@ public class MainTest {
 		        .addPackages(true, "me.langker.LendingPlat.Entity")
 		        .addPackages(true, "me.langker.LendingPlat.Util")
 		        .addPackages(true, "me.langker.LendingPlat.Viewer")
-		        .addAsResource("META-INF/persistence.xml").addClass(UserController.class)
-		        .addAsWebInfResource(new StringAsset("<faces-config version=\"2.0\"/>"), "faces-config.xml")
+		        .addAsResource("META-INF/persistence.xml")
+		        .addAsResource("META-INF/arquillian.xml")
 		        .addAsWebInfResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));
 				
-				archive.as(ZipExporter.class).exportTo(
-						    new File("target/TestLendingPlat.war"), true);
-				
+//				archive.as(ZipExporter.class).exportTo(
+//						    new File("target/TestLendingPlat.war"), true);
+//				
 				return archive;
 //	  return ShrinkWrap.create(WebArchive.class)
 //		      .addPackage("me.langker.LendingPlat.Controller")
