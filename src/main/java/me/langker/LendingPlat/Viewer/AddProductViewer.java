@@ -33,7 +33,7 @@ public class AddProductViewer {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		if (stream!=null) {
 			String filename = Util.getInstance().submit(stream,"/upload_product/");
-			productController.addProduct(name,price,description,insurance, (int)session.getAttribute("userid"),filename);
+			productController.addProduct(name,price,description,insurance, (Integer)session.getAttribute("userid"),filename);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No Cover Photo Select"));

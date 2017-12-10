@@ -38,7 +38,7 @@ public class Util {
     }
 	public int getUserId() {
 		HttpSession session =(HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		return (int)session.getAttribute("userid");
+		return (Integer)session.getAttribute("userid");
 	}
 	public static String getMD5(String str) {
 	    try {

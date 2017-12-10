@@ -23,13 +23,13 @@ import me.langker.LendingPlat.Entity.User;
 public class URLFilter implements Filter {
 
 	@Inject UserController userController;
-	@Override
+	
 	public void destroy() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
@@ -37,7 +37,7 @@ public class URLFilter implements Filter {
 		HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) response);
 		String redirectPath = hrequest.getContextPath() + "/index.xhtml";
 		if (hrequest.getSession().getAttribute("userid") !=null ) {
-			User user = userController.findUserProfileById((int)hrequest.getSession().getAttribute("userid"));
+			User user = userController.findUserProfileById((Integer)hrequest.getSession().getAttribute("userid"));
 			//25 is the lenght of "/LendingPlat/upload_cred
 			if (user.getIsAdmin()==true||user.getCredential().equals(hrequest.getRequestURI().substring(25))==true) { 
 				chain.doFilter(request, response);
@@ -51,7 +51,7 @@ public class URLFilter implements Filter {
 		}
 	}
 
-	@Override
+	
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
 		
