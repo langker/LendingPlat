@@ -45,73 +45,65 @@
     </plugins>
   </build>
   <profiles>
-  	<profile>
-  		<id>WILDFLY_REMOTE_8.X</id>
-  		<dependencies>
-  			<dependency>
-  				<groupId>org.wildfly</groupId>
-  				<artifactId>wildfly-arquillian-container-remote</artifactId>
-  				<version>8.2.1.Final</version>
-  			</dependency>
-  		</dependencies>
-  	</profile>
-  </profiles>
+  <profile>
+		    <id>arquillian-wildfly-remote</id>
+		    <dependencies>
+		        <dependency>
+		            <groupId>org.jboss.spec</groupId>
+		            <artifactId>jboss-javaee-7.0</artifactId>
+		            <version>1.1.0.Final</version>
+		            <type>pom</type>
+		            <scope>provided</scope>
+		        </dependency>
+        		<dependency>
+  					<groupId>org.wildfly.arquillian</groupId>
+  					<artifactId>wildfly-arquillian-container-remote</artifactId>
+  					<version>2.0.2.Final</version>
+  					<scope>test</scope>
+				</dependency>
+				        <dependency>
+		            <groupId>org.jboss.arquillian.protocol</groupId>
+		            <artifactId>arquillian-protocol-servlet</artifactId>
+		            <scope>test</scope>
+		        </dependency>
+		        <dependency>  
+				    <groupId>org.jboss.shrinkwrap.resolver</groupId>  
+				    <artifactId>shrinkwrap-resolver-impl-maven</artifactId>  
+				    <scope>test</scope>  
+				</dependency> 			
+		    </dependencies>
+		</profile>
+		</profiles>
   <dependencies>
-    <!-- the test -->
-    <!-- Make Arquillian work with JUnit -->
-<dependency>
-  <groupId>org.jboss.arquillian.junit</groupId>
-  <artifactId>arquillian-junit-container</artifactId>
-  <scope>test</scope>
-</dependency>
- 
-<dependency>
-  <groupId>org.jboss.arquillian.protocol</groupId>
-  <artifactId>arquillian-protocol-servlet</artifactId>
-  <scope>test</scope>
-</dependency>
- 
-<!-- For managing and wrapping of maven dependencies used by the application under test -->
-<dependency>
-  <groupId>org.jboss.shrinkwrap.resolver</groupId>
-  <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
-  <scope>test</scope>
-</dependency>
- 
-<dependency>
-  <groupId>org.jboss.arquillian.extension</groupId>
-  <artifactId>arquillian-persistence-dbunit</artifactId>
-  <version>1.0.0.Alpha7</version>
-  <scope>test</scope>
-</dependency>
-<dependency>
-       <groupId>org.slf4j</groupId>
-       <artifactId>slf4j-api</artifactId>
-       <version>1.7.5</version>
-   </dependency>
-   <dependency>
-       <groupId>org.slf4j</groupId>
-       <artifactId>slf4j-log4j12</artifactId>
-       <version>1.7.5</version>
-   </dependency>
-	<dependency>
-	    <groupId>org.jboss.weld</groupId>
-	    <artifactId>weld-core</artifactId>
-	    <version>2.3.5.Final</version>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>org.jboss.arquillian.container</groupId>
-	    <artifactId>arquillian-weld-ee-embedded-1.1</artifactId>
-	    <version>1.0.0.CR9</version>
-	    <scope>test</scope>
-	</dependency>
-	<dependency>
-	    <groupId>javax.transaction</groupId>
-	    <artifactId>jta</artifactId>
-	    <version>1.1</version>
-	</dependency>
-    <!-- end  -->
+  <dependency>
+           <groupId>junit</groupId>
+           <artifactId>junit</artifactId>
+           <version>4.8.1</version>
+           <scope>test</scope>
+       </dependency>
+       <dependency>
+		    <groupId>org.jboss.arquillian.junit</groupId>
+		    <artifactId>arquillian-junit-container</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.jboss.arquillian.extension</groupId>
+		  <artifactId>arquillian-jacoco</artifactId>
+		  <version>1.0.0.Alpha6</version>
+		  <scope>test</scope>
+		</dependency>
+		<dependency>
+             <groupId>org.jacoco</groupId>
+             <artifactId>org.jacoco.core</artifactId>
+             <version>0.6.3.201306030806</version>
+             <scope>test</scope>
+	    </dependency>
+  
+  	<dependency>
+  		<groupId>log4j</groupId>
+  		<artifactId>log4j</artifactId>
+  		<version>1.2.17</version>
+  	</dependency>
 	<dependency>
     	<groupId>javax.persistence</groupId>
     	<artifactId>persistence-api</artifactId>

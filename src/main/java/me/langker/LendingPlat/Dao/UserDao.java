@@ -11,7 +11,7 @@ import me.langker.LendingPlat.Util.Util;
 @Stateless
 public class UserDao {
 	@PersistenceContext
-	private EntityManager em;
+	EntityManager em;
 	
 	@SuppressWarnings("unchecked")
 	public List<User> findByEmailAndPassword(String email, String password) {

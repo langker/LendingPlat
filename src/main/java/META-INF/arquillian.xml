@@ -7,7 +7,7 @@
     <defaultProtocol type="Servlet 3.0" />
 
     <!-- Configuration to be used when the WidlFly remote profile is active -->
-    <container qualifier="WILDFLY_REMOTE_8.X" default="true">
+    <container qualifier="wildfly-remote" default="true">
         <configuration>
             <property name="managementAddress">127.0.0.1</property>
             <property name="managementPort">9990</property>
@@ -15,12 +15,4 @@
             <property name="password">abcd12345</property>
         </configuration>
     </container>
-
-    <!-- Configuration to be used when the WildFly managed profile is active -->
-    <container qualifier="widlfly-managed">
-        <configuration>
-            <property name="jbossHome">/Users/langker/code/wildfly-11.0.0.Final</property>
-        </configuration>
-    </container>
-
 </arquillian>

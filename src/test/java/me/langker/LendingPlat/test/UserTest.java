@@ -1,6 +1,11 @@
 package me.langker.LendingPlat.test;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,10 +19,11 @@ public class UserTest extends MainTest {
 	
 	@Inject UserController uc;
 	
+	@PersistenceContext
+	EntityManager em;
 	@Test
 	public void testName() {
-		User u = uc.reg("langke@123.com", "qwe", "qwe", "xiang", "666");
-		Assert.assertEquals(null,u);
+		Assert.assertEquals(true, em!=null);
 	}
 }
 
