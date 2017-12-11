@@ -17,6 +17,7 @@ import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Contract;
 import me.langker.LendingPlat.Entity.ContractHistory;
 import me.langker.LendingPlat.Entity.User;
+import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "admin")
 @ViewScoped
@@ -40,7 +41,7 @@ public class AdminViewer {
 		this.users = users;
 	}
 	public void checkIsAdmin() throws IOException {
-		if(userController.findUserProfile().getIsAdmin()!=true)
+		if(userController.findUserProfile(Util.getInstance().getUserId()).getIsAdmin()!=true)
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 	public ArrayList<Contract> getCon() {

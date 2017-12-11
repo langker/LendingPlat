@@ -7,7 +7,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import me.langker.LendingPlat.Controller.UserController;
+import me.langker.LendingPlat.Entity.User;
+import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "userLogin")
 @SessionScoped
@@ -16,7 +20,10 @@ public class UserLoginViewer {
 	private String password;
 	@Inject UserController userController;
 	public void login() throws IOException {
-			if(userController.login(email, password)!=null) {
+			User u = userController.login(email, password);
+			if(u!=null) {
+				HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+				session.setAttribute("userid",u.getId());
 				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 			}else {
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -24,7 +31,7 @@ public class UserLoginViewer {
 			}
 	}
 	public void logout() {
-		userController.logout();
+		Util.getInstance().logout();
 	}
 	public String getEmail() {
 		return email;
@@ -40,7 +47,7 @@ public class UserLoginViewer {
 	}
 	public void handleEvent() {
 		try {
-			if(!userController.isLogin())
+			if(!Util.getInstance().isLogin())
 				FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

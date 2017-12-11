@@ -41,14 +41,14 @@ public class LeaseViewer {
 		this.lease = lease;
 	}
 	public User getLender() {
-		lender = userController.findUserProfileById(lease.getLenderid());
+		lender = userController.findUserProfile(lease.getLenderid());
 		return lender;
 	}
 	public void setLender(User lender) {
 		this.lender = lender;
 	}
 	public User getLendee() {
-		lender = userController.findUserProfileById(lease.getLendeeid());
+		lender = userController.findUserProfile(lease.getLendeeid());
 		return lendee;
 	}
 	public void setLendee(User lendee) {

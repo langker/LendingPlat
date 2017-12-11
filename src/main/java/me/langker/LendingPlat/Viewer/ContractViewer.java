@@ -84,14 +84,14 @@ public class ContractViewer {
 		this.customer_detail = customer_detail;
 	}
 	public String getLendeeAddress(int id) {
-		lendeeAddress = userController.findUserProfileById(conController.getConById(id).getLendeeid()).getAddress();
+		lendeeAddress = userController.findUserProfile(conController.getConById(id).getLendeeid()).getAddress();
 		return lendeeAddress;
 	}
 	public void setLendeeAddress(String lendeeAddress) {
 		this.lendeeAddress = lendeeAddress;
 	}
 	public String getLenderAddress(int id) {
-		lenderAddress = userController.findUserProfileById(conController.getConById(id).getLenderid()).getAddress();
+		lenderAddress = userController.findUserProfile(conController.getConById(id).getLenderid()).getAddress();
 		return lenderAddress;
 	}
 	public void setLenderAddress(String lenderAddress) {
@@ -112,7 +112,7 @@ public class ContractViewer {
 	public void onTabChange(TabChangeEvent event) {
 		String []tmp = event.getTab().getTitle().split("\\s+");
 		int id = Integer.valueOf(tmp[tmp.length-1]);
-		lendeeProf = userController.findUserProfileById(conController.getConById(id).getLendeeid());
+		lendeeProf = userController.findUserProfile(conController.getConById(id).getLendeeid());
     }
 	public User getLendeeProf() {
 		return lendeeProf;

@@ -56,8 +56,8 @@ public class UserDao {
 		em.merge(user);
 	}
 	public void updateCred(int id, String filename) {
-		String sql = "UPDATE User SET credential =? WHERE id = ?";
-		Query query = em.createNativeQuery(sql, User.class).setParameter(1,filename).setParameter(2, id);
-		query.executeUpdate();
+		User user = findUserProfile(id);
+		if (filename!=null) user.setCredential(filename);
+		em.merge(user);
 	}
 }

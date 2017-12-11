@@ -50,4 +50,13 @@ public class Util {
 	    }
 		return null;
 	}
+	public Boolean isLogin() {
+		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		if(session.getAttribute("userid")!=null)return true;
+		else return false;
+	}
+	public void logout() {
+		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute("userid", null);
+	}
 }
