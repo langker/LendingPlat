@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,20 +18,25 @@ public class UserTest extends MainTest {
 	
 	@Inject UserController uc;
 	
+	@Before
+	public void init() {
+	   uc.reg(user.getEmail(), user.getPassword(), user.getAddress(), user.getName(), user.getPhone());
+	}
+	
 	@Test
 	public void testReg() {
-		User u = uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
+		User u =  uc.reg(user.getEmail(), user.getPassword(), user.getAddress(), user.getAddress(), user.getPhone());
+		Assert.assertTrue(u==null);
+		u =uc.reg("langker@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
 		Assert.assertTrue(u!=null);
 	}
 	@Test
 	public void testLogin() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
+		User u = uc.login(user.getEmail(), user.getPassword());
 		Assert.assertTrue(u!=null);
 	}
 	@Test
 	public void testUpdateProfile() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
 		User u = uc.login("langker@aliyun.com", "abcd12345");
 		uc.updateProfile(u.getId(), "Wuhan,China", "Xiang Chaoran", "18995654993");
 		User u1 = uc.findUserProfile(u.getId());
@@ -41,7 +47,6 @@ public class UserTest extends MainTest {
 	}
 	@Test
 	public void testUpdateCred() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
 		User u = uc.login("langker@aliyun.com", "abcd12345");
 		uc.updateCred(u.getId(), "666.jpg");
 		User u1 = uc.findUserProfile(u.getId());
@@ -50,14 +55,13 @@ public class UserTest extends MainTest {
 	}
 	@Test
 	public void testFindUserProfile() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
 		User u = uc.login("langker@aliyun.com", "abcd12345");
 		User u1 = uc.findUserProfile(u.getId());
 		
-		Assert.assertTrue(u1.getEmail().equals("langker@aliyun.com"));
-		Assert.assertTrue(u1.getAddress().equals("Greencampus,Pavia,Italy"));
-		Assert.assertTrue(u1.getName().equals("Chaoran Xiang"));
-		Assert.assertTrue(u1.getPhone().equals("3393391450"));
+		Assert.assertTrue(u1.getEmail().equals(user.getEmail()));
+		Assert.assertTrue(u1.getAddress().equals(user.getAddress()));
+		Assert.assertTrue(u1.getName().equals(user.getName()));
+		Assert.assertTrue(u1.getPhone().equals(user.getPhone()));
 	}
 	@Test
 	public void testFindAllUser() {

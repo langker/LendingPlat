@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,10 +21,14 @@ public class ProductTest extends MainTest {
 	@Inject UserController uc;
 	@Inject ProductController pc;
 	
+	@Before
+	public void init() {
+	   uc.reg(user.getEmail(), user.getPassword(), user.getAddress(), user.getName(), user.getPhone());
+	   u = uc.login(user.getEmail(), user.getPassword());
+	}
+	
 	@Test
 	public void testGetAllProducts() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		List<Product> p  = pc.getAllProducts();
 		
@@ -32,8 +37,6 @@ public class ProductTest extends MainTest {
 	
 	@Test
 	public void testSearchProducts() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		List<Product> p  = pc.searchProducts("byt");
 		
@@ -42,8 +45,6 @@ public class ProductTest extends MainTest {
 	
 	@Test
 	public void testAddProduct() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		List<Product> p  = pc.getAllProducts();
 		
@@ -52,8 +53,6 @@ public class ProductTest extends MainTest {
 	
 	@Test
 	public void testFindProductById() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		Product p = pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		Product pFind = pc.findProductById(p.getId());
 		
@@ -62,8 +61,6 @@ public class ProductTest extends MainTest {
 	
 	@Test
 	public void testSetNewAvailableDateAndStatus() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		Product p = pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		pc.setNewAvailableDateAndStatus(p.getId(), 10, new Date(), 0);
 		Product pFind = pc.findProductById(p.getId());
@@ -74,8 +71,6 @@ public class ProductTest extends MainTest {
 	
 	@Test
 	public void testAddTimeOfProdcut() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		Product p = pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		pc.addTimeOfProdcut(p.getId());
 		Product pFind = pc.findProductById(p.getId());

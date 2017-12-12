@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,7 +15,6 @@ import me.langker.LendingPlat.Controller.SubscriberController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Entity.Subscriber;
-import me.langker.LendingPlat.Entity.User;
 
 @RunWith(Arquillian.class)
 public class SubscriberTest extends MainTest {
@@ -23,10 +23,14 @@ public class SubscriberTest extends MainTest {
 	@Inject UserController uc;
 	@Inject ProductController pc;
 	
+	@Before
+	public void init() {
+	   uc.reg(user.getEmail(), user.getPassword(), user.getAddress(), user.getName(), user.getPhone());
+	   u = uc.login(user.getEmail(), user.getPassword());
+	}
+	
 	@Test
 	public void testSaveSub() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		sc.saveSub(u.getId(), "car");
 		List<Subscriber> s = sc.findAllSub(u.getId());
 		Assert.assertTrue(!s.isEmpty());
@@ -34,8 +38,6 @@ public class SubscriberTest extends MainTest {
 	
 	@Test
 	public void testDelSub() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		sc.saveSub(u.getId(), "car");
 		List<Subscriber> s = sc.findAllSub(u.getId());
 		sc.delSub(s.get(0).getId());
@@ -45,8 +47,6 @@ public class SubscriberTest extends MainTest {
 	
 	@Test
 	public void testFindAllSub() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		sc.saveSub(u.getId(), "car");
 		List<Subscriber> s = sc.findAllSub(u.getId());
 		Assert.assertTrue(!s.isEmpty());
@@ -54,8 +54,6 @@ public class SubscriberTest extends MainTest {
 	
 	@Test
 	public void testFindSubProdcut() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		sc.saveSub(u.getId(), "car");
 		pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		List<Product>p = sc.findSubProdcut(u.getId());
@@ -64,8 +62,6 @@ public class SubscriberTest extends MainTest {
 	
 	@Test
 	public void testUpdate() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
-		User u = uc.login("langker@aliyun.com", "abcd12345");
 		sc.saveSub(u.getId(), "car");
 		pc.addProduct("byt car", 100, "rubbish", true, u.getId(), "666.jpg");
 		List<Product>p = sc.findSubProdcut(u.getId());

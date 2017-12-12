@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,14 +26,21 @@ public class ContractTest extends MainTest {
 	@Inject ProductController pc;
 	@Inject ContractController cc;
 	
-	@Test
-	public void testAddContract() {
+	private User lender;
+	private User lendee;
+	private Product p;
+	
+	@Before
+	public void init() {
 		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
 		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
+		lender = uc.login("langker@aliyun.com", "abcd12345");
+		lendee = uc.login("179656046@qq.com", "abcd12345");
+		p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
+	}
+	@Test
+	public void testAddContract() {
 		cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		List<Contract> c = cc.getUserCon(lender.getId());
 		
@@ -40,12 +48,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testGetUserCon() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		List<Contract> c = cc.getUserCon(lender.getId());
 		
@@ -53,12 +55,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testGetAllCon() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		List<Contract> c = cc.getAllCon();
 		
@@ -66,12 +62,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testGetConById() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		Contract c = cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		Contract cs = cc.getConById(c.getId());
 		
@@ -79,12 +69,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testSetConStatus() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		Contract c = cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		cc.setConStatus(c.getId(), 1);
 		Contract cs = cc.getConById(c.getId());
@@ -93,12 +77,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testUpdateContract() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		Contract c = cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		cc.updateContract(c.getId(), "20+", 30, "italy", "666", "wqeqweqweqw");
 		Contract cs = cc.getConById(c.getId());
@@ -111,12 +89,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testUpdateLendeeSign() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		Contract c = cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		cc.updateLendeeSign(c.getId(), "qweasdzxc");
 		Contract cs = cc.getConById(c.getId());
@@ -125,12 +97,6 @@ public class ContractTest extends MainTest {
 	}
 	@Test
 	public void testGetConHistory() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		uc.reg("179656046@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Xiang Chaoran", "3393391450");
-		User lender = uc.login("langker@aliyun.com", "abcd12345");
-		User lendee = uc.login("179656046@qq.com", "abcd12345");
-		
-		Product p = pc.addProduct("byt car", 100, "rubbish", true, lender.getId(), "666.jpg");
 		Contract c = cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
 		List<ContractHistory> ch= cc.getConHistory(c.getId());
 		

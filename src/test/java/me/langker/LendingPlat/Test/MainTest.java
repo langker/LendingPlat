@@ -19,11 +19,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import me.langker.LendingPlat.Entity.User;
  
 @RunWith(Arquillian.class)
 public class MainTest {
  
 	Logger log = Logger.getLogger(MainTest.class);
+	protected User user;
+	protected User u;
 	@Deployment
 	public static Archive<?> createDeployment() {
 		  File[] files = Maven.resolver().loadPomFromFile("/Users/langker/code/pavia-research/LendingPlat/pom.xml")
@@ -46,9 +50,17 @@ public class MainTest {
 	}
 	@Inject
 	UserTransaction utx;
+	
 	@Before
 	public void startTransaction() throws Exception {
-	    utx.begin();	
+	    utx.begin();
+	    user = new User();
+	    user.setAddress("Greencampus,Pavia,Italy");
+	    user.setCredential("666.jpg");
+	    user.setEmail("langker@aliyun.com");
+	    user.setName("Xiang Chaoran");
+	    user.setPassword("abcd12345");
+	    user.setPhone("18995654993");
 	}
 	@After
 	public void rollbackTransaction() throws Exception {
