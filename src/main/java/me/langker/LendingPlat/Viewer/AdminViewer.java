@@ -45,7 +45,7 @@ public class AdminViewer {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 	}
 	public ArrayList<Contract> getCon() {
-		con = (ArrayList<Contract>)conController.getAllConForAdmin();
+		con = (ArrayList<Contract>)conController.getAllCon();
 		return con;
 	}
 	public void setCon(ArrayList<Contract> con) {

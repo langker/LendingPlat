@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.langker.LendingPlat.Controller.LeasePeriodController;
-import me.langker.LendingPlat.Entity.LeasePeriod;
 
 @RunWith(Arquillian.class)
 public class LeasePeriodTest extends MainTest {

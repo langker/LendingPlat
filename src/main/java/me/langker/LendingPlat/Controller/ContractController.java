@@ -10,22 +10,22 @@ import me.langker.LendingPlat.Dao.ContractHistoryDao;
 import me.langker.LendingPlat.Dao.ProductDao;
 import me.langker.LendingPlat.Entity.Contract;
 import me.langker.LendingPlat.Entity.ContractHistory;
-import me.langker.LendingPlat.Util.Util;
 
 @Stateless
 public class ContractController {
 	@Inject ContractDao contractdao;
 	@Inject ProductDao productdao;
 	@Inject ContractHistoryDao chdao;
-	public void addContract(int pid,int uid,int term,Date date) {
+	public Contract addContract(int pid,int uid,int term,Date date,int currentuid) {
 		int price = productdao.findProductById(pid).getPrice()*term;
-		Contract con = contractdao.createContract(null, "", "",price, "", uid,Util.getInstance().getUserId(),pid,1,term,date);
+		Contract con = contractdao.createContract(null, "", "",price, "", uid,currentuid,pid,1,term,date);
 		chdao.createContractHistory(con.getId(), 1);
+		return con;
+	}
+	public List<Contract> getUserCon(int uid) {
+		return contractdao.findContractByLenderID(uid);
 	}
 	public List<Contract> getAllCon() {
-		return contractdao.findContractByLenderID(Util.getInstance().getUserId());
-	}
-	public List<Contract> getAllConForAdmin() {
 		return contractdao.findContracts();
 	}
 	public Contract getConById(int id) {

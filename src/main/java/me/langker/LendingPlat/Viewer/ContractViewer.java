@@ -13,6 +13,7 @@ import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Contract;
 import me.langker.LendingPlat.Entity.User;
+import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "con")
 @SessionScoped
@@ -31,7 +32,7 @@ public class ContractViewer {
 	@Inject ContractController conController;
 	@Inject UserController userController;
 	public ArrayList<Contract> getConList() {
-		conList = (ArrayList<Contract>)conController.getAllCon();
+		conList = (ArrayList<Contract>)conController.getUserCon(Util.getInstance().getUserId());
 		return conList;
 	}
 	public void setConList(ArrayList<Contract> conList) {

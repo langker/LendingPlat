@@ -15,6 +15,7 @@ import org.primefaces.context.RequestContext;
 import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Entity.Product;
+import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "product")
 @ViewScoped
@@ -53,7 +54,7 @@ public class ProductViewer {
 			} else {
 				// start main processing
 				pController.setNewAvailableDateAndStatus(Integer.valueOf(pid), term, startRentingdate,1);
-				contractController.addContract(Integer.valueOf(pid),Integer.valueOf(uid),term,startRentingdate);
+				contractController.addContract(Integer.valueOf(pid),Integer.valueOf(uid),term,startRentingdate,Util.getInstance().getUserId());
 				RequestContext.getCurrentInstance().execute("alert('rent successful');PF('rentDlg').hide()");
 			}
 		} else {
