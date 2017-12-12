@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import me.langker.LendingPlat.Controller.SubscriberController;
 import me.langker.LendingPlat.Entity.Product;
 import me.langker.LendingPlat.Entity.Subscriber;
+import me.langker.LendingPlat.Util.Util;
 
 @ManagedBean(name = "sub")
 @ViewScoped
@@ -27,7 +28,7 @@ public class SubscribeViewer {
 		this.keyword = keyword;
 	}
 	public void saveSub() {
-		subController.saveSub(keyword);
+		subController.saveSub(Util.getInstance().getUserId(),keyword);
 	}
 
 	public void delSub(int id) {
@@ -35,7 +36,7 @@ public class SubscribeViewer {
 	}
 	
 	public ArrayList<Subscriber> getKeywords() {
-		keywords = (ArrayList<Subscriber>) subController.findAllSub();
+		keywords = (ArrayList<Subscriber>) subController.findAllSub(Util.getInstance().getUserId());
 		return keywords;
 	}
 
@@ -44,7 +45,7 @@ public class SubscribeViewer {
 	}
 
 	public ArrayList<Product> getSubProduct() {
-		subProduct = (ArrayList<Product>)subController.findSubProdcut();
+		subProduct = (ArrayList<Product>)subController.findSubProdcut(Util.getInstance().getUserId());
 		return subProduct;
 	}
 

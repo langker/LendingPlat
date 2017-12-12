@@ -19,12 +19,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import me.langker.LendingPlat.Controller.UserController;
+import me.langker.LendingPlat.Entity.User;
  
 @RunWith(Arquillian.class)
 public class MainTest {
  
 	Logger log = Logger.getLogger(MainTest.class);
-	
 	@Deployment
 	public static Archive<?> createDeployment() {
 		  File[] files = Maven.resolver().loadPomFromFile("/Users/langker/code/pavia-research/LendingPlat/pom.xml")
@@ -47,10 +49,9 @@ public class MainTest {
 	}
 	@Inject
 	UserTransaction utx;
-	
 	@Before
 	public void startTransaction() throws Exception {
-	    utx.begin();
+	    utx.begin();	
 	}
 	@After
 	public void rollbackTransaction() throws Exception {
