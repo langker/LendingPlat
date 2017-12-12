@@ -20,9 +20,10 @@ public class ProductController {
 	public List<Product> searchProducts(String keyword) {
 		return productdao.findProductsByKeyword(keyword);
 	}
-	public void addProduct(String name,int price, String description, boolean insurance, int userid, String photo) {
+	public Product addProduct(String name,int price, String description, boolean insurance, int userid, String photo) {
 		Product p = productdao.createProduct(description, insurance, name, price, userid, photo);
 		sController.update(p.getId());
+		return p;
 	}
 	public Product findProductById(int id) {
 		return productdao.findProductById(id);

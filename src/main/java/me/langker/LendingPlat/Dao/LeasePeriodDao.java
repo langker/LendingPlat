@@ -12,9 +12,14 @@ public class LeasePeriodDao {
 	EntityManager em;
 	
 	public void updateLease(String name,int value) {
-		String sql = "UPDATE LeasePeriod SET value =? WHERE name =?";
-		Query query = em.createNativeQuery(sql, LeasePeriod.class).setParameter(1,value).setParameter(2, name);
-		query.executeUpdate();
+//		String sql = "UPDATE LeasePeriod SET value =? WHERE name =?";
+//		Query query = em.createNativeQuery(sql, LeasePeriod.class).setParameter(1,value).setParameter(2, name);
+//		query.executeUpdate();
+		
+		LeasePeriod lp = findLeasePeriodByName(name);
+		lp.setValue(value);
+		em.merge(lp);
+		
 	}
 	public LeasePeriod findLeasePeriodByName(String name) {
 		String sql = "Select * from LeasePeriod where name=?";

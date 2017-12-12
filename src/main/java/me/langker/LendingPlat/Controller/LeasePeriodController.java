@@ -14,10 +14,10 @@ public class LeasePeriodController {
 			lpdao.initLeasePeriod();
 		}
 	}
-	public void updateTerm(int shortT,int medium, int average) {
-		lpdao.updateLease("short", shortT);
-		lpdao.updateLease("medium", medium);
-		lpdao.updateLease("average", average);
+	public void updateTerm(int shortTerm,int mediumTerm, int averageTerm) {
+		lpdao.updateLease("short", shortTerm);
+		lpdao.updateLease("medium", mediumTerm);
+		lpdao.updateLease("average", averageTerm);
 	}
 	public int findValueByName (String name) {
 		return lpdao.findLeasePeriodByName(name).getValue();

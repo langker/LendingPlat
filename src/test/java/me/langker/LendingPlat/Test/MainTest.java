@@ -19,9 +19,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import me.langker.LendingPlat.Controller.UserController;
-import me.langker.LendingPlat.Entity.User;
  
 @RunWith(Arquillian.class)
 public class MainTest {
