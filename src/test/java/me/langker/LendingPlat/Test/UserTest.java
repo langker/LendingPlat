@@ -37,7 +37,7 @@ public class UserTest extends MainTest {
 	}
 	@Test
 	public void testUpdateProfile() {
-		User u = uc.login("langker@aliyun.com", "abcd12345");
+		User u = uc.login(user.getEmail(), user.getPassword());
 		uc.updateProfile(u.getId(), "Wuhan,China", "Xiang Chaoran", "18995654993");
 		User u1 = uc.findUserProfile(u.getId());
 		
@@ -47,7 +47,7 @@ public class UserTest extends MainTest {
 	}
 	@Test
 	public void testUpdateCred() {
-		User u = uc.login("langker@aliyun.com", "abcd12345");
+		User u = uc.login(user.getEmail(), user.getPassword());
 		uc.updateCred(u.getId(), "666.jpg");
 		User u1 = uc.findUserProfile(u.getId());
 		
@@ -55,7 +55,7 @@ public class UserTest extends MainTest {
 	}
 	@Test
 	public void testFindUserProfile() {
-		User u = uc.login("langker@aliyun.com", "abcd12345");
+		User u = uc.login(user.getEmail(), user.getPassword());
 		User u1 = uc.findUserProfile(u.getId());
 		
 		Assert.assertTrue(u1.getEmail().equals(user.getEmail()));
@@ -65,7 +65,7 @@ public class UserTest extends MainTest {
 	}
 	@Test
 	public void testFindAllUser() {
-		uc.reg("langker@aliyun.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
+		uc.reg("langker@gmail.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
 		uc.reg("langker@qq.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
 		uc.reg("langker@163.com", "abcd12345", "Greencampus,Pavia,Italy", "Chaoran Xiang", "3393391450");
 		List<User> u = uc.findAllUser();

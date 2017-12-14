@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import me.langker.LendingPlat.Controller.ProductController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.Product;
-import me.langker.LendingPlat.Entity.User;
 
 @RunWith(Arquillian.class)
 public class ProductTest extends MainTest {

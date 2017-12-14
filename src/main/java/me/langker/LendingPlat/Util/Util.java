@@ -13,7 +13,10 @@ import javax.servlet.http.HttpSession;
 
 @SessionScoped
 public class Util { 
+	//Pls edit this to your situation
 	private static Util instance;
+	private static final String projectName = "LendingPlat";
+	private static final String projectPomPath = "/Users/langker/code/pavia-research/LendingPlat/pom.xml";
 	private Util() {};
 	public static Util getInstance() {
 		if (instance == null) {
@@ -58,5 +61,11 @@ public class Util {
 	public void logout() {
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute("userid", null);
+	}
+	public static String getProjectname() {
+		return projectName;
+	}
+	public static String getProjectpompath() {
+		return projectPomPath;
 	}
 }

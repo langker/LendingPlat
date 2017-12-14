@@ -22,4 +22,12 @@
 	    <filter-name>CredFilter</filter-name>
 	    <url-pattern>/upload_cred/*</url-pattern>
 	</filter-mapping>
+	<filter>
+	    <filter-name>VersionFilter</filter-name>
+	    <filter-class>me.langker.LendingPlat.Util.VersionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>VersionFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.langker.LendingPlat.Entity.User;
+import me.langker.LendingPlat.Util.Util;
  
 @RunWith(Arquillian.class)
 public class MainTest {
@@ -30,7 +31,7 @@ public class MainTest {
 	protected User u;
 	@Deployment
 	public static Archive<?> createDeployment() {
-		  File[] files = Maven.resolver().loadPomFromFile("/Users/langker/code/pavia-research/LendingPlat/pom.xml")
+		  File[] files = Maven.resolver().loadPomFromFile(Util.getProjectpompath())
 			        .importRuntimeDependencies().resolve().withTransitivity().asFile();
 		  WebArchive archive = ShrinkWrap.create(WebArchive.class, "TestLendingPlat.war")
 			        .addPackages(true, "me.langker.LendingPlat.Controller")
