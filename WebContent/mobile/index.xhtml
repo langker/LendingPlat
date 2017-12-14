@@ -3,7 +3,9 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:p="http://primefaces.org/ui">   
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+	<f:view renderKitId="PRIMEFACES_MOBILE" />   
 	<h:head>  
  		<title>welcome to the lendingplat</title>   
 	</h:head>   
@@ -12,7 +14,7 @@
     	<f:event listener="#{productList.getProductAllList}" type="preRenderView" />
     	<f:event listener="#{admin.initLP}" type="preRenderView" />
     	<ui:include src="stack.xhtml" />
-    	<h:form id="search" style="margin-bottom:10px;width:1000px;">
+    	<h:form id="search" style="margin-bottom:10px;">
     		<p:panel id="panel" header="Search Form"> 
 		    	<center>
 		    		<h:outputLabel value="keyword:" style="font-weight:bold" /> <h:inputText value="#{productList.keyword}"/>
@@ -20,32 +22,31 @@
 		    	</center>
 	    	</p:panel>
 	    </h:form>
-    	<h:form id="products" style="margin-bottom:10px;width:1000px;">
-    		<p:layout style="height:550px">
-    			<p:layoutUnit position="west" resizable="true" size="500" maxSize="500">
+    	<h:form id="products">
+    	<p:panel header="all products"> 
     			<p:dataScroller value="#{productList.productList}" var="list" mode="inline">
 			        <f:facet name="header">All Prodcuts you can lent</f:facet>
 			        <h:panelGrid columns="2" columnClasses="logo,detail">
-			            <p:graphicImage value="upload_product/#{list.photo}" style="width:100px;height:120px;"/>
+			           <p:graphicImage value="../upload_product/#{list.photo}" style="width:80px;height:120px;"/>
 			            <p:outputPanel>
 			                <h:panelGrid columns="2" cellpadding="5">
-			                    <h:outputText value="Name:" />
+			                	<h:outputText value="Name:" />
 			                    <h:outputText value="#{list.name}" style="font-weight: bold"/>
 			                    <h:outputText value="Price:" />
 			                    <h:outputText value="#{list.price}" style="font-weight: bold"/>
 			                    <h:outputText value="Insuarnce:" />
 			                    <h:outputText value="#{list.insurance}" style="font-weight: bold"/>
-			                    <p:link outcome="product.xhtml?id=#{list.id}" value="click here to see detail" />
+			                    <p:link outcome="product.xhtml?id=#{list.id}" value="click here to see" />
 			                </h:panelGrid>
 			            </p:outputPanel>
 			        </h:panelGrid>
 			    </p:dataScroller>
-			    </p:layoutUnit>
-			    <p:layoutUnit position="center">
-	        		<p:dataScroller value="#{sub.subProduct}" var="list" mode="inline">
+		</p:panel>
+		<p:panel header="subscirbe products"> 
+			<p:dataScroller value="#{sub.subProduct}" var="list" mode="inline">
 			        <f:facet name="header">Subscribe product</f:facet>
 			        <h:panelGrid columns="2" columnClasses="logo,detail">
-			            <p:graphicImage value="upload_product/#{list.photo}" style="width:100px;height:120px;"/>
+			            <p:graphicImage value="../upload_product/#{list.photo}" style="width:100px;height:120px;"/>
 			            <p:outputPanel>
 			                <h:panelGrid columns="2" cellpadding="5">
 			                    <h:outputText value="Name:" />
@@ -54,13 +55,12 @@
 			                    <h:outputText value="#{list.price}" style="font-weight: bold"/>
 			                    <h:outputText value="Insuarnce:" />
 			                    <h:outputText value="#{list.insurance}" style="font-weight: bold"/>
-			                    <p:link outcome="product.xhtml?id=#{list.id}" value="click here to see detail" />
+			                    <p:link outcome="product.xhtml?id=#{list.id}" value="click here to see" />
 			                </h:panelGrid>
 			            </p:outputPanel>
 			        </h:panelGrid>
 			    </p:dataScroller>
-	    		</p:layoutUnit>
-		    </p:layout>
+			</p:panel>
     	</h:form>
     </h:body>
 </html>

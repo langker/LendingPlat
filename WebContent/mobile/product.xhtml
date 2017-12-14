@@ -3,7 +3,9 @@
 	xmlns:h="http://java.sun.com/jsf/html" 
 	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:ui="http://java.sun.com/jsf/facelets" 
-	xmlns:p="http://primefaces.org/ui">   
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">  
+	<f:view renderKitId="PRIMEFACES_MOBILE" /> 
 	<h:head>  
  		<title>Hello World</title>   
 	</h:head>   
@@ -27,7 +29,7 @@
 			</h:panelGrid>
 			<h:outputText value="#{product.p.description}" escape="false" style="font-weight:bold" /><br />
 		</h:form>
-		<h:outputLabel value="you can not rent the product without cred" rendered="#{profile.cred==null}"/>
+		<h:outputLabel value="you can not rent the product without cred,pls use login the desktop to add" rendered="#{profile.cred==null}"/>
 		<p:commandButton ajax="true"  value="rent" type="button" onclick="PF('rentDlg').show();" rendered="#{product.p.userid!=profile.userid and profile.cred!=null}" />
 		
 		<p:dialog widgetVar="rentDlg" modal="true" position="center top">
@@ -40,11 +42,13 @@
     			<h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
 			    <h:outputLabel value="the term you want to start renting" style="font-weight:bold" />
 			    </h:panelGrid>
-			    <h:selectOneRadio value="#{product.term}" require="true">
-					<f:selectItem itemLabel="short(#{lp.shortTerm})" itemValue="#{lp.shortTerm}"/>
-					<f:selectItem itemLabel="medium(#{lp.mediumTerm})" itemValue="#{lp.mediumTerm}"/>
-					<f:selectItem itemLabel="average(#{lp.averageTerm})" itemValue="#{lp.averageTerm}"/>
-				</h:selectOneRadio>
+			    <pm:field>
+				    <p:selectOneRadio value="#{product.term}" require="true">
+						<f:selectItem itemLabel="short(#{lp.shortTerm})" itemValue="#{lp.shortTerm}"/>
+						<f:selectItem itemLabel="medium(#{lp.mediumTerm})" itemValue="#{lp.mediumTerm}"/>
+						<f:selectItem itemLabel="average(#{lp.averageTerm})" itemValue="#{lp.averageTerm}"/>
+					</p:selectOneRadio>
+				</pm:field>
 			    <p:commandButton ajax="true" validateClient="true" value="submit" action="#{product.rentProduct(product.p.id,product.p.userid)}" update="message"/>
 		    </h:form>
 		</p:dialog>             

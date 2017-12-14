@@ -6,13 +6,9 @@
     xmlns:p="http://primefaces.org/ui">
     <f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     <h:form>
-	    <p:stack expanded="true">
+	    <p:stack expanded="true" style="position:absolute;z-index:1;">
 			<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
-		    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
-			<p:menuitem value="contract" url="contract.xhtml"/>
-			<p:menuitem value="adding" onclick="PF('addDlg').show();" rendered="#{profile.cred!=null}" />
-			<p:menuitem value="profile" url="profile.xhtml"/>
-			<p:menuitem value="Home" url="index.xhtml"/>
+		   	<p:menuitem value="Home" url="index.xhtml"/>
 		</p:stack>
 	</h:form>
 	<p:dialog id="addDlg" header="adding product" widgetVar="addDlg" modal="true" position="center top">
