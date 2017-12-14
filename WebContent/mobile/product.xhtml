@@ -10,7 +10,6 @@
  		<title>Hello World</title>   
 	</h:head>   
     <h:body>
-  		<ui:include src="stack.xhtml" />
     	<f:event listener="#{product.getProduct(param['id'])}" type="preRenderView" />
 		<h:form id="rent" value="product.p"> 
 			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
@@ -31,7 +30,7 @@
 		</h:form>
 		<h:outputLabel value="you can not rent the product without cred,pls use login the desktop to add" rendered="#{profile.cred==null}"/>
 		<p:commandButton ajax="true"  value="rent" type="button" onclick="PF('rentDlg').show();" rendered="#{product.p.userid!=profile.userid and profile.cred!=null}" />
-		
+		<ui:include src="stack.xhtml" />
 		<p:dialog widgetVar="rentDlg" modal="true" position="center top">
     		<h:form> 
     			<p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>

@@ -6,13 +6,13 @@
     xmlns:p="http://primefaces.org/ui">
     <f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     <h:form>
-	    <p:stack expanded="true">
-			<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
-		    <p:menuitem value="admin" url="admin.xhtml" rendered="#{profile.isAdmin}"/>
-			<p:menuitem value="contract" url="contract.xhtml"/>
-			<p:menuitem value="adding" onclick="PF('addDlg').show();" rendered="#{profile.cred!=null}" />
-			<p:menuitem value="profile" url="profile.xhtml"/>
-			<p:menuitem value="Home" url="index.xhtml"/>
+	    <p:stack icon="https://www.primefaces.org/showcase/resources/demo/images/dock/stack.png" expanded="true">
+			<p:menuitem value="logout" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/history.png" actionListener="#{userLogin.logout}"/>
+		    <p:menuitem value="admin" url="admin.xhtml" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/calendar.png"  rendered="#{profile.isAdmin}"/>
+			<p:menuitem value="contract" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/email.png" url="contract.xhtml"/>
+			<p:menuitem value="adding" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/link.png" onclick="PF('addDlg').show();" rendered="#{profile.cred!=null}" />
+			<p:menuitem value="profile" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/portfolio.png" url="profile.xhtml"/>
+			<p:menuitem value="Home" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/home.png" url="index.xhtml"/>
 		</p:stack>
 	</h:form>
 	<p:dialog id="addDlg" header="adding product" widgetVar="addDlg" modal="true" position="center top">

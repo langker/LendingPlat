@@ -6,9 +6,9 @@
     xmlns:p="http://primefaces.org/ui">
     <f:event listener="#{userLogin.handleEvent}" type="preRenderView" />
     <h:form>
-	    <p:stack expanded="true" style="position:absolute;z-index:1;">
-			<p:menuitem value="logout" actionListener="#{userLogin.logout}"/>
-		   	<p:menuitem value="Home" url="index.xhtml"/>
+	    <p:stack expanded="true" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/stack.png">
+			<p:menuitem value="logout" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/history.png" actionListener="#{userLogin.logout}"/>
+		   	<p:menuitem value="Home" icon="https://www.primefaces.org/showcase/resources/demo/images/dock/home.png" url="index.xhtml"/>
 		</p:stack>
 	</h:form>
 	<p:dialog id="addDlg" header="adding product" widgetVar="addDlg" modal="true" position="center top">

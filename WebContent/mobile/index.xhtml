@@ -13,7 +13,6 @@
     <h:body>
     	<f:event listener="#{productList.getProductAllList}" type="preRenderView" />
     	<f:event listener="#{admin.initLP}" type="preRenderView" />
-    	<ui:include src="stack.xhtml" />
     	<h:form id="search" style="margin-bottom:10px;">
     		<p:panel id="panel" header="Search Form"> 
 		    	<center>
@@ -23,10 +22,9 @@
 	    	</p:panel>
 	    </h:form>
     	<h:form id="products">
-    	<p:panel header="all products"> 
+    	<p:panel header="All Products"> 
     			<p:dataScroller value="#{productList.productList}" var="list" mode="inline">
-			        <f:facet name="header">All Prodcuts you can lent</f:facet>
-			        <h:panelGrid columns="2" columnClasses="logo,detail">
+					<h:panelGrid columns="2" columnClasses="logo,detail">
 			           <p:graphicImage value="../upload_product/#{list.photo}" style="width:80px;height:120px;"/>
 			            <p:outputPanel>
 			                <h:panelGrid columns="2" cellpadding="5">
@@ -42,9 +40,8 @@
 			        </h:panelGrid>
 			    </p:dataScroller>
 		</p:panel>
-		<p:panel header="subscirbe products"> 
+		<p:panel header="Subscirbe Products"> 
 			<p:dataScroller value="#{sub.subProduct}" var="list" mode="inline">
-			        <f:facet name="header">Subscribe product</f:facet>
 			        <h:panelGrid columns="2" columnClasses="logo,detail">
 			            <p:graphicImage value="../upload_product/#{list.photo}" style="width:100px;height:120px;"/>
 			            <p:outputPanel>
@@ -62,5 +59,6 @@
 			    </p:dataScroller>
 			</p:panel>
     	</h:form>
+    	<ui:include src="stack.xhtml" />
     </h:body>
 </html>
