@@ -38,10 +38,9 @@ public class SubscriberDao {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Product> findSubProdcut(int id) {
-		String sql = "select *from Product where id in (select product_id from SubscriberNotify where user_id=?)";
+		String sql = "Select * from Product where id in (Select product_id from SubscriberNotify where user_id=?)";
 		return (List<Product>)em.createNativeQuery(sql, Product.class).setParameter(1, id).getResultList();
 	}
-	@SuppressWarnings("unchecked")
 	public Subscriber findSubById(int id) {
 		String sql = "select *from Subscriber where id=?";
 		return (Subscriber)em.createNativeQuery(sql, Subscriber.class).setParameter(1, id).getSingleResult();

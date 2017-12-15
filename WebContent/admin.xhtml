@@ -77,7 +77,7 @@
 		            <h:outputText value="#{list.startDate}" />
 		        </p:column>
 		        <p:column headerText="product">
-		            <p:link outcome="product.xhtml?id=#{list.productid}" value="product detail" />
+		            <p:link outcome="product.xhtml?id=#{list.product.id}" value="product detail" />
 		        </p:column>
 		        <p:ajax event="rowSelect" oncomplete="PF('conDlg').show()" listener="#{admin.setSelConId}" update="conDlg"/>
 		 	</p:dataTable>
