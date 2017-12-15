@@ -29,7 +29,7 @@
 			<h:outputText value="#{product.p.description}" escape="false" style="font-weight:bold" /><br />
 		</h:form>
 		<h:outputLabel value="you can not rent the product without cred,pls use login the desktop to add" rendered="#{profile.cred==null}"/>
-		<p:commandButton ajax="true"  value="rent" type="button" onclick="PF('rentDlg').show();" rendered="#{product.p.userid!=profile.userid and profile.cred!=null}" />
+		<p:commandButton ajax="true"  value="rent" type="button" onclick="PF('rentDlg').show();" rendered="#{product.p.user.id!=profile.userid and profile.cred!=null}" />
 		<ui:include src="stack.xhtml" />
 		<p:dialog widgetVar="rentDlg" modal="true" position="center top">
     		<h:form> 

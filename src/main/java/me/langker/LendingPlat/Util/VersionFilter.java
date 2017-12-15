@@ -1,6 +1,7 @@
 package me.langker.LendingPlat.Util;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.faces.bean.ManagedBean;
@@ -33,8 +34,8 @@ public class VersionFilter implements Filter{
 		HttpServletRequest request = (HttpServletRequest)arg0;
 		HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) arg1);
 		UAgentInfo agentInfo = new UAgentInfo(request.getHeader("User-Agent"), null);
-		if(agentInfo.detectMobileQuick()) {
-			if (Pattern.matches("/"+Util.getProjectname()+"/*.xhtml", request.getRequestURI())==true){
+		if (agentInfo.detectMobileQuick()) {
+			if (request.getRequestURI().contains("mobile")==false) {
 				String redirect = request.getContextPath() + "/mobile"+request.getRequestURI().substring(("/"+Util.getProjectname()).length());
 				wrapper.sendRedirect(redirect);
 			}
