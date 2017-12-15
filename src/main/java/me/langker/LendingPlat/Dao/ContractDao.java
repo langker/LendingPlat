@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -13,6 +14,8 @@ import me.langker.LendingPlat.Entity.Contract;
 public class ContractDao {
 	@PersistenceContext
 	EntityManager em;
+	@Inject ProductDao pdao;
+	@Inject UserDao udao;
 	
 	public Contract createContract(String age, String customer_detail,String detail,int finalprice,String location,int lenderid,int lendeeid, int product_id,int status,int term,Date date) {
 		Contract con = new Contract();
@@ -21,9 +24,9 @@ public class ContractDao {
 		con.setDetail(detail);
 		con.setFinalprice(finalprice);
 		con.setLocation(location);
-		con.setLenderid(lenderid);
-		con.setLendeeid(lendeeid);
-		con.setProductid(product_id);
+		con.setLender(udao.findUserProfile(lenderid));
+		con.setLendee(udao.findUserProfile(lendeeid));
+		con.setProduct(pdao.findProductById(product_id));
 		con.setStatus(status);
 		con.setTerm(term);
 		con.setStartDate(date);
@@ -37,15 +40,15 @@ public class ContractDao {
 		con.setDetail(detail);
 		con.setFinalprice(finalprice);
 		con.setLocation(location);
-		con.setLenderid(lenderid);
-		con.setLendeeid(lendeeid);
-		con.setProductid(product_id);
+		con.setLender(udao.findUserProfile(lenderid));
+		con.setLendee(udao.findUserProfile(lendeeid));
+		con.setProduct(pdao.findProductById(product_id));
 		em.merge(con);
 		return con;
 	}
 	@SuppressWarnings("unchecked")
-	public List<Contract> findContractByLenderID(int uid) {
-		String sql = "Select * from Contract where lenderid=? or lendeeid=?";
+	public List<Contract> findContractByUserID(int uid) {
+		String sql = "Select * from Contract where lender_id=? or lendee_id=?";
 		return (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, uid).setParameter(2, uid).getResultList();
 	}
 	@SuppressWarnings("unchecked")

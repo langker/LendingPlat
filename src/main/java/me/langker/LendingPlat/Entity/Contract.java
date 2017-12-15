@@ -1,6 +1,7 @@
 package me.langker.LendingPlat.Entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -9,12 +10,15 @@ public class Contract {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private int lenderid;
-    private int lendeeid;
+	@ManyToOne
+    private User lender;
+	@ManyToOne
+    private User lendee;
     private String detail;
     private Date startDate;
     private int term;
-    private int productid;
+    @ManyToOne
+    private Product product;
     private int finalprice;
     private String location;
     private String age;
@@ -34,24 +38,26 @@ public class Contract {
     //7:lender receive the product and the whole progress finish
     private int status;
     
-
+    @OneToMany(mappedBy="contract")
+	private List<ContractHistory> ContractHistorys; 
+    
     public int getId() {
         return id;
     }
     public void setId(int id) {
 		this.id = id;
 	}
-	public int getLenderid() {
-		return lenderid;
+	public User getLender() {
+		return lender;
 	}
-	public void setLenderid(int lenderid) {
-		this.lenderid = lenderid;
+	public void setLender(User lender) {
+		this.lender = lender;
 	}
-	public int getLendeeid() {
-		return lendeeid;
+	public User getLendee() {
+		return lendee;
 	}
-	public void setLendeeid(int lendeeid) {
-		this.lendeeid = lendeeid;
+	public void setLendee(User lendee) {
+		this.lendee = lendee;
 	}
 	public Date getStartDate() {
 		return startDate;
@@ -65,11 +71,11 @@ public class Contract {
 	public void setTerm(int term) {
 		this.term = term;
 	}
-	public int getProductid() {
-		return productid;
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductid(int productid) {
-		this.productid = productid;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	public int getFinalprice() {
 		return finalprice;

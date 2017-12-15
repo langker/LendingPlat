@@ -1,5 +1,7 @@
 package me.langker.LendingPlat.Entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,15 @@ public class User {
 	private String address;
 	private String name;
 	private String phone;
+	
+	@OneToMany(mappedBy="user")
+	private List<Product> products; 
+	
+	@OneToMany(mappedBy="user")
+	private List<Subscriber> subscribers; 
+	
+	@OneToMany(mappedBy="user")
+	List<SubscriberNotify> SubscriberNotifys;
 
     public int getId() {
         return id;
@@ -62,5 +73,11 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 }

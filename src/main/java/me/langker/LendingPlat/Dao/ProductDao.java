@@ -3,6 +3,7 @@ package me.langker.LendingPlat.Dao;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -12,6 +13,7 @@ import me.langker.LendingPlat.Entity.Product;
 public class ProductDao {
 	@PersistenceContext
 	EntityManager em;
+	@Inject UserDao udao;
 	public Product createProduct(String description, boolean insurance, String name, int price, int userid,String photo) {
 		Product prd = new Product();
 		prd.setInsurance(insurance);
@@ -19,7 +21,7 @@ public class ProductDao {
 		prd.setPrice(price);
 		prd.setStatus(0);
 		prd.setTimes(0);
-		prd.setUserid(userid);
+		prd.setUserid(udao.findUserProfile(userid));
 		prd.setDescription(description);
 		prd.setPhoto(photo);
 		prd.setAvailableData(new Date());
@@ -33,7 +35,7 @@ public class ProductDao {
 		prd.setPrice(price);
 		prd.setStatus(status);
 		prd.setTimes(0);
-		prd.setUserid(userid);
+		prd.setUserid(udao.findUserProfile(userid));
 		em.merge(prd);
 		return prd;
 	}

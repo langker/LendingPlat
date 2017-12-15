@@ -6,13 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ContractHistory {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-	private int contractid;
+	 @ManyToOne
+	private Contract contract;
 	// see Contract.java
 	private int status;
 	private Date date;
@@ -22,11 +24,11 @@ public class ContractHistory {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getContractid() {
-		return contractid;
+	public Contract getContract() {
+		return contract;
 	}
-	public void setContractid(int contractid) {
-		this.contractid = contractid;
+	public void setContract(Contract contract) {
+		this.contract = contract;
 	}
 	public int getStatus() {
 		return status;

@@ -41,21 +41,21 @@ public class LeaseViewer {
 		this.lease = lease;
 	}
 	public User getLender() {
-		lender = userController.findUserProfile(lease.getLenderid());
+		lender = userController.findUserProfile(lease.getLender().getId());
 		return lender;
 	}
 	public void setLender(User lender) {
 		this.lender = lender;
 	}
 	public User getLendee() {
-		lender = userController.findUserProfile(lease.getLendeeid());
+		lender = userController.findUserProfile(lease.getLendee().getId());
 		return lendee;
 	}
 	public void setLendee(User lendee) {
 		this.lendee = lendee;
 	}
 	public Product getPro() {
-		pro = pController.findProductById(lease.getProductid());
+		pro = pController.findProductById(lease.getProduct().getId());
 		return pro;
 	}
 	public void setPro(Product pro) {

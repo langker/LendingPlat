@@ -4,38 +4,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class SubscriberNotify {
-	 @Id
-	 @GeneratedValue(strategy=GenerationType.IDENTITY)
-	 private int id;
-	 private int userid;
-	 private int pid;
-	 private int subid;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	@ManyToOne
+	private User user;
+	@ManyToOne
+	private Product product;
+	@ManyToOne
+	private Subscriber subscriber;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUserid() {
-		return userid;
+	public User getUser() {
+		return user;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	public int getPid() {
-		return pid;
+	public Product getProduct() {
+		return product;
 	}
-	public void setPid(int pid) {
-		this.pid = pid;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	public int getSubid() {
-		return subid;
+	public Subscriber getSubscriber() {
+		return subscriber;
 	}
-	public void setSubid(int subid) {
-		this.subid = subid;
+	public void setSubscriber(Subscriber subscriber) {
+		this.subscriber = subscriber;
 	}
-	
 }

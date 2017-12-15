@@ -43,12 +43,12 @@ public class ContractViewer {
 		setConStatus(cid,s);
 	}
 	public void rejectContract(int cid,int s) {
-		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProductid(), 0, new Date(), 0);
+		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProduct().getId(), 0, new Date(), 0);
 		setConStatus(cid,s);
 	}
 	public void finishContract(int cid,int s) {
-		pController.addTimeOfProdcut(conController.getConById(cid).getProductid());
-		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProductid(), 0, new Date(), 0);
+		pController.addTimeOfProdcut(conController.getConById(cid).getProduct().getId());
+		pController.setNewAvailableDateAndStatus(conController.getConById(cid).getProduct().getId(), 0, new Date(), 0);
 		setConStatus(cid,s);
 	}
 	public void setConStatus(int cid,int s) {
@@ -85,14 +85,14 @@ public class ContractViewer {
 		this.customer_detail = customer_detail;
 	}
 	public String getLendeeAddress(int id) {
-		lendeeAddress = userController.findUserProfile(conController.getConById(id).getLendeeid()).getAddress();
+		lendeeAddress = userController.findUserProfile(conController.getConById(id).getLendee().getId()).getAddress();
 		return lendeeAddress;
 	}
 	public void setLendeeAddress(String lendeeAddress) {
 		this.lendeeAddress = lendeeAddress;
 	}
 	public String getLenderAddress(int id) {
-		lenderAddress = userController.findUserProfile(conController.getConById(id).getLenderid()).getAddress();
+		lenderAddress = userController.findUserProfile(conController.getConById(id).getLender().getId()).getAddress();
 		return lenderAddress;
 	}
 	public void setLenderAddress(String lenderAddress) {
@@ -113,7 +113,7 @@ public class ContractViewer {
 	public void onTabChange(TabChangeEvent event) {
 		String []tmp = event.getTab().getTitle().split("\\s+");
 		int id = Integer.valueOf(tmp[tmp.length-1]);
-		lendeeProf = userController.findUserProfile(conController.getConById(id).getLendeeid());
+		lendeeProf = userController.findUserProfile(conController.getConById(id).getLendee().getId());
     }
 	public User getLendeeProf() {
 		return lendeeProf;

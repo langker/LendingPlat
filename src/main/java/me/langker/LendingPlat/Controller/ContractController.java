@@ -23,7 +23,7 @@ public class ContractController {
 		return con;
 	}
 	public List<Contract> getUserCon(int uid) {
-		return contractdao.findContractByLenderID(uid);
+		return contractdao.findContractByUserID(uid);
 	}
 	public List<Contract> getAllCon() {
 		return contractdao.findContracts();

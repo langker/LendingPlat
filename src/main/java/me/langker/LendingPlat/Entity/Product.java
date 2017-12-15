@@ -1,6 +1,7 @@
 package me.langker.LendingPlat.Entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -13,7 +14,9 @@ public class Product {
     private String name;
     @Column(length=65535) 
     private String description;
-    private int userid;
+    
+    @ManyToOne
+    private User user;
     //0:can be lent
     //1:lent to others
     private int status;
@@ -21,6 +24,10 @@ public class Product {
     private int price;
     private int times;
     private Date availableDate;
+    
+    @OneToMany(mappedBy="product")
+	List<SubscriberNotify> SubscriberNotifys;
+    
 	public int getId() {
 		return id;
 	}
@@ -38,12 +45,6 @@ public class Product {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
 	}
 	public int getStatus() {
 		return status;
@@ -80,5 +81,11 @@ public class Product {
 	}
 	public void setAvailableData(Date availableDate) {
 		this.availableDate = availableDate;
+	}
+	public void setUserid(User user) {
+		this.user = user;
+	}
+	public User getUser() {
+		return user;
 	}
 }

@@ -3,6 +3,7 @@ package me.langker.LendingPlat.Dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,9 +14,10 @@ import me.langker.LendingPlat.Entity.Subscriber;
 public class SubscriberDao {
 	@PersistenceContext
 	EntityManager em;
+	@Inject UserDao udao;
 	public Subscriber createSubscribe(int userid, String name) {
 		Subscriber sub = new Subscriber();
-		sub.setUserid(userid);
+		sub.setUser(udao.findUserProfile(userid));
 		sub.setSubscribe_name(name);
 		em.persist(sub);
 		return sub;
@@ -31,13 +33,18 @@ public class SubscriberDao {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Subscriber> findSubByUserId(int userid) {
-		String sql = "Select * from Subscriber where userid=?";
+		String sql = "Select * from Subscriber where user_id=?";
 		return (List<Subscriber>)em.createNativeQuery(sql, Subscriber.class).setParameter(1, userid).getResultList();
 	}
 	@SuppressWarnings("unchecked")
 	public List<Product> findSubProdcut(int id) {
-		String sql = "select *from Product where id in (select pid from SubscriberNotify where userid=?)";
+		String sql = "select *from Product where id in (select product_id from SubscriberNotify where user_id=?)";
 		return (List<Product>)em.createNativeQuery(sql, Product.class).setParameter(1, id).getResultList();
+	}
+	@SuppressWarnings("unchecked")
+	public Subscriber findSubById(int id) {
+		String sql = "select *from Subscriber where id=?";
+		return (Subscriber)em.createNativeQuery(sql, Subscriber.class).setParameter(1, id).getSingleResult();
 	}
 	
 }

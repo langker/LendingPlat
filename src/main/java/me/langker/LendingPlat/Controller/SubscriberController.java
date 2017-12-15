@@ -28,7 +28,7 @@ public class SubscriberController {
 	public void update(int pid) {
 		String pname = pDao.findProductById(pid).getName();
 		List<Subscriber> subs = subDao.findSubByName(pname);
-		for(Subscriber sub:subs) snDao.createSubscribeNotify(pid, sub.getId(),sub.getUserid());
+		for(Subscriber sub:subs) snDao.createSubscribeNotify(pid, sub.getId(),sub.getUser().getId());
 	}
 	public List<Product> findSubProdcut(int id) {
 		return subDao.findSubProdcut(id);
