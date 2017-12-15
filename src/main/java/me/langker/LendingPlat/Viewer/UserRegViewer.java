@@ -24,7 +24,7 @@ public class UserRegViewer {
 		
 		if(userController.reg(email, password, address, name, phone)!=null) {
 			userController.login(email, password);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 	                new FacesMessage(FacesMessage.SEVERITY_ERROR,"ERROR: register failed!The same email",""));
