@@ -22,7 +22,6 @@ public class UserRegViewer {
 	
 	public void reg() throws IOException {
 		if(userController.reg(email, password, address, name, phone)!=null) {
-			userController.login(email, password);
 			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
