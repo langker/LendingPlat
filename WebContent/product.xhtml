@@ -45,7 +45,7 @@
 					<f:selectItem itemLabel="medium(#{lp.mediumTerm})" itemValue="#{lp.mediumTerm}"/>
 					<f:selectItem itemLabel="average(#{lp.averageTerm})" itemValue="#{lp.averageTerm}"/>
 				</h:selectOneRadio>
-			    <p:commandButton ajax="true" validateClient="true" value="submit" action="#{product.rentProduct(product.p.id,product.p.userid)}" update="message"/>
+			    <p:commandButton ajax="true" validateClient="true" value="submit" action="#{product.rentProduct(product.p.id,product.p.user.id)}" update="message"/>
 		    </h:form>
 		</p:dialog>             
     </h:body>
