@@ -100,7 +100,7 @@
 					
 					<p:commandButton ajax="false" value="conform receive the product and finish the contract" action="#{con.finishContract(list.id,7)}" rendered="#{list.status==6 and list.lender.id==profile.userid}" />
 					
-					<p:commandButton ajax="false" value="reject or cancel" action="#{con.rejectContract(list.id,0)}" rendered="#{list.status!=7 and list.status!=0}" />
+					<p:commandButton ajax="false" value="reject or cancel" action="#{con.rejectContract(list.id,0)}" rendered="#{list.status==1 or list.status==2}" />
 	            </h:panelGrid>
 	        </p:tab>
 	    </p:accordionPanel>
