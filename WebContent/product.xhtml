@@ -34,11 +34,11 @@
     		<h:form> 
     			<p:messages id="message" showDetail="true" autoUpdate="true" closable="true"/>
     			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-    				<h:outputLabel value="the data you want to start renting" style="font-weight:bold" /> 
+    				<h:outputLabel value="the date you want to start renting" style="font-weight:bold" /> 
     				<p:calendar id="popup" require="true" value="#{product.startRentingdate}" />
     			</h:panelGrid>
     			<h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
-			    <h:outputLabel value="the term you want to start renting" style="font-weight:bold" />
+			    <h:outputLabel value="the term you want to rent" style="font-weight:bold" />
 			    </h:panelGrid>
 			    <h:selectOneRadio value="#{product.term}" require="true">
 					<f:selectItem itemLabel="short(#{lp.shortTerm})" itemValue="#{lp.shortTerm}"/>

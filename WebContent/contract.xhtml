@@ -77,12 +77,12 @@
 					<h:inputText style="font-weight:bold" rendered="#{list.status==2 and list.lendee.id==profile.userid}"/>
 					<p:outputLabel for="console" value="choose billing schemes(it will automatic paid since you choose):" style="font-weight:bold" rendered="#{list.status==2 and list.lendee.id==profile.userid}"/>
 					<p:selectOneMenu id="console" value="daily" style="width:125px" rendered="#{list.status==2 and list.lendee.id==profile.userid}">
-			            <f:selectItem itemLabel="hourly" />
-			            <f:selectItem itemLabel="daily" />
-			            <f:selectItem itemLabel="weekly"  itemDisabled ="#{7 > list.term}" />
-			            <f:selectItem itemLabel="fortnight" itemDisabled ="#{14 > list.term}" />
-			            <f:selectItem itemLabel="monthly" itemDisabled ="#{30 > list.term}" />
-			            <f:selectItem itemLabel="yearly" itemDisabled = "#{365 > list.term}" />
+			            <f:selectItem itemLabel="hourly"  itemValue="hourly" />
+			            <f:selectItem itemLabel="daily"  itemValue="daily"/>
+			            <f:selectItem itemLabel="weekly"  itemValue="weekly" itemDisabled ="#{7 > list.term}" />
+			            <f:selectItem itemLabel="fortnight" itemValue="fortnight" itemDisabled ="#{14 > list.term}" />
+			            <f:selectItem itemLabel="monthly" itemValue="monthly" itemDisabled ="#{30 > list.term}" />
+			            <f:selectItem itemLabel="yearly" itemValue="yearly" itemDisabled = "#{365 > list.term}" />
 			        </p:selectOneMenu>
 			        <h:outputLabel value="sign here" style="font-weight:bold" rendered="#{list.status==2 and list.lendee.id==profile.userid}"/>
 					<p:signature id="signature" value="#{con.lendeeSignature}" style="width:400px;height:200px" widgetVar="sig" required="true" guideline="true" rendered="#{list.status==2 and list.lendee.id==profile.userid}"/>
