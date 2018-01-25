@@ -72,5 +72,14 @@ public class UserTest extends MainTest {
 		
 		Assert.assertTrue(!u.isEmpty());
 	}
+	@Test
+	public void testFindByCred() {
+		uc.reg(user.getEmail(), user.getPassword(), user.getAddress(), user.getName(), user.getPhone());
+		User loginUser = uc.login(user.getEmail(), user.getPassword());
+		loginUser.setCredential("666");
+		User testUser = uc.findByCred("666");
+		
+		Assert.assertTrue(testUser.getEmail().equals(user.getEmail()));
+	}
 }
 

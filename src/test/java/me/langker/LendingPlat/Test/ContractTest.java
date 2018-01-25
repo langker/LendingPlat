@@ -102,4 +102,16 @@ public class ContractTest extends MainTest {
 		
 		Assert.assertTrue(ch!=null);
 	}
+	@Test
+	public void testIsInTheSameContract() {
+		cc.addContract(p.getId(), lender.getId(), 10, new Date(), lendee.getId());
+		
+		Boolean result1 = cc.isInTheSameContract(lender.getId(), lendee.getId());
+		Boolean result2 = cc.isInTheSameContract(lendee.getId(), lender.getId());
+		Boolean result3 = cc.isInTheSameContract(lender.getId(), lender.getId());
+		
+		Assert.assertTrue(result1);
+		Assert.assertTrue(result2);
+		Assert.assertFalse(result3);
+	}
 }

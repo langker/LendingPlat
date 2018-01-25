@@ -38,4 +38,7 @@ public class UserController {
 	public List<User> findAllUser() {
 		return userdao.findAllUser();
 	}
+	public User findByCred(String filename) {
+		return userdao.findByCred(filename);
+	}
 }   

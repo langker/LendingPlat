@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import me.langker.LendingPlat.Controller.ContractController;
 import me.langker.LendingPlat.Controller.UserController;
 import me.langker.LendingPlat.Entity.User;
 
@@ -23,6 +24,7 @@ import me.langker.LendingPlat.Entity.User;
 public class URLFilter implements Filter {
 
 	@Inject UserController userController;
+	@Inject ContractController conController;
 	
 	@Override
 	public void destroy() {
@@ -38,9 +40,16 @@ public class URLFilter implements Filter {
 		HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) response);
 		String redirectPath = hrequest.getContextPath() + "/index.xhtml";
 		if (hrequest.getSession().getAttribute("userid") !=null ) {
-			User user = userController.findUserProfile((Integer)hrequest.getSession().getAttribute("userid"));
+			int loginUserid = (Integer) hrequest.getSession().getAttribute("userid");
 			//25 is the lenght of "/LendingPlat/upload_cred
-			if (user.getIsAdmin()==true||(user.getCredential()!=null&&user.getCredential().equals(hrequest.getRequestURI().substring(25)))==true) { 
+			String credital = hrequest.getRequestURI().substring(25)==null?"":hrequest.getRequestURI().substring(25); 
+			
+			User loginUser = userController.findUserProfile(loginUserid);
+			User visitUser = userController.findByCred(credital);
+			
+			if (loginUser.getId()==visitUser.getId()
+					||loginUser.getIsAdmin()==true
+					||conController.isInTheSameContract(loginUser.getId(), visitUser.getId())) { 
 				chain.doFilter(request, response);
 			} else {
 				wrapper.sendRedirect(redirectPath);

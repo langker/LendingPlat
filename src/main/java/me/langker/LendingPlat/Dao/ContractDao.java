@@ -81,4 +81,10 @@ public class ContractDao {
 		con.setLendeeSignature(lendeeSignature);
 		em.merge(con);
 	}
+	public Boolean isInTheSameContract(int login,int visit) {
+		String sql = "Select * from Contract where lender_id=? and lendee_id=?";
+		List<Contract> tmp1 = (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, login).setParameter(2, visit).getResultList();
+		List<Contract> tmp2 = (List<Contract>)em.createNativeQuery(sql, Contract.class).setParameter(1, visit).setParameter(2, login).getResultList();
+		return (tmp1.size()!=0||tmp2.size()!=0);
+	}
 }

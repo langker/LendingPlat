@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
+import me.langker.LendingPlat.Entity.Contract;
 import me.langker.LendingPlat.Entity.User;
 import me.langker.LendingPlat.Util.Util;
 
@@ -59,5 +60,10 @@ public class UserDao {
 		User user = findUserProfile(id);
 		if (filename!=null) user.setCredential(filename);
 		em.merge(user);
+	}
+	public User findByCred(String filename) {
+		String sql = "Select * from User where credential=?";
+		Query query = em.createNativeQuery(sql, User.class).setParameter(1, filename);
+		return (User)query.getSingleResult();
 	}
 }

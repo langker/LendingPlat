@@ -44,4 +44,7 @@ public class ContractController {
 	public List<ContractHistory> getConHistory(int id) {
 		return chdao.findContractHistoryByConid(id);
 	}
+	public Boolean isInTheSameContract(int login,int visit) {
+		return contractdao.isInTheSameContract(login, visit);
+	}
 }
